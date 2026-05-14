@@ -1,0 +1,168 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import "../styles/home.css";
+
+import {
+  getFeaturedPosts,
+  getPostsByCategory,
+} from "../lib/repositories/postRepository";
+
+const schema = {
+  "@context": "https://schema.org",
+
+  "@type": "WebSite",
+
+  name: "GovtJobsNotice",
+
+  url: "/",
+
+  description:
+    "Latest Government Job Notifications, Admit Cards, Results, Answer Keys and Recruitment Updates",
+};
+
+/* FETCH POSTS */
+
+const featuredPosts = await getFeaturedPosts(8);
+
+const latestJobs = await getPostsByCategory("latest-jobs", 6);
+
+const results = await getPostsByCategory("results", 6);
+
+const admitCards = await getPostsByCategory("admit-card", 6);
+
+const answerKeys = await getPostsByCategory("answer-key", 6);
+
+const admissions = await getPostsByCategory("admission", 6);
+
+const syllabus = await getPostsByCategory("syllabus", 6);
+
+/* HOME SECTIONS */
+
+const sections = [
+  {
+    title: "Latest Jobs",
+    slug: "latest-jobs",
+    posts: latestJobs,
+  },
+
+  {
+    title: "Results",
+    slug: "results",
+    posts: results,
+  },
+
+  {
+    title: "Admit Card",
+    slug: "admit-card",
+    posts: admitCards,
+  },
+
+  {
+    title: "Answer Key",
+    slug: "answer-key",
+    posts: answerKeys,
+  },
+
+  {
+    title: "Admission",
+    slug: "admission",
+    posts: admissions,
+  },
+
+  {
+    title: "Syllabus",
+    slug: "syllabus",
+    posts: syllabus,
+  },
+];
+
+/* FEATURED COLORS */
+
+const colors = [
+  "red",
+  "orange",
+  "purple",
+  "green",
+  "blue",
+  "darkred",
+  "darkgreen",
+  "sky",
+];
+---
+
+<BaseLayout
+  title="GovtJobsNotice"
+  description="Latest Government Job Notifications, Admit Cards, Results, Answer Keys and Recruitment Updates"
+  canonical="/"
+  keywords="government jobs, latest govt jobs, admit card, result, answer key, recruitment"
+  schema={schema}
+>
+  <main class="home-page">
+    <!-- HERO -->
+
+    <section class="hero-section">
+      <div class="hero-box">
+        <div class="hero-top-line">
+          Latest Sarkari Jobs • Admit Cards • Results • Answer Keys • Admissions
+        </div>
+
+        <p class="hero-description">
+          Get fastest updates for Railway, SSC, UPSC, Banking, Police, Defence,
+          Teaching, State Government Jobs and all latest recruitment
+          notifications.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#" class="hero-btn whatsapp-btn"> Join WhatsApp Channel </a>
+
+          <a href="#" class="hero-btn telegram-btn"> Join Telegram Channel </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED POSTS -->
+
+    <section class="featured-grid">
+      {
+        featuredPosts.map((post, index) => (
+          <a
+            href={`/${post.slug}/`}
+            class={`featured-card ${colors[index % colors.length]}`}
+          >
+            <div class="featured-title">
+              {post.title} ({post.total_posts} Posts)
+            </div>
+          </a>
+        ))
+      }
+    </section>
+
+    <!-- HOME SECTIONS -->
+
+    <section class="home-sections">
+      {
+        sections.map((section) => (
+          <div class="home-card">
+            <div class="home-card-heading">{section.title}</div>
+
+            <ul class="home-list">
+              {section.posts.map((post) => (
+                <li class="home-list-item">
+                  <a href={`/${post.slug}/`} class="home-list-link">
+                    {post.title} 
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <div class="view-more-wrap">
+              <a href={`/category/${section.slug}/`} class="view-more-btn">
+                View More →
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </section>
+  </main>
+</BaseLayout>

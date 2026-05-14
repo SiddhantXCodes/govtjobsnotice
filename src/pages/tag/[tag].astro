@@ -1,0 +1,263 @@
+---
+import BaseLayout
+  from "../../layouts/BaseLayout.astro";
+
+import "../../styles/category.css";
+
+import {
+  getAllPosts
+} from "../../lib/repositories/postRepository";
+
+export async function getStaticPaths() {
+
+  const posts =
+    await getAllPosts();
+
+  const tags = [
+    ...new Set(
+
+      posts.flatMap((post:any)=>{
+
+        if(!post.tags){
+          return [];
+        }
+
+        /* REAL ARRAY */
+
+        if(Array.isArray(post.tags)){
+
+          return post.tags.map(
+            (tag:string)=>
+
+              tag
+                .trim()
+                .toLowerCase()
+                .replace(/\s+/g,"-")
+
+          );
+
+        }
+
+        /* STRINGIFIED JSON */
+
+        try{
+
+          const parsed =
+            JSON.parse(post.tags);
+
+          if(Array.isArray(parsed)){
+
+            return parsed.map(
+              (tag:string)=>
+
+                tag
+                  .trim()
+                  .toLowerCase()
+                  .replace(/\s+/g,"-")
+
+            );
+
+          }
+
+        }catch(err){
+
+          console.error(err);
+
+        }
+
+        return [];
+
+      })
+
+    )
+  ];
+
+  return tags.map((tag)=>({
+
+    params:{
+      tag
+    }
+
+  }));
+
+}
+
+const { tag } =
+  Astro.params;
+
+const allPosts =
+  await getAllPosts();
+
+/* FILTER POSTS */
+
+const posts =
+  allPosts.filter((post:any)=>{
+
+    if(!post.tags){
+      return false;
+    }
+
+    let tagsArray:any[] = [];
+
+    /* ARRAY */
+
+    if(Array.isArray(post.tags)){
+
+      tagsArray =
+        post.tags;
+
+    }
+
+    /* STRINGIFIED JSON */
+
+    else{
+
+      try{
+
+        tagsArray =
+          JSON.parse(post.tags);
+
+      }catch{
+
+        return false;
+
+      }
+
+    }
+
+    return tagsArray.some(
+      (item:string)=>
+
+        item
+          .trim()
+          .toLowerCase()
+          .replace(/\s+/g,"-")
+          === tag
+
+    );
+
+  });
+
+const tagTitle =
+  tag
+    ?.replaceAll("-"," ")
+    .replace(
+      /\b\w/g,
+      (c: string)=>c.toUpperCase()
+    );
+---
+
+<BaseLayout
+  title={`${tagTitle} Jobs | GovtJobsNotice`}
+  description={`${tagTitle} government jobs, admit cards, results, answer keys and latest recruitment updates`}
+  canonical={`/tag/${tag}/`}
+>
+
+<main class="category-page">
+
+  <section class="category-header">
+
+    <h1 class="category-title">
+
+      {tagTitle} Jobs
+
+    </h1>
+
+    <div class="category-count">
+
+      Total Posts :
+      {posts.length}
+
+    </div>
+
+  </section>
+
+  <section class="category-table-wrap">
+
+    <table class="category-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Post Name
+          </th>
+
+          <th>
+            Category
+          </th>
+
+          <th>
+            Updated Date
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          posts.map((post)=>(
+
+            <tr>
+
+              <td>
+
+                <a
+                  href={`/${post.slug}/`}
+                  class="category-link"
+                >
+
+                  {post.title}
+
+                </a>
+
+              </td>
+
+              <td>
+
+                {
+                  post.category
+                    ?.replaceAll("-"," ")
+                    .replace(
+                      /\b\w/g,
+                      (c:any)=>c.toUpperCase()
+                    )
+                }
+
+              </td>
+
+              <td>
+
+                {
+                  post.latest_status_date &&
+                  new Date(
+                    post.latest_status_date
+                  ).toLocaleDateString(
+                    "en-IN",
+                    {
+                      day:"numeric",
+                      month:"short",
+                      year:"numeric"
+                    }
+                  )
+                }
+
+              </td>
+
+            </tr>
+
+          ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+</main>
+
+</BaseLayout>

@@ -1,0 +1,135 @@
+---
+type BreadcrumbItem = {
+  label: string;
+  href?: string;
+};
+
+const {
+  items = [] as BreadcrumbItem[]
+} = Astro.props;
+
+function formatHref(href?: string){
+
+  if(!href){
+    return "";
+  }
+
+  /* CLEAN */
+
+  const cleanHref =
+    href
+      .replace(/^\/+|\/+$/g,"")
+      .toLowerCase();
+
+  /* CATEGORY PAGES */
+
+  const categoryPages = [
+    "latest-jobs",
+    "admit-card",
+    "results",
+    "answer-key",
+    "syllabus",
+    "admission"
+  ];
+
+  if(categoryPages.includes(cleanHref)){
+
+    return `/category/${cleanHref}/`;
+
+  }
+
+  /* TAG PAGES */
+
+  const tagPages = [
+    "tech",
+    "non-tech",
+    "railway",
+    "engineering",
+    "psu",
+    "bank",
+    "defence",
+    "teaching"
+  ];
+
+  if(tagPages.includes(cleanHref)){
+
+    return `/tag/${cleanHref}/`;
+
+  }
+
+  /* NORMAL LINKS */
+
+  return href.startsWith("/")
+    ? href
+    : `/${href}`;
+
+}
+---
+
+<nav class="breadcrumbs">
+
+  <a href="/">
+    Home
+  </a>
+
+  {
+    items.map((item: BreadcrumbItem)=>(
+
+      <>
+        <span class="breadcrumb-separator">
+          ›
+        </span>
+
+        {
+          item.href ? (
+
+            <a href={formatHref(item.href)}>
+              {item.label}
+            </a>
+
+          ) : (
+
+            <span class="breadcrumb-current">
+              {item.label}
+            </span>
+
+          )
+        }
+      </>
+
+    ))
+  }
+
+</nav>
+
+<style>
+
+  .breadcrumbs{
+    margin-bottom:12px;
+    font-size:14px;
+    font-weight:700;
+    color:#555;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    align-items:center;
+  }
+
+  .breadcrumbs a{
+    color:#0000cc;
+    text-decoration:none;
+  }
+
+  .breadcrumbs a:hover{
+    color:#d40000;
+  }
+
+  .breadcrumb-current{
+    color:#111;
+  }
+
+  .breadcrumb-separator{
+    color:#777;
+  }
+
+</style>

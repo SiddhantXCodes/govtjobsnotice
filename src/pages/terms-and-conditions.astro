@@ -1,0 +1,150 @@
+---
+import BaseLayout
+  from "../layouts/BaseLayout.astro";
+
+import "../styles/category.css";
+
+import {
+  searchPosts
+} from "../lib/repositories/postRepository";
+
+const query =
+  Astro.url.searchParams.get("q") || "";
+
+const posts =
+  query
+    ? await searchPosts(query,50)
+    : [];
+---
+
+<BaseLayout
+  title="Search | GovtJobsNotice"
+>
+
+<main class="category-page">
+
+  <section class="category-header">
+
+    <h1 class="category-title">
+
+      Search Jobs
+
+    </h1>
+
+    <form
+      action="/search/"
+      method="GET"
+      class="search-form"
+    >
+
+      <input
+        type="text"
+        name="q"
+        value={query}
+        placeholder="Search jobs..."
+        class="search-input"
+      />
+
+      <button
+        type="submit"
+        class="search-btn"
+      >
+
+        Search
+
+      </button>
+
+    </form>
+
+  </section>
+
+  {
+    query && (
+
+      <section class="category-table-wrap">
+
+        <table class="category-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Post Name
+              </th>
+
+              <th>
+                Category
+              </th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            {
+              posts.map((post)=>(
+                <tr>
+
+                  <td>
+
+                    <a
+                      href={`/${post.slug}/`}
+                      class="category-link"
+                    >
+
+                      {post.title}
+
+                    </a>
+
+                  </td>
+
+                  <td>
+
+                    {post.category}
+
+                  </td>
+
+                </tr>
+              ))
+            }
+
+          </tbody>
+
+        </table>
+
+      </section>
+
+    )
+  }
+
+</main>
+
+<style>
+
+.search-form{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+}
+
+.search-input{
+  flex:1;
+  padding:12px;
+  border:1px solid #555;
+  font-size:15px;
+}
+
+.search-btn{
+  background:#000066;
+  color:#fff;
+  border:none;
+  padding:12px 20px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+</style>
+
+</BaseLayout>

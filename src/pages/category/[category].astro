@@ -1,0 +1,180 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import "../../styles/category.css";
+
+import { getPostsByCategory } from "../../lib/repositories/postRepository";
+
+export async function getStaticPaths() {
+    const categories = [
+        "latest-jobs",
+        "results",
+        "admit-card",
+        "answer-key",
+        "admission",
+        "syllabus",
+    ];
+
+    return categories.map((category) => ({
+        params: {
+            category,
+        },
+    }));
+}
+
+const { category } = Astro.params;
+
+const posts = await getPostsByCategory(category, 100);
+
+const categoryTitle = category
+    ?.replaceAll("-", " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+/* COLUMN LOGIC */
+
+const getColumns = () => {
+    switch (category) {
+        case "latest-jobs":
+            return ["Post Name", "Application Start", "Last Date"];
+
+        case "results":
+            return ["Result Name", "Post Date", "Result Date"];
+
+        case "admit-card":
+            return ["Admit Card", "Exam Date", "Admit Card Date"];
+
+        case "answer-key":
+            return ["Answer Key", "Exam Date", "Answer Key Date"];
+
+        case "admission":
+            return ["Admission", "Application Start", "Last Date"];
+
+        case "syllabus":
+            return ["Syllabus", "Post Date", "Updated Date"];
+
+        default:
+            return ["Title", "Date", "Status"];
+    }
+};
+
+const columns = getColumns();
+
+const formatDate = (date: any) => {
+    if (!date) return "-";
+
+    return new Date(date).toLocaleDateString("en-IN", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+    });
+};
+---
+
+<BaseLayout
+    title={`${categoryTitle} | GovtJobsNotice`}
+    description={`${categoryTitle} updates, notifications, admit cards, results and latest information`}
+>
+    <main class="category-page">
+        <section class="category-header">
+            <h1 class="category-title">
+                {categoryTitle}
+            </h1>
+
+            <div class="category-count">
+                Total Posts :
+                {posts.length}
+            </div>
+        </section>
+
+        <section class="category-table-wrap">
+            <table class="category-table">
+                <thead>
+                    <tr>
+                        {columns.map((column) => <th>{column}</th>)}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {
+                        posts.map((post) => (
+                            <tr>
+                                <td>
+                                    <a
+                                        href={`/${post.slug}/`}
+                                        class="category-link"
+                                    >
+                                        {post.title} - {post.latest_status} ({post.total_posts})
+                                    </a>
+                                </td>
+
+                                {category === "latest-jobs" && (
+                                    <>
+                                        <td>
+                                            {formatDate(post.application_start)}
+                                        </td>
+
+                                        <td>
+                                            {formatDate(post.application_end)}
+                                        </td>
+                                    </>
+                                )}
+
+                                {category === "results" && (
+                                    <>
+                                        <td>{formatDate(post.latest_status_date)}</td>
+
+                                        <td>{formatDate(post.result_date)}</td>
+                                    </>
+                                )}
+
+                                {category === "admit-card" && (
+                                    <>
+                                        <td>{formatDate(post.exam_date)}</td>
+
+                                        <td>
+                                            {formatDate(post.admit_card_date)}
+                                        </td>
+                                    </>
+                                )}
+
+                                {category === "answer-key" && (
+                                    <>
+                                        <td>{formatDate(post.exam_date)}</td>
+
+                                        <td>
+                                            {formatDate(post.answer_key_date)}
+                                        </td>
+                                    </>
+                                )}
+
+                                {category === "admission" && (
+                                    <>
+                                        <td>
+                                            {formatDate(post.application_start)}
+                                        </td>
+
+                                        <td>
+                                            {formatDate(post.application_end)}
+                                        </td>
+                                    </>
+                                )}
+
+                                {category === "syllabus" && (
+                                    <>
+                                        <td>{formatDate(post.latest_status_date)}</td>
+
+                                        <td>
+                                            {formatDate(
+                                                post.latest_status_date,
+                                            )}
+                                        </td>
+                                    </>
+                                )}
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
+        </section>
+    </main>
+</BaseLayout>

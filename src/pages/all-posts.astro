@@ -1,0 +1,107 @@
+---
+import BaseLayout
+  from "../layouts/BaseLayout.astro";
+
+import "../styles/category.css";
+
+import {
+  getLatestPosts
+} from "../lib/repositories/postRepository";
+
+const posts =
+  await getLatestPosts(100);
+---
+
+<BaseLayout
+  title="Latest Updates | GovtJobsNotice"
+>
+
+<main class="category-page">
+
+  <section class="category-header">
+
+    <h1 class="category-title">
+
+      All Posts
+
+    </h1>
+
+    <div class="category-count">
+
+      Total Updates :
+      {posts.length}
+
+    </div>
+
+  </section>
+
+  <section class="category-table-wrap">
+
+    <table class="category-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Latest Update
+          </th>
+
+          <th>
+            Updated Date
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          posts.map((post)=>(
+            <tr>
+
+              <td>
+
+                <a
+                  href={`/${post.slug}/`}
+                  class="category-link"
+                >
+
+                  {post.title}
+
+                </a>
+
+              </td>
+
+              <td>
+
+                {
+                  post.latest_status_date &&
+                  new Date(
+                    post.latest_status_date
+                  ).toLocaleDateString(
+                    "en-IN",
+                    {
+                      day:"numeric",
+                      month:"short",
+                      year:"numeric"
+                    }
+                  )
+                }
+
+              </td>
+
+            </tr>
+          ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+</main>
+
+</BaseLayout>

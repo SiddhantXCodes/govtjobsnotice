@@ -1,0 +1,260 @@
+@import "tailwindcss";
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  padding:0;
+  background:#ffffff;
+  color:#111;
+  font-family:Arial,Helvetica,sans-serif;
+  font-size: 17px;
+}
+
+a{
+  text-decoration:none;
+}
+
+img{
+  max-width:100%;
+}
+
+.container{
+  max-width:1050px;
+  margin:auto;
+  padding:0 8px;
+}
+
+.site-header{
+  width:100%;
+}
+
+.top-header{
+  background:#d40000;
+  padding:24px 10px;
+}
+
+.logo-wrapper{
+  display:block;
+  text-align:center;
+  color:#fff;
+}
+
+.logo-title{
+  font-size:40px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:1px;
+}
+
+.logo-subtitle{
+  margin-top:10px;
+  font-size:22px;
+  font-weight:700;
+}
+.logo-wrapper{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  color:#fff;
+}
+
+.site-logo{
+  width:82px;
+  height:82px;
+  object-fit:contain;
+  background:#fff;
+  border-radius:12px;
+  padding:6px;
+}
+
+.logo-text{
+  text-align:left;
+}
+
+.logo-title{
+  font-size:40px;
+  font-weight:800;
+  line-height:1;
+  letter-spacing:1px;
+}
+
+.logo-subtitle{
+  margin-top:10px;
+  font-size:24px;
+  font-weight:700;
+}
+
+@media(max-width:900px){
+
+  .logo-wrapper{
+    gap:12px;
+  }
+
+  .site-logo{
+    width:58px;
+    height:58px;
+    border-radius:8px;
+  }
+
+  .logo-title{
+    font-size:30px;
+  }
+
+  .logo-subtitle{
+    font-size:14px;
+    margin-top:6px;
+  }
+
+}
+.main-navbar{
+  background:#00007a;
+  border-top:2px solid #ff0000;
+}
+
+.navbar-container{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.navbar-container a{
+  color:#fff;
+  font-size:16px;
+  font-weight:700;
+  padding:13px 16px;
+  transition:.2s;
+}
+
+.navbar-container a:hover{
+  background:#001fd1;
+}
+
+.section-title{
+  background:#b00000;
+  color:#fff;
+  text-align:center;
+  font-size:24px;
+  font-weight:700;
+  padding:10px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid #cfcfcf;
+}
+
+.blue-link{
+  color:#0000cc;
+  font-weight:700;
+}
+
+.red-text{
+  color:#d40000;
+}
+
+.green-text{
+  color:#008000;
+}
+
+@media(max-width:900px){
+
+  .logo-title{
+    font-size:34px;
+  }
+
+  .logo-subtitle{
+    font-size:15px;
+  }
+
+  .navbar-container{
+    flex-wrap:nowrap;
+    justify-content:flex-start;
+    overflow-x:auto;
+  }
+
+  .navbar-container a{
+    white-space:nowrap;
+    font-size:14px;
+    padding:12px 14px;
+  }
+
+}
+
+
+.site-footer{
+  background:#111;
+  color:#fff;
+  margin-top:40px;
+}
+
+.footer-top{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  gap:30px;
+  padding:40px 0;
+}
+
+.footer-logo{
+  font-size:32px;
+  font-weight:700;
+  color:#fff;
+}
+
+.footer-description{
+  margin-top:14px;
+  color:#ccc;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.footer-heading{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:14px;
+}
+
+.footer-links{
+  display:flex;
+  flex-direction:column;
+}
+
+.footer-links a{
+  color:#ccc;
+  margin-bottom:10px;
+  font-size:15px;
+}
+
+.footer-links a:hover{
+  color:#fff;
+}
+
+.footer-bottom{
+  border-top:1px solid #333;
+  padding:16px 0;
+  text-align:center;
+  font-size:14px;
+  color:#aaa;
+}
+
+@media(max-width:900px){
+
+  .footer-top{
+    grid-template-columns:1fr;
+    gap:24px;
+  }
+
+  .footer-logo{
+    font-size:26px;
+  }
+
+}
+

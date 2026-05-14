@@ -1,0 +1,86 @@
+---
+import {
+  getPostsByCategory
+} from "../lib/repositories/postRepository";
+
+const {
+  currentSlug,
+  category
+} = Astro.props;
+
+const posts =
+  await getPostsByCategory(
+    category,
+    6
+  );
+
+const relatedPosts =
+  posts.filter(
+    (post)=>post.slug !== currentSlug
+  );
+---
+
+<section class="related-posts">
+
+  <h2 class="related-heading">
+
+    Related Posts
+
+  </h2>
+
+  <ul class="related-list">
+
+    {
+      relatedPosts.map((post)=>(
+        <li>
+
+          <a href={`/${post.slug}/`}>
+
+            {post.title}
+
+          </a>
+
+        </li>
+      ))
+    }
+
+  </ul>
+
+</section>
+
+<style>
+
+.related-posts{
+  margin-top:20px;
+  background:#fff;
+  border:1px solid #555;
+  padding:16px;
+}
+
+.related-heading{
+  margin:0 0 14px;
+  color:#c00000;
+  font-size:22px;
+}
+
+.related-list{
+  margin:0;
+  padding-left:22px;
+}
+
+.related-list li{
+  margin-bottom:10px;
+}
+
+.related-list a{
+  color:#0000cc;
+  font-weight:700;
+  line-height:1.6;
+  text-decoration:none;
+}
+
+.related-list a:hover{
+  color:#d40000;
+}
+
+</style>

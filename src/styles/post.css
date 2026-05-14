@@ -1,0 +1,357 @@
+.post-page {
+  max-width: 1050px;
+  margin: auto;
+  padding: 10px 6px 30px;
+  color: #111;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* PAGE INTRO */
+
+.page-intro-box {
+  margin-bottom: 14px;
+}
+
+.page-intro-title {
+  margin: 0 0 10px;
+  color: #0033cc;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.page-post-date {
+  color: #ef2020;
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.page-intro-content {
+  font-size: 18px;
+  line-height: 2;
+  color: #111;
+}
+
+.page-intro-content p {
+  margin-top: 0;
+  margin-bottom: 14px;
+}
+
+.page-intro-content strong {
+  font-weight: 700;
+}
+
+.page-intro-content a {
+  color: #0000cc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.page-intro-content a:hover {
+  color: #d40000;
+}
+
+/* TOP BUTTONS */
+
+.top-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.whatsapp-btn,
+.telegram-btn {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 10px 22px;
+  border-radius: 3px;
+  transition: .2s;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+}
+
+.telegram-btn {
+  background: #0088cc;
+}
+
+.whatsapp-btn:hover,
+.telegram-btn:hover {
+  opacity: .92;
+}
+
+/* MAIN TITLE */
+
+.main-title-box {
+  background: #fff;
+  border: 1px solid #555;
+  text-align: center;
+}
+
+.main-title {
+  margin: 0;
+  padding: 5px 5px 0;
+  color: #fd1414;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.main-status {
+  margin: 0;
+  color: #008000;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.5;
+  padding-bottom: 5px;
+}
+
+.site-name {
+  color: #0033cc;
+  font-size: 17px;
+  font-weight: 700;
+
+}
+
+/* GRID */
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.four-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+}
+
+/* BOX */
+
+.post-box,
+.age-box,
+.total-post-box {
+  background: #fff;
+  border: 1px solid #555;
+}
+
+.section-gap {
+  margin-top: 14px;
+}
+
+/* HEADINGS */
+
+.pink-heading,
+.green-heading,
+.orange-heading,
+.blue-heading,
+.yellow-heading {
+  margin: 0;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  padding: 8px 10px;
+  line-height: 1.4;
+}
+
+.pink-heading {
+  background: #76003c;
+  color: #fff;
+}
+
+.green-heading {
+  background: #006b2d;
+  color: #fff;
+}
+
+.orange-heading {
+  background: #ef4e00;
+  color: #fff;
+}
+
+.blue-heading {
+  background: #000066;
+  color: #fff;
+}
+
+.yellow-heading {
+  background: #fff3a6;
+  color: #c00000;
+}
+
+/* CONTENT */
+
+.post-content {
+  padding: 10px 14px;
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.post-content ul {
+  margin: 0;
+  padding-left: 26px;
+  list-style: disc;
+}
+
+.post-content ol {
+  margin: 0;
+  padding-left: 26px;
+}
+
+.post-content li {
+  margin-bottom: 4px;
+}
+
+.post-content p {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.post-content strong {
+  font-weight: 700;
+}
+
+.post-content mark {
+  background: #ffeb3b;
+  padding: 1px 3px;
+}
+
+.post-content a {
+  color: #0000cc;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.post-content a:hover {
+  color: #d40000;
+}
+
+/* TABLE */
+
+.post-content table {
+  width: 100%;
+  border-collapse: collapse;
+
+  font-size: 17px;
+}
+
+.post-content table th,
+.post-content table td {
+  border: 1px solid #555;
+  padding: 8px;
+  vertical-align: top;
+}
+
+.post-content table th {
+  background: #f5f5f5;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* TOTAL POST */
+
+.total-post-number {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 44px 10px;
+  color: #111;
+}
+
+/* DISCLAIMER */
+
+.disclaimer-box {
+  margin-top: 18px;
+  background: #fff;
+  border: 1px solid #555;
+  padding: 12px 14px;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* MOBILE */
+
+@media(max-width:768px) {
+
+  .post-page {
+    padding: 8px 4px 24px;
+    font-size: 14px;
+  }
+
+  .page-intro-title {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .page-post-date {
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
+
+  .page-intro-content {
+    font-size: 15px;
+    line-height: 1.9;
+  }
+
+  .two-column-grid,
+  .four-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .top-buttons {
+    flex-wrap: wrap;
+  }
+
+  .whatsapp-btn,
+  .telegram-btn {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .main-title {
+    font-size: 18px;
+  }
+
+  .main-status {
+    font-size: 16px;
+  }
+
+  .site-name {
+    font-size: 15px;
+  }
+
+  .pink-heading,
+  .green-heading,
+  .orange-heading,
+  .blue-heading,
+  .yellow-heading {
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .post-content {
+    padding: 10px 12px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .post-content table {
+    font-size: 13px;
+  }
+
+  .post-content table th,
+  .post-content table td {
+    padding: 6px;
+  }
+
+  .total-post-number {
+    font-size: 22px;
+    padding: 24px 10px;
+  }
+
+}
+
