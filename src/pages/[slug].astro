@@ -25,7 +25,11 @@ const post = await getPostBySlug(slug);
 
 ---
 
-<BaseLayout>
+<BaseLayout
+  title={`${post?.title} | GovtJobsNotice`}
+  description={post?.seo_description || post?.title}
+  canonical={`https://govtjobsnotice.com/${post?.slug}/`}
+>
   <main class="post-page">
     <!-- PAGE INTRO -->
     <Breadcrumbs
@@ -67,7 +71,7 @@ const post = await getPostBySlug(slug);
     <div class="top-buttons">
       <a href="#" class="whatsapp-btn"> WhatsApp </a>
 
-      <a href="#" class="telegram-btn"> Telegram </a>
+      <a href="https://t.me/GovtJobs_Notice" class="telegram-btn"> Telegram </a>
     </div>
 
     <!-- MAIN TITLE -->
@@ -190,6 +194,25 @@ const post = await getPostBySlug(slug);
   currentSlug={post?.slug}
   category={post?.category}
 />
+<!-- Featured Image -->
+
+{
+  post?.featured_image && (
+
+    <section class="bottom-featured-image-wrap">
+
+      <img
+        src={`http://localhost:8055/assets/${post.featured_image}`}
+        alt={post.title}
+        class="bottom-featured-image"
+        loading="lazy"
+      />
+
+    </section>
+
+  )
+}
+
     <!-- DISCLAIMER -->
 
     <section class="disclaimer-box">
