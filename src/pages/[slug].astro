@@ -25,7 +25,7 @@ const post = await getPostBySlug(slug);
 
 <BaseLayout
   title={`${post?.title} | GovtJobsNotice`}
-  description={post?.seo_description || post?.title}
+  description={post?.seo_description || post?.seo_title}
   canonical={`https://govtjobsnotice.com/${post?.slug}/`}
 >
   <main class="post-page">
@@ -76,11 +76,11 @@ const post = await getPostBySlug(slug);
 
     <section class="main-title-box">
       <h2 class="main-title">
-        {post?.title}
+        {post?.feed_title}
       </h2>
-      <div class="site-name">GovtJobsNotice.Com</div>
+      <div class="site-name">www.GovtJobsNotice.Com</div>
       <div class="main-status">
-        {post?.title} Recruitment : Overview
+        {post?.title} : Overview
       </div>
     </section>
 
