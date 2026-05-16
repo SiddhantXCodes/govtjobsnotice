@@ -8,9 +8,7 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import RelatedPosts from "../components/RelatedPosts.astro";
 export async function getStaticPaths() {
   const posts = await getAllPosts();
- console.log(
-    posts.map(post => post.slug)
-  );
+
 
   return posts.map((post) => ({
     params: {
@@ -202,12 +200,11 @@ const post = await getPostBySlug(slug);
     <section class="bottom-featured-image-wrap">
 
       <img
-        src={`https://govtjobsnotice-v2.pages.dev/assets/${post.featured_image}`}
+        src={`https://cms.govtjobsnotice.com/assets/${post.featured_image}`}
         alt={post.title}
         class="bottom-featured-image"
         loading="lazy"
       />
-
     </section>
 
   )
