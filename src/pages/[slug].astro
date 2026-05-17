@@ -135,16 +135,7 @@ const post = await getPostBySlug(slug);
 
         <h2 class="green-heading">
 
-          Age Limit as on {
-
-            new Date(post?.age_limt_as_on_date).toLocaleString("en-IN", {
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })
-
-          }
-
+          {post?.age_limit_title || "Age Limit"}
         </h2>
 
         <div
