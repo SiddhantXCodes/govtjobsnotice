@@ -84,8 +84,8 @@ export async function getFeaturedPosts(
     .select("*")
     .eq("status", "published")
     .eq("is_featured", true)
-    .order("display_order", {
-      ascending: true
+    .order("latest_status_date", {
+      ascending: false
     })
     .limit(limit);
 

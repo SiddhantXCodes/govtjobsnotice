@@ -1,0 +1,96 @@
+---
+const {
+  showWhatsApp = true,
+  showTelegram = true,
+  showYoutube = true,
+  showInstagram = true,
+  showLinkedin = true,
+} = Astro.props;
+
+const socials = {
+  telegram: "https://t.me/GovtJobs_Notice",
+  whatsapp: "https://chat.whatsapp.com/yourlink",
+  youtube: "https://youtube.com/@govtjobsnotice",
+  instagram: "https://instagram.com/govtjobsnotice",
+  linkedin: "https://linkedin.com/company/govtjobsnotice",
+};
+---
+
+<div class="social-links">
+  {
+    showWhatsApp && (
+      <a href={socials.whatsapp} class="whatsapp-btn" target="_blank">
+        WhatsApp
+      </a>
+    )
+  }
+
+  {
+    showTelegram && (
+      <a href={socials.telegram} class="telegram-btn" target="_blank">
+        Telegram
+      </a>
+    )
+  }
+
+  {
+    showYoutube && (
+      <a href={socials.youtube} class="youtube-btn" target="_blank">
+        YouTube
+      </a>
+    )
+  }
+
+  {
+    showInstagram && (
+      <a href={socials.instagram} class="instagram-btn" target="_blank">
+        Instagram
+      </a>
+    )
+  }
+
+  {
+    showLinkedin && (
+      <a href={socials.linkedin} class="linkedin-btn" target="_blank">
+        LinkedIn
+      </a>
+    )
+  }
+</div>
+
+<style>
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 20px 0;
+  }
+
+  .social-links a {
+    padding: 10px 18px;
+   
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .telegram-btn {
+    background: #229ed9;
+  }
+
+  .whatsapp-btn {
+    background: #25d366;
+  }
+
+  .youtube-btn {
+    background: #ff0000;
+  }
+
+  .instagram-btn {
+    background: #e1306c;
+  }
+
+  .linkedin-btn {
+    background: #0077b5;
+  }
+</style>

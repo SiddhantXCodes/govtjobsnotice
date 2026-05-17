@@ -6,6 +6,7 @@ import {
   getFeaturedPosts,
   getPostsByCategory,
 } from "../lib/repositories/postRepository";
+import SocialLinks from "../components/SocialLinks.astro";
 
 const schema = {
   "@context": "https://schema.org",
@@ -113,9 +114,7 @@ const colors = [
         </p>
 
         <div class="hero-buttons">
-          <a href="#" class="hero-btn whatsapp-btn"> Join WhatsApp Channel </a>
-
-          <a href="https://t.me/GovtJobs_Notice" class="hero-btn telegram-btn"> Join Telegram Channel </a>
+         <SocialLinks />
         </div>
       </div>
     </section>

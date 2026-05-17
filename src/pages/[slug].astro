@@ -4,8 +4,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import "../styles/post.css";
 
 import { getAllPosts, getPostBySlug } from "../lib/repositories/postRepository";
+
 import Breadcrumbs from "../components/Breadcrumbs.astro";
-import RelatedPosts from "../components/RelatedPosts.astro";
+import PostSuggestions from "../components/PostSuggestions.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+
 export async function getStaticPaths() {
   const posts = await getAllPosts();
 
@@ -27,7 +30,9 @@ const post = await getPostBySlug(slug);
   canonical={`https://govtjobsnotice.com/${post?.slug}/`}
 >
   <main class="post-page">
+
     <!-- PAGE INTRO -->
+
     <Breadcrumbs
       items={[
         {
@@ -39,7 +44,9 @@ const post = await getPostBySlug(slug);
         },
       ]}
     />
+
     <section class="page-intro-box">
+
       <h1 class="page-intro-title">
         {post?.title}
       </h1>
@@ -59,138 +66,212 @@ const post = await getPostBySlug(slug);
         }
       </div>
 
-      <div class="page-intro-content" set:html={post?.intro_content} />
+      <div
+        class="editor-content"
+        set:html={post?.intro_content}
+      />
+
     </section>
 
-    <!-- BUTTONS -->
+    <!-- SOCIAL LINKS -->
 
-    <div class="top-buttons">
-      <a href="#" class="whatsapp-btn"> WhatsApp </a>
-
-      <a href="https://t.me/GovtJobs_Notice" class="telegram-btn"> Telegram </a>
-    </div>
+    <SocialLinks />
 
     <!-- MAIN TITLE -->
 
     <section class="main-title-box">
+
       <h2 class="main-title">
         {post?.feed_title}
       </h2>
-      <div class="site-name">www.GovtJobsNotice.Com</div>
+
+      <div class="site-name">
+        www.GovtJobsNotice.Com
+      </div>
+
       <div class="main-status">
         {post?.title} : Overview
       </div>
+
     </section>
 
     <!-- IMPORTANT DATES + APPLICATION FEE -->
 
     <div class="two-column-grid">
-      <section class="post-box">
-        <h2 class="pink-heading">Important Dates</h2>
 
-        <div class="post-content" set:html={post?.important_dates} />
+      <section class="post-box">
+
+        <h2 class="pink-heading">
+          Important Dates
+        </h2>
+
+        <div
+          class="editor-content"
+          set:html={post?.important_dates}
+        />
+
       </section>
 
       <section class="post-box">
-        <h2 class="pink-heading">Application Fee</h2>
 
-        <div class="post-content" set:html={post?.application_fee} />
+        <h2 class="pink-heading">
+          Application Fee
+        </h2>
+
+        <div
+          class="editor-content"
+          set:html={post?.application_fee}
+        />
+
       </section>
+
     </div>
 
     <!-- AGE LIMIT + TOTAL POST -->
 
     <div class="four-grid">
+
       <section class="age-box">
+
         <h2 class="green-heading">
+
           Age Limit as on {
+
             new Date(post?.age_limt_as_on_date).toLocaleString("en-IN", {
               day: "numeric",
               month: "long",
               year: "numeric",
             })
+
           }
+
         </h2>
 
-        <div class="post-content" set:html={post?.age_limit} />
+        <div
+          class="editor-content"
+          set:html={post?.age_limit}
+        />
+
       </section>
 
       <section class="total-post-box">
-        <h2 class="orange-heading">Total Post</h2>
+
+        <h2 class="orange-heading">
+          Total Post
+        </h2>
 
         <div class="total-post-number">
           {post?.total_posts}
         </div>
+
       </section>
+
     </div>
 
     <!-- VACANCY DETAILS -->
 
     <section class="post-box section-gap">
+
       <h2 class="blue-heading">
         {post?.title} : Vacancy Details
       </h2>
 
       <div
-        class="post-content table-content"
+        class="editor-content"
         set:html={post?.vacancy_details}
       />
+
     </section>
 
     <!-- ELIGIBILITY -->
 
     <section class="post-box section-gap">
-      <h2 class="blue-heading">{post?.title} : Eligibility Criteria</h2>
+
+      <h2 class="blue-heading">
+        {post?.title} : Eligibility Criteria
+      </h2>
 
       <div
-        class="post-content table-content"
+        class="editor-content"
         set:html={post?.eligibility_criteria}
       />
+
     </section>
 
     <!-- HOW TO APPLY -->
 
     <section class="post-box section-gap">
-      <h2 class="blue-heading">{post?.how_to_apply_title} {post?.title}</h2>
 
-      <div class="post-content" set:html={post?.how_to_apply} />
+      <h2 class="blue-heading">
+        {post?.how_to_apply_title}
+      </h2>
+
+      <div
+        class="editor-content"
+        set:html={post?.how_to_apply}
+      />
+
     </section>
 
     <!-- SELECTION PROCESS -->
 
     <section class="post-box section-gap">
-      <h2 class="blue-heading">{post?.title} : Selection Process</h2>
 
-      <div class="post-content" set:html={post?.selection_process} />
+      <h2 class="blue-heading">
+        {post?.title} : Selection Process
+      </h2>
+
+      <div
+        class="editor-content"
+        set:html={post?.selection_process}
+      />
+
     </section>
 
     <!-- IMPORTANT LINKS -->
 
     <section class="post-box section-gap">
+
       <h2 class="yellow-heading">
         Some Useful Important Links for {post?.title}
       </h2>
 
       <div
-        class="post-content table-content"
+        class="editor-content"
         set:html={post?.important_links}
       />
+
     </section>
 
     <!-- FAQ -->
 
     <section class="post-box section-gap">
-      <h2 class="blue-heading">Important Questions for {post?.title}</h2>
 
-      <div class="post-content table-content" set:html={post?.faq} />
+      <h2 class="blue-heading">
+        Important Questions for {post?.title}
+      </h2>
+
+      <div
+        class="editor-content"
+        set:html={post?.faq}
+      />
+
     </section>
 
-    <!-- Related Posts -->
-    <RelatedPosts currentSlug={post?.slug} category={post?.category} />
+    <!-- POST SUGGESTIONS -->
+
+    <PostSuggestions
+      currentSlug={post?.slug}
+      category={post?.category}
+    />
+
+    <!-- FEATURED IMAGE -->
 
     {
       post?.featured_image_url && (
+
         <section class="bottom-featured-image-wrap">
+
           <img
             src={post.featured_image_url.replace(
               "/upload/",
@@ -201,26 +282,29 @@ const post = await getPostBySlug(slug);
             loading="lazy"
             decoding="async"
           />
+
         </section>
+
       )
     }
 
     <!-- DISCLAIMER -->
 
     <section class="disclaimer-box">
+
       <strong> Disclaimer : </strong>
 
-      Information regarding any exam form , results/marks, answer key are
-      published on this website are provided just for the immediate information
-      of the examinees and should not be considered as a legal document. While
-      every effort has been made by sarkariresult team to ensure the accuracy of
-      the information provided which includes official links, we are not
-      responsible for any inadvertent errors that may appear in the examination
-      results/marks, answer key or time table/admission dates. Additionally, we
-      disclaim any liability for any loss or damage caused by any shortcomings,
-      defects, or inaccuracies in the information available on this website. In
-      case of any correction is needed feel free to contact us through contact
-      us page.
+      Information regarding any exam form, results/marks,
+      answer key are published on this website are provided
+      just for the immediate information of the examinees
+      and should not be considered as a legal document.
+
+      While every effort has been made by Sarkari Result
+      team to ensure the accuracy of the information
+      provided which includes official links, we are not
+      responsible for any inadvertent errors.
+
     </section>
+
   </main>
 </BaseLayout>

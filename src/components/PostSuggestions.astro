@@ -1,0 +1,15 @@
+---
+import RelatedPosts from "./RelatedPosts.astro";
+import LatestPosts from "./LatestPosts.astro";
+
+const { currentSlug, category } = Astro.props;
+---
+
+<section class="post-suggestion-grid">
+  <RelatedPosts
+    currentSlug={currentSlug}
+    category={category}
+  />
+
+  <LatestPosts currentSlug={currentSlug} />
+</section>

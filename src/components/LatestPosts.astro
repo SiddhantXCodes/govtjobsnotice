@@ -1,27 +1,28 @@
 ---
 import { getAllPosts } from "../lib/repositories/postRepository";
 
-const { currentSlug, category } = Astro.props;
+const { currentSlug = "" } = Astro.props;
 
 const allPosts = await getAllPosts();
 
-const relatedPosts = allPosts
-  .filter(
-    (post) =>
-      post.slug !== currentSlug &&
-      post.category === category,
+const latestPosts = allPosts
+  .filter((post) => post.slug !== currentSlug)
+  .sort(
+    (a, b) =>
+      new Date(b.latest_status_date).getTime() -
+      new Date(a.latest_status_date).getTime(),
   )
   .slice(0, 8);
 ---
 
 <section class="simple-post-box">
   <h2 class="simple-post-heading red-heading">
-    Related Posts
+    Latest Posts
   </h2>
 
   <ul class="simple-post-list">
     {
-      relatedPosts.map((post) => (
+      latestPosts.map((post) => (
         <li>
           <a href={`/${post.slug}/`}>
             {post.title}
