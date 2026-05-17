@@ -192,19 +192,21 @@ const post = await getPostBySlug(slug);
   currentSlug={post?.slug}
   category={post?.category}
 />
-<!-- Featured Image -->
+
 
 {
-  post?.featured_image && (
+  post?.featured_image_url && (
 
     <section class="bottom-featured-image-wrap">
 
       <img
-        src={`https://cms.govtjobsnotice.com/assets/${post.featured_image}`}
+        src={post.featured_image_url}
         alt={post.title}
         class="bottom-featured-image"
         loading="lazy"
+        decoding="async"
       />
+
     </section>
 
   )
