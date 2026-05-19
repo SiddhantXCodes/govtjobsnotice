@@ -5,18 +5,27 @@ import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
 import PostSuggestions from "../../components/PostSuggestions.astro";
 
+import SocialLinks from "../../components/SocialLinks.astro";
+
+import { EXAM_LIFECYCLE_TEMPLATES } from "../../lib/examLifecycleTemplates";
+
+import { EXAM_PAGE_SECTIONS } from "../../lib/examPageSections";
+
 import {
     getAllExams,
     getExamBySlug,
     getExamPosts,
 } from "../../lib/repositories/examRepository";
 
+import { buildExamLifecycle } from "../../lib/repositories/examLifecycle";
+
 import { buildExamMeta } from "../../lib/seo/buildExamMeta";
 
 import { buildExamSchema } from "../../lib/seo/buildExamSchema";
-import SocialLinks from "../../components/SocialLinks.astro";
 
-/* STATIC PATHS */
+/* =========================================
+   STATIC PATHS
+========================================= */
 
 export async function getStaticPaths() {
     const exams = await getAllExams();
@@ -28,11 +37,15 @@ export async function getStaticPaths() {
     }));
 }
 
-/* PARAMS */
+/* =========================================
+   PARAMS
+========================================= */
 
 const { slug } = Astro.params;
 
-/* EXAM */
+/* =========================================
+   EXAM
+========================================= */
 
 const exam = await getExamBySlug(slug);
 
@@ -40,88 +53,37 @@ if (!exam) {
     return Astro.redirect("/404");
 }
 
-/* POSTS */
+/* =========================================
+   POSTS
+========================================= */
 
 const latestUpdates = await getExamPosts(exam.id, 12);
 
-/* SEO */
+const lifecycle = buildExamLifecycle(latestUpdates);
+
+/* =========================================
+   SEO
+========================================= */
 
 const meta = buildExamMeta(exam);
 
 const schema = buildExamSchema(exam);
 
-/* TOC */
+/* =========================================
+   SECTIONS
+========================================= */
 
-const sections = [
-    exam.overview && {
-        id: "overview",
-        label: "Overview",
-    },
+const sections = EXAM_PAGE_SECTIONS.filter((section) => {
+    /* LIFECYCLE */
 
-    exam.exam_details && {
-        id: "exam-details",
-        label: "Exam Details",
-    },
+    if (section.type === "lifecycle") {
+        return true;
+    }
 
-    exam.notification && {
-        id: "notification",
-        label: "Notification",
-    },
+    /* CONTENT */
 
-    exam.important_dates && {
-        id: "important_dates",
-        label: "Important Dates",
-    },
-
-    exam.vacancy_details && {
-        id: "vacancy_details",
-        label: "Vacancy Details",
-    },
-
-    exam.admit_card && {
-        id: "admit-card",
-        label: "Admit Card",
-    },
-
-    exam.answer_key && {
-        id: "answer-key",
-        label: "Answer Key",
-    },
-
-    exam.result && {
-        id: "result",
-        label: "Result",
-    },
-
-    exam.important_links && {
-        id: "important-links",
-        label: "Important Links",
-    },
-    exam.eligibility && {
-        id: "eligibility",
-        label: "Eligibility Criteria",
-    },
-    exam.selection_process && {
-        id: "selection-process",
-        label: "Selection Process",
-    },
-    exam.exam_pattern && {
-        id: "exam-pattern",
-        label: "Exam Pattern",
-    },
-    exam.syllabus && {
-        id: "syllabus",
-        label: "Syllabus",
-    },
-    exam.salary && {
-        id: "salary",
-        label: "Salary",
-    },
-    exam.faq && {
-        id: "faq",
-        label: "FAQ",
-    },
-].filter(Boolean);
+    return !!exam[section.field];
+});
 ---
 
 <BaseLayout
@@ -148,7 +110,7 @@ const sections = [
             />
 
             <h1 class="exam-title">
-                {exam.title} {exam.year}
+                {exam.title}
             </h1>
 
             <div class="exam-meta-line">
@@ -194,7 +156,7 @@ const sections = [
 
             <aside class="exam-sidebar">
                 <div class="exam-toc">
-                    <div class="exam-toc-title">Quick Navigation</div>
+                    <div class="exam-toc-title">Table of Contents</div>
 
                     <ul class="exam-toc-list">
                         {
@@ -210,20 +172,18 @@ const sections = [
                 </div>
             </aside>
 
-            <!-- MAIN CONTENT -->
+            <!-- CONTENT -->
 
             <div class="exam-content">
                 <!-- LATEST UPDATES -->
 
-                <section class="exam-box">
-                    <h2 class="exam-box-heading">
-                        Latest
-                        {exam.short_name}
-                        Updates
-                    </h2>
+                {
+                    latestUpdates.length > 0 && (
+                        <section class="exam-box">
+                            <h2 class="exam-box-heading">
+                                {exam.short_name} {exam.year} Latest Updates
+                            </h2>
 
-                    {
-                        latestUpdates.length > 0 ? (
                             <ul class="exam-update-list">
                                 {latestUpdates.map((post) => (
                                     <li>
@@ -233,31 +193,101 @@ const sections = [
                                     </li>
                                 ))}
                             </ul>
-                        ) : (
-                            <div class="no-updates">
-                                No latest updates available.
-                            </div>
-                        )
-                    }
-                </section>
+                        </section>
+                    )
+                }
 
-                <!-- DYNAMIC CONTENT SECTIONS -->
+                <!-- ALL SECTIONS -->
+
                 {
                     sections.map((section) => {
-                        const key = section.id.replace(/-/g, "_");
+                        /* =====================================
+                         LIFECYCLE
+                        ===================================== */
+                        if (section.type === "lifecycle") {
+                            const lifecycleItem = lifecycle[section.statusType];
 
-                        const content = exam[key];
+                            if (!lifecycleItem) {
+                                return null;
+                            }
+
+                            /* TEMPLATE */
+
+                            let template = null;
+
+                            /* =====================================
+       ACTIVE
+    ===================================== */
+
+                            if (lifecycleItem.status === "active") {
+                                template = EXAM_LIFECYCLE_TEMPLATES[
+                                    section.statusType
+                                ]?.active?.(exam, lifecycleItem.post);
+                            } else if (lifecycleItem.status === "released") {
+                                /* =====================================
+       RELEASED
+    ===================================== */
+                                template =
+                                    EXAM_LIFECYCLE_TEMPLATES[
+                                        section.statusType
+                                    ]?.released?.(exam);
+                            } else {
+                                /* =====================================
+       UPCOMING
+    ===================================== */
+                                template =
+                                    EXAM_LIFECYCLE_TEMPLATES[
+                                        section.statusType
+                                    ]?.upcoming?.(exam);
+                            }
+
+                            if (!template) {
+                                return null;
+                            }
+
+                            return (
+                                <section id={section.id} class="exam-box">
+                                    <h2 class="exam-box-heading">
+                                        {template.title}
+                                    </h2>
+
+                                    <div class="editor-content">
+                                        <div set:html={template.content} />
+
+                                        {lifecycleItem.status === "active" &&
+                                            lifecycleItem.post &&
+                                            template.buttonLabel && (
+                                                <a
+                                                    href={`/${lifecycleItem.post.slug}/`}
+                                                    class="status-btn"
+                                                >
+                                                    {lifecycleItem.post
+                                                        ?.title ||
+                                                        template.buttonLabel}
+                                                </a>
+                                            )}
+                                    </div>
+                                </section>
+                            );
+                        }
+
+                        /* =====================================
+                                CONTENT
+                                            ===================================== */
+
+                        const content = exam[section.field];
 
                         if (!content) {
                             return null;
                         }
 
-                        /* IMPORTANT DATES TABLE */
+                        /* IMPORTANT DATES */
 
-                        if (key === "important_dates") {
+                        if (section.field === "important_dates") {
                             return (
                                 <section id={section.id} class="exam-box">
                                     <h2 class="exam-box-heading">
+                                        {exam.short_name} {exam.year}{" "}
                                         {section.label}
                                     </h2>
 
@@ -288,16 +318,16 @@ const sections = [
 
                         /* IMPORTANT LINKS */
 
-                        if (key === "important_links") {
+                        if (section.field === "important_links") {
                             return (
                                 <section id={section.id} class="exam-box">
                                     <h2 class="exam-box-heading">
+                                        {exam.short_name} {exam.year}{" "}
                                         {section.label}
                                     </h2>
+
                                     <div class="exam-table-wrap">
                                         <table class="exam-table">
-                                          
-
                                             <tbody>
                                                 {content.map((item) => (
                                                     <tr>
@@ -321,11 +351,12 @@ const sections = [
                             );
                         }
 
-                        /* NORMAL HTML CONTENT */
+                        /* NORMAL HTML */
 
                         return (
                             <section id={section.id} class="exam-box">
                                 <h2 class="exam-box-heading">
+                                    {exam.short_name} {exam.year}{" "}
                                     {section.label}
                                 </h2>
 
@@ -340,9 +371,10 @@ const sections = [
             </div>
         </div>
 
-        <!-- RELATED POSTS -->
+        <!-- RELATED -->
 
         <PostSuggestions currentSlug="" category="" />
+
         <SocialLinks />
     </article>
 </BaseLayout>

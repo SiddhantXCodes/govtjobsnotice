@@ -2,261 +2,263 @@
    EXAM PAGE
 ========================================= */
 
-.exam-page{
-  max-width:1050px;
+.exam-page {
+  max-width: 1050px;
 
-  margin:auto;
+  margin: auto;
 
-  padding:14px 8px 30px;
+  padding: 14px 8px 30px;
 }
 
 /* =========================================
    HERO
 ========================================= */
 
-.exam-hero{
-  background:#fff;
+.exam-hero {
+  background: #fff;
 
-  border:1px solid #555;
+  border: 1px solid #555;
 
-  padding:18px 20px;
+  padding: 18px 20px;
 
-  margin-bottom:14px;
+  margin-bottom: 14px;
 }
 
-.exam-title{
-  margin:12px 0 0;
+.exam-title {
+  margin: 12px 0 0;
 
-  color:#000066;
+  color: #000066;
 
-  font-size:38px;
+  font-size: 38px;
 
-  font-weight:800;
+  font-weight: 800;
 
-  line-height:1.4;
+  line-height: 1.4;
 }
 
-.exam-meta-line{
-  display:flex;
+.exam-meta-line {
+  display: flex;
 
-  flex-wrap:wrap;
+  flex-wrap: wrap;
 
-  gap:10px;
+  gap: 10px;
 
-  margin-top:14px;
+  margin-top: 14px;
 
-  color:#444;
+  color: #444;
 
-  font-size:15px;
+  font-size: 15px;
 
-  font-weight:600;
+  font-weight: 600;
 }
 
-.exam-dot{
-  color:#999;
+.exam-dot {
+  color: #999;
 }
 
-.exam-updated-line{
-  margin-top:14px;
+.exam-updated-line {
+  margin-top: 14px;
 
-  padding-top:12px;
+  padding-top: 12px;
 
-  border-top:1px solid #ddd;
+  border-top: 1px solid #ddd;
 
-  color:#c00000;
+  color: #c00000;
 
-  font-size:14px;
+  font-size: 14px;
 
-  font-weight:700;
+  font-weight: 700;
 }
 
 /* =========================================
    LAYOUT
 ========================================= */
 
-.exam-layout{
-  display:grid;
+.exam-layout {
+  display: grid;
 
   grid-template-columns:
     240px 1fr;
 
-  gap:14px;
+  gap: 14px;
 
-  align-items:start;
+  align-items: start;
 }
 
 /* =========================================
    SIDEBAR
 ========================================= */
 
-.exam-sidebar{
-  position:sticky;
+.exam-sidebar {
+  position: sticky;
 
-  top:14px;
+  top: 14px;
 }
 
-.exam-toc{
-  background:#fff;
+.exam-toc {
+  background: #fff;
 
-  border:1px solid #555;
+  border: 1px solid #555;
 }
 
-.exam-toc-title{
-  background:#000066;
+.exam-toc-title {
+  background: #000066;
 
-  color:#fff;
+  color: #fff;
 
-  font-size:18px;
+  font-size: 18px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  padding:12px 14px;
+  padding: 12px 14px;
 
-  border-bottom:1px solid #555;
+  border-bottom: 1px solid #555;
 }
 
-.exam-toc-list{
-  margin:0;
+.exam-toc-list {
+  margin: 0;
 
-  padding:0;
+  padding: 0;
 
-  list-style:none;
+  list-style: none;
 }
 
-.exam-toc-list li{
-  border-bottom:1px solid #ddd;
+.exam-toc-list li {
+  border-bottom: 1px solid #ddd;
 }
 
-.exam-toc-list li:last-child{
-  border-bottom:none;
+.exam-toc-list li:last-child {
+  border-bottom: none;
 }
 
 .exam-toc-list a{
   display:block;
 
-  padding:11px 14px;
+  padding:7px 12px;
 
   color:#0000cc;
 
-  font-size:15px;
+  font-size:14px;
 
   font-weight:700;
 
-  line-height:1.6;
+  line-height:1.35;
 
   text-decoration:none;
+
+  transition:0.2s ease;
 }
 
-.exam-toc-list a:hover{
-  background:#fafafa;
+.exam-toc-list a:hover {
+  background: #fafafa;
 
-  color:#d40000;
+  color: #d40000;
 }
 
 /* =========================================
    CONTENT
 ========================================= */
 
-.exam-content{
-  min-width:0;
+.exam-content {
+  min-width: 0;
 }
 
 /* =========================================
    BOX
 ========================================= */
 
-.exam-box{
-  background:#fff;
+.exam-box {
+  background: #fff;
 
-  border:1px solid #555;
+  border: 1px solid #555;
 
-  margin-bottom:14px;
+  margin-bottom: 14px;
 }
 
 /* =========================================
    SECTION HEADING
 ========================================= */
 
-.exam-box-heading{
-  margin:0;
+.exam-box-heading {
+  margin: 0;
 
-  background:#000066;
+  background: #000066;
 
-  color:#fff;
+  color: #fff;
 
-  font-size:21px;
+  font-size: 21px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  padding:10px 14px;
+  padding: 10px 14px;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
 /* =========================================
    TABLE
 ========================================= */
 
-.exam-table-wrap{
-  overflow-x:auto;
+.exam-table-wrap {
+  overflow-x: auto;
 }
 
-.exam-table{
-  width:100%;
+.exam-table {
+  width: 100%;
 
-  border-collapse:collapse;
+  border-collapse: collapse;
 
-  min-width:700px;
+  min-width: 700px;
 }
 
-.exam-table th{
-  width:32%;
+.exam-table th {
+  width: 32%;
 
-  background:#f5f5f5;
+  background: #f5f5f5;
 
-  color:#111;
+  color: #111;
 
-  font-size:15px;
+  font-size: 15px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  text-align:left;
+  text-align: left;
 
-  padding:10px;
+  padding: 10px;
 
-  border:1px solid #555;
+  border: 1px solid #555;
 
-  vertical-align:top;
+  vertical-align: top;
 
-  line-height:1.6;
+  line-height: 1.6;
 }
 
-.exam-table td{
-  border:1px solid #555;
+.exam-table td {
+  border: 1px solid #555;
 
-  padding:10px;
+  padding: 10px;
 
-  font-size:15px;
+  font-size: 15px;
 
-  line-height:1.7;
+  line-height: 1.7;
 
-  vertical-align:top;
+  vertical-align: top;
 
-  color:#111;
+  color: #111;
 }
 
-.exam-table tr:nth-child(even){
-  background:#fafafa;
+.exam-table tr:nth-child(even) {
+  background: #fafafa;
 }
 
 /* =========================================
    STATUS
 ========================================= */
 
-.exam-status{
-  color:#008000;
+.exam-status {
+  color: #008000;
 
-  font-weight:700;
+  font-weight: 700;
 }
 
 /* =========================================
@@ -266,161 +268,193 @@
 .exam-table a,
 .exam-content a,
 .exam-update-list a,
-.important-link-card{
-  color:#0000cc;
+.important-link-card {
+  color: #0000cc;
 
-  font-weight:700;
+  font-weight: 700;
 
-  text-decoration:none;
+  text-decoration: none;
 }
 
 .exam-table a:hover,
 .exam-content a:hover,
 .exam-update-list a:hover,
-.important-link-card:hover{
-  color:#d40000;
+.important-link-card:hover {
+  color: #d40000;
 
-  text-decoration:underline;
+  text-decoration: underline;
 }
 
 /* =========================================
    LATEST UPDATES
 ========================================= */
 
-.exam-update-list{
-  margin:0;
+.exam-update-list {
+  margin: 0;
 
-  padding:0;
+  padding: 0;
 
-  list-style:none;
+  list-style: none;
 }
 
-.exam-update-list li{
-  border-bottom:1px solid #ddd;
+.exam-update-list li {
+  border-bottom: 1px solid #ddd;
 }
 
-.exam-update-list li:last-child{
-  border-bottom:none;
+.exam-update-list li:last-child {
+  border-bottom: none;
 }
 
-.exam-update-list a{
-  display:block;
+.exam-update-list a {
+  display: block;
 
-  padding:12px 14px;
+  padding: 12px 14px;
 
-  font-size:15px;
+  font-size: 15px;
 
-  line-height:1.7;
+  line-height: 1.7;
 }
 
-.exam-update-list a:hover{
-  background:#fafafa;
+.exam-update-list a:hover {
+  background: #fafafa;
 }
+
+
+.status-btn {
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  margin-top:16px;
+
+  padding:6px 10px;
+
+  background:#f9f9f9;
+
+  border:2px solid #c20e0e;
+
+  color:#f7f7f7;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  border-radius:4px;
+
+  transition:all .2s ease;
+}
+
 
 /* =========================================
    IMPORTANT LINKS
 ========================================= */
 
-.important-links-grid{
-  display:grid;
+.important-links-grid {
+  display: grid;
 
   grid-template-columns:
-    repeat(auto-fit,minmax(220px,1fr));
+    repeat(auto-fit, minmax(220px, 1fr));
 
-  gap:12px;
+  gap: 12px;
 
-  padding:14px;
+  padding: 14px;
 }
 
-.important-link-card{
-  border:1px solid #555;
+.important-link-card {
+  border: 1px solid #555;
 
-  background:#fafafa;
+  background: #fafafa;
 
-  padding:12px;
+  padding: 12px;
 
-  text-align:center;
+  text-align: center;
 
-  line-height:1.6;
+  line-height: 1.6;
 }
 
 /* =========================================
    EDITOR CONTENT
 ========================================= */
 
-.editor-content{
-  padding:14px;
+.editor-content {
+  padding: 14px;
 }
 
 /* =========================================
    MOBILE
 ========================================= */
 
-@media(max-width:900px){
+@media(max-width:900px) {
 
-  .exam-layout{
-    grid-template-columns:1fr;
+  .exam-layout {
+    grid-template-columns: 1fr;
   }
 
-  .exam-sidebar{
-    position:static;
+  .exam-sidebar {
+    position: static;
   }
 
 }
 
-@media(max-width:768px){
+@media(max-width:768px) {
 
-  .exam-page{
-    padding:10px 4px 24px;
+  .exam-page {
+    padding: 10px 4px 24px;
   }
 
-  .exam-hero{
-    padding:14px;
+  .exam-hero {
+    padding: 14px;
   }
 
-  .exam-title{
-    font-size:28px;
+  .exam-title {
+    font-size: 28px;
 
-    line-height:1.5;
+    line-height: 1.5;
   }
 
-  .exam-meta-line{
-    font-size:14px;
+  .exam-meta-line {
+    font-size: 14px;
   }
 
-  .exam-box-heading{
-    font-size:18px;
+  .exam-box-heading {
+    font-size: 18px;
 
-    padding:9px 12px;
+    padding: 9px 12px;
   }
 
-  .editor-content{
-    padding:12px;
+  .editor-content {
+    padding: 12px;
   }
 
-  .exam-table{
-    min-width:620px;
+  .exam-table {
+    min-width: 620px;
   }
 
   .exam-table th,
-  .exam-table td{
-    padding:8px;
+  .exam-table td {
+    padding: 8px;
 
-    font-size:13px;
+    font-size: 13px;
   }
 
-  .exam-toc-title{
-    font-size:16px;
+  .exam-toc-title {
+    font-size: 16px;
   }
 
-  .exam-toc-list a{
-    font-size:14px;
-  }
+ .exam-toc-list a{
+  padding:6px 10px;
+
+  font-size:13px;
+
+  line-height:1.3;
+}
 
 }
 
 /* =========================================
    IMPORTANT LINKS BUTTON
 ========================================= */
-
-

@@ -1,7 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-
 import { getAllPosts, getPostBySlug } from "../lib/repositories/postRepository";
 
 import Breadcrumbs from "../components/Breadcrumbs.astro";
@@ -27,32 +26,28 @@ const post = await getPostBySlug(slug);
   title={`${post?.title} | GovtJobsNotice`}
   description={post?.seo_description || post?.seo_title}
   canonical={`https://govtjobsnotice.com/${post?.slug}/`}
+  ogImage={post?.featured_image_url?.replace(
+    "/upload/",
+    "/upload/f_auto,q_auto/",
+  )}
 >
   <main class="post-page">
-
     <!-- PAGE INTRO -->
 
-
     <section class="page-intro-box">
-
-    <Breadcrumbs
-      items={[
-        {
-         label:
-  post?.category
-    ?.replaceAll("-", " ")
-    .replace(
-      /\b\w/g,
-      (c:any)=>c.toUpperCase()
-    ),
-          href: `/${post?.category}/`,
-        },
-        {
-          label: post?.title,
-        },
-      ]}
-
-    />
+      <Breadcrumbs
+        items={[
+          {
+            label: post?.category
+              ?.replaceAll("-", " ")
+              .replace(/\b\w/g, (c: any) => c.toUpperCase()),
+            href: `/${post?.category}/`,
+          },
+          {
+            label: post?.title,
+          },
+        ]}
+      />
 
       <h1 class="page-intro-title">
         {post?.title}
@@ -73,11 +68,7 @@ const post = await getPostBySlug(slug);
         }
       </div>
 
-      <div
-        class="editor-content"
-        set:html={post?.intro_content}
-      />
-
+      <div class="editor-content" set:html={post?.intro_content} />
     </section>
 
     <!-- SOCIAL LINKS -->
@@ -87,189 +78,122 @@ const post = await getPostBySlug(slug);
     <!-- MAIN TITLE -->
 
     <section class="main-title-box">
-
       <h2 class="main-title">
         {post?.feed_title}
       </h2>
 
-      <div class="site-name">
-        www.GovtJobsNotice.Com
-      </div>
+      <div class="site-name">www.GovtJobsNotice.Com</div>
 
       <div class="main-status">
         {post?.title} : Overview
       </div>
-
     </section>
 
     <!-- IMPORTANT DATES + APPLICATION FEE -->
 
     <div class="two-column-grid">
-
       <section class="post-box">
+        <h2 class="pink-heading">Important Dates</h2>
 
-        <h2 class="pink-heading">
-          Important Dates
-        </h2>
-
-        <div
-          class="editor-content"
-          set:html={post?.important_dates}
-        />
-
+        <div class="editor-content" set:html={post?.important_dates} />
       </section>
 
       <section class="post-box">
+        <h2 class="pink-heading">Application Fee</h2>
 
-        <h2 class="pink-heading">
-          Application Fee
-        </h2>
-
-        <div
-          class="editor-content"
-          set:html={post?.application_fee}
-        />
-
+        <div class="editor-content" set:html={post?.application_fee} />
       </section>
-
     </div>
 
     <!-- AGE LIMIT + TOTAL POST -->
 
     <div class="four-grid">
-
       <section class="age-box">
-
         <h2 class="green-heading">
-
           {post?.age_limit_title || "Age Limit"}
         </h2>
 
-        <div
-          class="editor-content"
-          set:html={post?.age_limit}
-        />
-
+        <div class="editor-content" set:html={post?.age_limit} />
       </section>
 
       <section class="total-post-box">
-
-        <h2 class="orange-heading">
-          Total Post
-        </h2>
+        <h2 class="orange-heading">Total Post</h2>
 
         <div class="total-post-number">
           {post?.total_posts}
         </div>
-
       </section>
-
     </div>
 
     <!-- VACANCY DETAILS -->
 
     <section class="post-box section-gap">
-
       <h2 class="blue-heading">
         {post?.title} : Vacancy Details
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.vacancy_details}
-      />
-
+      <div class="editor-content" set:html={post?.vacancy_details} />
     </section>
 
     <!-- ELIGIBILITY -->
 
     <section class="post-box section-gap">
-
       <h2 class="blue-heading">
         {post?.title} : Eligibility Criteria
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.eligibility_criteria}
-      />
-
+      <div class="editor-content" set:html={post?.eligibility_criteria} />
     </section>
 
     <!-- HOW TO APPLY -->
 
     <section class="post-box section-gap">
-
       <h2 class="blue-heading">
         {post?.how_to_apply_title}
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.how_to_apply}
-      />
-
+      <div class="editor-content" set:html={post?.how_to_apply} />
     </section>
 
     <!-- SELECTION PROCESS -->
 
     <section class="post-box section-gap">
-
       <h2 class="blue-heading">
         {post?.title} : Selection Process
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.selection_process}
-      />
-
+      <div class="editor-content" set:html={post?.selection_process} />
     </section>
 
     <!-- IMPORTANT LINKS -->
 
     <section class="post-box section-gap">
-
       <h2 class="yellow-heading">
         Some Useful Important Links for {post?.title}
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.important_links}
-      />
-
+      <div class="editor-content" set:html={post?.important_links} />
     </section>
 
     <!-- FAQ -->
 
     <section class="post-box section-gap">
-
       <h2 class="blue-heading">
         Important Questions for {post?.title}
       </h2>
 
-      <div
-        class="editor-content"
-        set:html={post?.faq}
-      />
-
+      <div class="editor-content" set:html={post?.faq} />
     </section>
 
     <!-- POST SUGGESTIONS -->
 
-    <PostSuggestions
-      currentSlug={post?.slug}
-      category={post?.category}
-    />
+    <PostSuggestions currentSlug={post?.slug} category={post?.category} />
 
     <!-- FEATURED IMAGE -->
 
     {
       post?.featured_image_url && (
-
         <section class="bottom-featured-image-wrap">
-
           <img
             src={post.featured_image_url.replace(
               "/upload/",
@@ -280,29 +204,21 @@ const post = await getPostBySlug(slug);
             loading="lazy"
             decoding="async"
           />
-
         </section>
-
       )
     }
 
     <!-- DISCLAIMER -->
 
     <section class="disclaimer-box">
-
       <strong> Disclaimer : </strong>
 
-      Information regarding any exam form, results/marks,
-      answer key are published on this website are provided
-      just for the immediate information of the examinees
-      and should not be considered as a legal document.
-
-      While every effort has been made by Sarkari Result
-      team to ensure the accuracy of the information
-      provided which includes official links, we are not
+      Information regarding any exam form, results/marks, answer key are
+      published on this website are provided just for the immediate information
+      of the examinees and should not be considered as a legal document. While
+      every effort has been made by Sarkari Result team to ensure the accuracy
+      of the information provided which includes official links, we are not
       responsible for any inadvertent errors.
-
     </section>
-
   </main>
 </BaseLayout>
