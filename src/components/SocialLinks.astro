@@ -12,9 +12,9 @@ const {
 const socials = {
   telegram: "https://t.me/GovtJobs_Notice",
 
-  whatsapp: "https://chat.whatsapp.com/yourlink",
+  whatsapp: "https://whatsapp.com/channel/0029Vb7JzZS1yT2AI8P1gt39",
 
-  youtube: "https://youtube.com/@govtjobsnotice",
+  youtube: "https://youtube.com/@govtjobs_notice",
 
   instagram: "https://instagram.com/govtjobsnotice",
 
@@ -43,43 +43,23 @@ const socialSchema = {
 ---
 
 <!-- SEO SCHEMA -->
-
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(socialSchema)}
-></script>
+<script type="application/ld+json" set:html={JSON.stringify(socialSchema)} />
 
 <!-- SOCIAL LINKS -->
-
-<section
-  class="social-links-section"
-  aria-labelledby="social-links-heading"
->
-
-  <h2
-    id="social-links-heading"
-    class="social-heading"
-  >
-
+<section class="social-links-section" aria-labelledby="social-links-heading">
+  <h2 id="social-links-heading" class="social-heading">
     Join GovtJobsNotice on Social Media
-
   </h2>
 
   <p class="social-description">
-
-    Get latest government jobs,
-    Sarkari Result updates,
-    admit cards, answer keys,
-    admissions and recruitment notifications
-    through our official social media channels.
-
+    Get latest government jobs, Sarkari Result updates, admit cards, answer
+    keys, admissions and recruitment notifications through our official social
+    media channels.
   </p>
 
   <div class="social-links">
-
     {
       showWhatsApp && (
-
         <a
           href={socials.whatsapp}
           class="whatsapp-btn"
@@ -87,17 +67,13 @@ const socialSchema = {
           rel="noopener noreferrer"
           aria-label="Join GovtJobsNotice WhatsApp Channel"
         >
-
           WhatsApp
-
         </a>
-
       )
     }
 
     {
       showTelegram && (
-
         <a
           href={socials.telegram}
           class="telegram-btn"
@@ -105,17 +81,13 @@ const socialSchema = {
           rel="noopener noreferrer"
           aria-label="Join GovtJobsNotice Telegram Channel"
         >
-
           Telegram
-
         </a>
-
       )
     }
 
     {
       showYoutube && (
-
         <a
           href={socials.youtube}
           class="youtube-btn"
@@ -123,17 +95,13 @@ const socialSchema = {
           rel="noopener noreferrer"
           aria-label="Visit GovtJobsNotice YouTube Channel"
         >
-
           YouTube
-
         </a>
-
       )
     }
 
     {
       showInstagram && (
-
         <a
           href={socials.instagram}
           class="instagram-btn"
@@ -141,17 +109,13 @@ const socialSchema = {
           rel="noopener noreferrer"
           aria-label="Follow GovtJobsNotice on Instagram"
         >
-
           Instagram
-
         </a>
-
       )
     }
 
     {
       showLinkedin && (
-
         <a
           href={socials.linkedin}
           class="linkedin-btn"
@@ -159,15 +123,9 @@ const socialSchema = {
           rel="noopener noreferrer"
           aria-label="Follow GovtJobsNotice on LinkedIn"
         >
-
           LinkedIn
-
         </a>
-
       )
     }
-
   </div>
-
 </section>
-

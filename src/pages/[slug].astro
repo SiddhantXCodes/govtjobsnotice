@@ -32,19 +32,27 @@ const post = await getPostBySlug(slug);
 
     <!-- PAGE INTRO -->
 
+
+    <section class="page-intro-box">
+
     <Breadcrumbs
       items={[
         {
-          label: post?.category?.replaceAll("-", " "),
+         label:
+  post?.category
+    ?.replaceAll("-", " ")
+    .replace(
+      /\b\w/g,
+      (c:any)=>c.toUpperCase()
+    ),
           href: `/${post?.category}/`,
         },
         {
           label: post?.title,
         },
       ]}
-    />
 
-    <section class="page-intro-box">
+    />
 
       <h1 class="page-intro-title">
         {post?.title}

@@ -1,29 +1,22 @@
 ---
-import { getAllPosts }
-  from "../lib/repositories/postRepository";
+import { getAllPosts } from "../lib/repositories/postRepository";
 
-const {
-  currentSlug = ""
-} = Astro.props;
+const { currentSlug = "" } = Astro.props;
 
 /* FETCH POSTS */
 
-const allPosts =
-  await getAllPosts();
+const allPosts = await getAllPosts();
 
 /* SORT LATEST */
 
-const latestPosts =
-  allPosts
-    .filter((post) =>
-      post.slug !== currentSlug
-    )
-    .sort(
-      (a, b) =>
-        new Date(b.latest_status_date).getTime() -
-        new Date(a.latest_status_date).getTime()
-    )
-    .slice(0, 8);
+const latestPosts = allPosts
+  .filter((post) => post.slug !== currentSlug)
+  .sort(
+    (a, b) =>
+      new Date(b.latest_status_date).getTime() -
+      new Date(a.latest_status_date).getTime(),
+  )
+  .slice(0, 8);
 
 /* SCHEMA */
 
@@ -35,7 +28,6 @@ const itemListSchema = {
   name: "Latest Government Job Updates",
 
   itemListElement: latestPosts.map((post, index) => ({
-
     "@type": "ListItem",
 
     position: index + 1,
@@ -43,65 +35,33 @@ const itemListSchema = {
     url: `https://govtjobsnotice.com/${post.slug}/`,
 
     name: post.title,
-
   })),
 };
 ---
 
 <!-- SEO SCHEMA -->
-
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(itemListSchema)}
-></script>
+<script type="application/ld+json" set:html={JSON.stringify(itemListSchema)} />
 
 <!-- LATEST POSTS -->
-
-<section
-  class="simple-post-box"
-  aria-labelledby="latest-posts-heading"
->
-
-  <h2
-    id="latest-posts-heading"
-    class="simple-post-heading red-heading"
-  >
-
+<section class="simple-post-box" aria-labelledby="latest-posts-heading">
+  <h2 id="latest-posts-heading" class="simple-post-heading red-heading">
     Latest Government Job Updates
-
   </h2>
 
   <p class="simple-post-description">
-
-    Check latest government jobs,
-    Sarkari Result updates,
-    admit cards, answer keys,
-    syllabus and recruitment notifications.
-
+    Check latest government jobs, Sarkari Result updates, admit cards, answer
+    keys, syllabus and recruitment notifications.
   </p>
 
   <ul class="simple-post-list">
-
     {
       latestPosts.map((post) => (
-
         <li class="simple-post-item">
-
-          <a
-            href={`/${post.slug}/`}
-            class="simple-post-link"
-          >
-
+          <a href={`/${post.slug}/`} class="simple-post-link">
             {post.title}
-
           </a>
-
         </li>
-
       ))
     }
-
   </ul>
-
 </section>
-

@@ -2,7 +2,8 @@
 import BaseLayout
   from "../../layouts/BaseLayout.astro";
 
-
+import Breadcrumbs
+  from "../../components/Breadcrumbs.astro";
 
 import {
   getAllPosts
@@ -22,7 +23,7 @@ export async function getStaticPaths() {
           return [];
         }
 
-        /* REAL ARRAY */
+        /* ARRAY */
 
         if(Array.isArray(post.tags)){
 
@@ -38,7 +39,7 @@ export async function getStaticPaths() {
 
         }
 
-        /* STRINGIFIED JSON */
+        /* JSON STRING */
 
         try{
 
@@ -108,7 +109,7 @@ const posts =
 
     }
 
-    /* STRINGIFIED JSON */
+    /* JSON STRING */
 
     else{
 
@@ -143,7 +144,7 @@ const tagTitle =
     ?.replaceAll("-"," ")
     .replace(
       /\b\w/g,
-      (c: string)=>c.toUpperCase()
+      (c:string)=>c.toUpperCase()
     );
 ---
 
@@ -153,28 +154,52 @@ const tagTitle =
   canonical={`/tag/${tag}/`}
 >
 
-<main class="category-page">
+<main class="page-container">
 
-  <section class="category-header">
+  <!-- HEADER -->
 
-    <h1 class="category-title">
+  <section class="page-header common-box">
+
+    <Breadcrumbs
+      items={[
+        {
+          label:`${tagTitle} Jobs`
+        }
+      ]}
+    />
+
+    <h1 class="page-title">
 
       {tagTitle} Jobs
 
     </h1>
 
-    <div class="category-count">
+    <div class="page-count">
 
       Total Posts :
       {posts.length}
 
     </div>
 
+    <p class="page-description">
+
+      Get latest {tagTitle.toLowerCase()} government jobs,
+      recruitment notifications,
+      admit cards,
+      results,
+      answer keys,
+      exam dates and official updates
+      from various central and state government departments.
+
+    </p>
+
   </section>
 
-  <section class="category-table-wrap">
+  <!-- TABLE -->
 
-    <table class="category-table">
+  <section class="table-wrap">
+
+    <table class="common-table">
 
       <thead>
 
@@ -207,7 +232,7 @@ const tagTitle =
 
                 <a
                   href={`/${post.slug}/`}
-                  class="category-link"
+                  class="table-link"
                 >
 
                   {post.title}
@@ -255,6 +280,45 @@ const tagTitle =
       </tbody>
 
     </table>
+
+  </section>
+
+  <!-- SEO CONTENT -->
+
+  <section class="seo-box common-box">
+
+    <h2>
+
+      Latest {tagTitle} Government Jobs
+
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides latest
+      {tagTitle.toLowerCase()} government jobs,
+      recruitment notifications,
+      admit cards,
+      results,
+      answer keys,
+      syllabus and official announcements.
+
+    </p>
+
+    <p>
+
+      Candidates can check exam dates,
+      application forms,
+      eligibility,
+      results and official notifications
+      for SSC,
+      Railway,
+      Banking,
+      UPSC,
+      Defence,
+      PSU and State Government recruitments.
+
+    </p>
 
   </section>
 

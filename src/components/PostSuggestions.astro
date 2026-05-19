@@ -1,14 +1,9 @@
 ---
-import RelatedPosts
-  from "./RelatedPosts.astro";
+import RelatedPosts from "./RelatedPosts.astro";
 
-import LatestPosts
-  from "./LatestPosts.astro";
+import LatestPosts from "./LatestPosts.astro";
 
-const {
-  currentSlug,
-  category
-} = Astro.props;
+const { currentSlug, category } = Astro.props;
 
 /* SCHEMA */
 
@@ -25,62 +20,33 @@ const suggestionSchema = {
 ---
 
 <!-- SEO SCHEMA -->
-
 <script
   type="application/ld+json"
   set:html={JSON.stringify(suggestionSchema)}
-></script>
+/>
 
 <!-- POST SUGGESTIONS -->
-
 <section
   class="post-suggestion-grid"
   aria-label="Related Government Job Updates"
 >
-
   <!-- RELATED POSTS -->
 
-  <section
-    class="suggestion-column"
-    aria-labelledby="related-posts-heading"
-  >
-
-    <h2
-      id="related-posts-heading"
-      class="visually-hidden"
-    >
-
+  <section class="suggestion-column" aria-labelledby="related-posts-heading">
+    <h2 id="related-posts-heading" class="visually-hidden">
       Related Government Job Posts
-
     </h2>
 
-    <RelatedPosts
-      currentSlug={currentSlug}
-      category={category}
-    />
-
+    <RelatedPosts currentSlug={currentSlug} category={category} />
   </section>
 
   <!-- LATEST POSTS -->
 
-  <section
-    class="suggestion-column"
-    aria-labelledby="latest-posts-heading"
-  >
-
-    <h2
-      id="latest-posts-heading"
-      class="visually-hidden"
-    >
-
+  <section class="suggestion-column" aria-labelledby="latest-posts-heading">
+    <h2 id="latest-posts-heading" class="visually-hidden">
       Latest Sarkari Result and Recruitment Updates
-
     </h2>
 
-    <LatestPosts
-      currentSlug={currentSlug}
-    />
-
+    <LatestPosts currentSlug={currentSlug} />
   </section>
-
 </section>

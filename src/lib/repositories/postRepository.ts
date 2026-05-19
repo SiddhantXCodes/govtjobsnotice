@@ -104,7 +104,7 @@ export async function getFeaturedPosts(
 
 export async function getPostsByCategory(
   category: string,
-  limit = 6
+  limit = 10
 ) {
 
   const { data, error } = await supabase
@@ -187,16 +187,15 @@ export async function searchPosts(
 /* POSTS BY TAG */
 
 export async function getPostsByTag(
-  tag:string,
-  limit=100
+  tag: string,
+  limit = 10
 ) {
 
   const { data, error } =
     await supabase
       .from("posts")
       .select("*")
-      .eq("status","published")
-      .contains("tags",[tag])
+      .eq("status", "published")
       .order(
         "latest_status_date",
         {
@@ -208,10 +207,41 @@ export async function getPostsByTag(
   if(error){
 
     console.error(error);
+
     return [];
 
   }
 
-  return data || [];
+  if(!data){
+    return [];
+  }
+
+  /* FILTER TAGS MANUALLY */
+
+  return data.filter((post:any)=>{
+
+    if(!post.tags){
+      return false;
+    }
+
+    /* ARRAY */
+
+    if(Array.isArray(post.tags)){
+
+      return post.tags.some(
+        (item:string)=>
+
+          item
+            .trim()
+            .toLowerCase()
+            === tag.toLowerCase()
+
+      );
+
+    }
+
+    return false;
+
+  });
 
 }

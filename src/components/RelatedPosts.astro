@@ -1,35 +1,23 @@
 ---
-import {
-  getAllPosts
-} from "../lib/repositories/postRepository";
+import { getAllPosts } from "../lib/repositories/postRepository";
 
-const {
-  currentSlug,
-  category
-} = Astro.props;
+const { currentSlug, category } = Astro.props;
 
 /* FETCH POSTS */
 
-const allPosts =
-  await getAllPosts();
+const allPosts = await getAllPosts();
 
 /* RELATED POSTS */
 
-const relatedPosts =
-  allPosts
-    .filter(
-      (post) =>
-        post.slug !== currentSlug &&
-        post.category === category
-    )
-    .slice(0, 8);
+const relatedPosts = allPosts
+  .filter((post) => post.slug !== currentSlug && post.category === category)
+  .slice(0, 8);
 
 /* FORMAT CATEGORY */
 
-const formattedCategory =
-  category
-    ?.replace(/-/g, " ")
-    ?.replace(/\b\w/g, c => c.toUpperCase());
+const formattedCategory = category
+  ?.replace(/-/g, " ")
+  ?.replace(/\b\w/g, (c) => c.toUpperCase());
 
 /* SCHEMA */
 
@@ -38,97 +26,50 @@ const relatedSchema = {
 
   "@type": "ItemList",
 
-  name:
-    `${formattedCategory || "Government Job"} Related Posts`,
+  name: `${formattedCategory || "Government Job"} Related Posts`,
 
   description:
     "Related government job notifications, Sarkari Result updates, admit cards and recruitment posts.",
 
-  itemListElement:
-    relatedPosts.map((post, index) => ({
+  itemListElement: relatedPosts.map((post, index) => ({
+    "@type": "ListItem",
 
-      "@type": "ListItem",
+    position: index + 1,
 
-      position: index + 1,
+    url: `https://govtjobsnotice.com/${post.slug}/`,
 
-      url:
-        `https://govtjobsnotice.com/${post.slug}/`,
-
-      name:
-        post.title,
-
-    })),
+    name: post.title,
+  })),
 };
 ---
 
 <!-- SEO SCHEMA -->
-
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(relatedSchema)}
-></script>
+<script type="application/ld+json" set:html={JSON.stringify(relatedSchema)} />
 
 <!-- RELATED POSTS -->
-
-<section
-  class="simple-post-box"
-  aria-labelledby="related-posts-heading"
->
-
-  <h2
-    id="related-posts-heading"
-    class="simple-post-heading red-heading"
-  >
-
+<section class="simple-post-box" aria-labelledby="related-posts-heading">
+  <h2 id="related-posts-heading" class="simple-post-heading red-heading">
     Related {formattedCategory || "Government Job"} Posts
-
   </h2>
 
   <p class="simple-post-description">
-
-    Explore more related government job notifications,
-    Sarkari Result updates,
-    admit cards, answer keys
-    and recruitment information.
-
+    Explore more related government job notifications, Sarkari Result updates,
+    admit cards, answer keys and recruitment information.
   </p>
 
   {
     relatedPosts.length > 0 ? (
-
       <ul class="simple-post-list">
-
-        {
-          relatedPosts.map((post) => (
-
-            <li class="simple-post-item">
-
-              <a
-                href={`/${post.slug}/`}
-                class="simple-post-link"
-              >
-
-                {post.title}
-
-              </a>
-
-            </li>
-
-          ))
-        }
-
+        {relatedPosts.map((post) => (
+          <li class="simple-post-item">
+            <a href={`/${post.slug}/`} class="simple-post-link">
+              {post.title}
+            </a>
+          </li>
+        ))}
       </ul>
-
     ) : (
-
-      <div class="no-related-posts">
-
-        No related posts available.
-
-      </div>
-
+      <div class="no-related-posts">No related posts available.</div>
     )
   }
-
 </section>
-

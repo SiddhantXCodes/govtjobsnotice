@@ -1,0 +1,348 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+
+import PostSuggestions from "../../components/PostSuggestions.astro";
+
+import {
+    getAllExams,
+    getExamBySlug,
+    getExamPosts,
+} from "../../lib/repositories/examRepository";
+
+import { buildExamMeta } from "../../lib/seo/buildExamMeta";
+
+import { buildExamSchema } from "../../lib/seo/buildExamSchema";
+import SocialLinks from "../../components/SocialLinks.astro";
+
+/* STATIC PATHS */
+
+export async function getStaticPaths() {
+    const exams = await getAllExams();
+
+    return exams.map((exam) => ({
+        params: {
+            slug: exam.slug,
+        },
+    }));
+}
+
+/* PARAMS */
+
+const { slug } = Astro.params;
+
+/* EXAM */
+
+const exam = await getExamBySlug(slug);
+
+if (!exam) {
+    return Astro.redirect("/404");
+}
+
+/* POSTS */
+
+const latestUpdates = await getExamPosts(exam.id, 12);
+
+/* SEO */
+
+const meta = buildExamMeta(exam);
+
+const schema = buildExamSchema(exam);
+
+/* TOC */
+
+const sections = [
+    exam.overview && {
+        id: "overview",
+        label: "Overview",
+    },
+
+    exam.exam_details && {
+        id: "exam-details",
+        label: "Exam Details",
+    },
+
+    exam.notification && {
+        id: "notification",
+        label: "Notification",
+    },
+
+    exam.important_dates && {
+        id: "important_dates",
+        label: "Important Dates",
+    },
+
+    exam.vacancy_details && {
+        id: "vacancy_details",
+        label: "Vacancy Details",
+    },
+
+    exam.admit_card && {
+        id: "admit-card",
+        label: "Admit Card",
+    },
+
+    exam.answer_key && {
+        id: "answer-key",
+        label: "Answer Key",
+    },
+
+    exam.result && {
+        id: "result",
+        label: "Result",
+    },
+
+    exam.important_links && {
+        id: "important-links",
+        label: "Important Links",
+    },
+    exam.eligibility && {
+        id: "eligibility",
+        label: "Eligibility Criteria",
+    },
+    exam.selection_process && {
+        id: "selection-process",
+        label: "Selection Process",
+    },
+    exam.exam_pattern && {
+        id: "exam-pattern",
+        label: "Exam Pattern",
+    },
+    exam.syllabus && {
+        id: "syllabus",
+        label: "Syllabus",
+    },
+    exam.salary && {
+        id: "salary",
+        label: "Salary",
+    },
+    exam.faq && {
+        id: "faq",
+        label: "FAQ",
+    },
+].filter(Boolean);
+---
+
+<BaseLayout
+    title={meta.title}
+    description={meta.description}
+    canonical={meta.canonical}
+    keywords={meta.keywords}
+    schema={schema}
+>
+    <article class="exam-page">
+        <!-- HERO -->
+
+        <section class="exam-hero">
+            <Breadcrumbs
+                items={[
+                    {
+                        label: "Exams",
+                        href: "/exams",
+                    },
+                    {
+                        label: exam.short_name || exam.title,
+                    },
+                ]}
+            />
+
+            <h1 class="exam-title">
+                {exam.title} {exam.year}
+            </h1>
+
+            <div class="exam-meta-line">
+                <span>
+                    {exam.organization || "Government of India"}
+                </span>
+
+                <span class="exam-dot"> • </span>
+
+                <span>
+                    {exam.category || "Government Exam"}
+                </span>
+
+                <span class="exam-dot"> • </span>
+
+                <span>
+                    {exam.level || "National Level"}
+                </span>
+            </div>
+
+            <div class="exam-updated-line">
+                Last Updated :
+
+                {
+                    exam.last_updated
+                        ? new Date(exam.last_updated).toLocaleDateString(
+                              "en-IN",
+                              {
+                                  day: "numeric",
+                                  month: "long",
+                                  year: "numeric",
+                              },
+                          )
+                        : "-"
+                }
+            </div>
+        </section>
+
+        <!-- MAIN GRID -->
+
+        <div class="exam-layout">
+            <!-- SIDEBAR -->
+
+            <aside class="exam-sidebar">
+                <div class="exam-toc">
+                    <div class="exam-toc-title">Quick Navigation</div>
+
+                    <ul class="exam-toc-list">
+                        {
+                            sections.map((section) => (
+                                <li>
+                                    <a href={`#${section.id}`}>
+                                        {section.label}
+                                    </a>
+                                </li>
+                            ))
+                        }
+                    </ul>
+                </div>
+            </aside>
+
+            <!-- MAIN CONTENT -->
+
+            <div class="exam-content">
+                <!-- LATEST UPDATES -->
+
+                <section class="exam-box">
+                    <h2 class="exam-box-heading">
+                        Latest
+                        {exam.short_name}
+                        Updates
+                    </h2>
+
+                    {
+                        latestUpdates.length > 0 ? (
+                            <ul class="exam-update-list">
+                                {latestUpdates.map((post) => (
+                                    <li>
+                                        <a href={`/${post.slug}/`}>
+                                            {post.title}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <div class="no-updates">
+                                No latest updates available.
+                            </div>
+                        )
+                    }
+                </section>
+
+                <!-- DYNAMIC CONTENT SECTIONS -->
+                {
+                    sections.map((section) => {
+                        const key = section.id.replace(/-/g, "_");
+
+                        const content = exam[key];
+
+                        if (!content) {
+                            return null;
+                        }
+
+                        /* IMPORTANT DATES TABLE */
+
+                        if (key === "important_dates") {
+                            return (
+                                <section id={section.id} class="exam-box">
+                                    <h2 class="exam-box-heading">
+                                        {section.label}
+                                    </h2>
+
+                                    <div class="exam-table-wrap">
+                                        <table class="exam-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Event</th>
+
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                {content.map((item) => (
+                                                    <tr>
+                                                        <td>{item.event}</td>
+
+                                                        <td>{item.date}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            );
+                        }
+
+                        /* IMPORTANT LINKS */
+
+                        if (key === "important_links") {
+                            return (
+                                <section id={section.id} class="exam-box">
+                                    <h2 class="exam-box-heading">
+                                        {section.label}
+                                    </h2>
+                                    <div class="exam-table-wrap">
+                                        <table class="exam-table">
+                                          
+
+                                            <tbody>
+                                                {content.map((item) => (
+                                                    <tr>
+                                                        <td>{item.label}</td>
+
+                                                        <td>
+                                                            <a
+                                                                href={item.url}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                            >
+                                                                Click Here
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </section>
+                            );
+                        }
+
+                        /* NORMAL HTML CONTENT */
+
+                        return (
+                            <section id={section.id} class="exam-box">
+                                <h2 class="exam-box-heading">
+                                    {section.label}
+                                </h2>
+
+                                <div
+                                    class="editor-content"
+                                    set:html={content}
+                                />
+                            </section>
+                        );
+                    })
+                }
+            </div>
+        </div>
+
+        <!-- RELATED POSTS -->
+
+        <PostSuggestions currentSlug="" category="" />
+        <SocialLinks />
+    </article>
+</BaseLayout>

@@ -1,178 +1,466 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
+import BaseLayout
+  from "../../layouts/BaseLayout.astro";
 
-import { getPostsByCategory } from "../../lib/repositories/postRepository";
+import Breadcrumbs
+  from "../../components/Breadcrumbs.astro";
+
+import {
+  getPostsByCategory
+} from "../../lib/repositories/postRepository";
 
 export async function getStaticPaths() {
-    const categories = [
-        "latest-jobs",
-        "results",
-        "admit-card",
-        "answer-key",
-        "admission",
-        "syllabus",
-    ];
 
-    return categories.map((category) => ({
-        params: {
-            category,
-        },
-    }));
+  const categories = [
+
+    "latest-jobs",
+    "results",
+    "admit-card",
+    "answer-key",
+    "admission",
+    "syllabus",
+
+  ];
+
+  return categories.map((category)=>({
+
+    params:{
+      category
+    }
+
+  }));
+
 }
 
-const { category } = Astro.params;
+const { category } =
+  Astro.params;
 
-const posts = await getPostsByCategory(category, 100);
+const posts =
+  await getPostsByCategory(
+    category,
+    100
+  );
 
-const categoryTitle = category
-    ?.replaceAll("-", " ")
-    .replace(/\b\w/g, (c) => c.toUpperCase());
+const categoryTitle =
+  category
+    ?.replaceAll("-"," ")
+    .replace(
+      /\b\w/g,
+      (c)=>c.toUpperCase()
+    );
 
 /* COLUMN LOGIC */
 
-const getColumns = () => {
-    switch (category) {
-        case "latest-jobs":
-            return ["Post Name", "Application Start", "Last Date"];
+const getColumns = ()=>{
 
-        case "results":
-            return ["Result Name", "Post Date", "Result Date"];
+  switch(category){
 
-        case "admit-card":
-            return ["Admit Card", "Exam Date", "Admit Card Date"];
+    case "latest-jobs":
 
-        case "answer-key":
-            return ["Answer Key", "Exam Date", "Answer Key Date"];
+      return [
+        "Post Name",
+        "Application Start",
+        "Last Date"
+      ];
 
-        case "admission":
-            return ["Admission", "Application Start", "Last Date"];
+    case "results":
 
-        case "syllabus":
-            return ["Syllabus", "Post Date", "Updated Date"];
+      return [
+        "Result Name",
+        "Post Date",
+        "Result Date"
+      ];
 
-        default:
-            return ["Title", "Date", "Status"];
-    }
+    case "admit-card":
+
+      return [
+        "Admit Card",
+        "Exam Date",
+        "Admit Card Date"
+      ];
+
+    case "answer-key":
+
+      return [
+        "Answer Key",
+        "Exam Date",
+        "Answer Key Date"
+      ];
+
+    case "admission":
+
+      return [
+        "Admission",
+        "Application Start",
+        "Last Date"
+      ];
+
+    case "syllabus":
+
+      return [
+        "Syllabus",
+        "Post Date",
+        "Updated Date"
+      ];
+
+    default:
+
+      return [
+        "Title",
+        "Date",
+        "Status"
+      ];
+
+  }
+
 };
 
-const columns = getColumns();
+const columns =
+  getColumns();
 
-const formatDate = (date: any) => {
-    if (!date) return "-";
+const formatDate = (date:any)=>{
 
-    return new Date(date).toLocaleDateString("en-IN", {
-        day: "numeric",
-        month: "short",
-        year: "numeric",
-    });
+  if(!date){
+    return "-";
+  }
+
+  return new Date(date)
+    .toLocaleDateString(
+      "en-IN",
+      {
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
 };
 ---
 
 <BaseLayout
-    title={`${categoryTitle} | GovtJobsNotice`}
-    description={`${categoryTitle} updates, notifications, admit cards, results and latest information`}
+  title={`${categoryTitle} | GovtJobsNotice`}
+  description={`${categoryTitle} updates, notifications, admit cards, results and latest information`}
 >
-    <main class="category-page">
-        <section class="category-header">
-            <h1 class="category-title">
-                {categoryTitle}
-            </h1>
 
-            <div class="category-count">
-                Total Posts :
-                {posts.length}
-            </div>
-        </section>
+<main class="page-container">
 
-        <section class="category-table-wrap">
-            <table class="category-table">
-                <thead>
-                    <tr>
-                        {columns.map((column) => <th>{column}</th>)}
-                    </tr>
-                </thead>
+  <!-- HEADER -->
 
-                <tbody>
-                    {
-                        posts.map((post) => (
-                            <tr>
-                                <td>
-                                    <a
-                                        href={`/${post.slug}/`}
-                                        class="category-link"
-                                    >
-                                        {post.title} - {post.latest_status} ({post.total_posts})
-                                    </a>
-                                </td>
+  <section class="page-header common-box">
 
-                                {category === "latest-jobs" && (
-                                    <>
-                                        <td>
-                                            {formatDate(post.application_start)}
-                                        </td>
+    <Breadcrumbs
+      items={[
+        {
+          label:categoryTitle
+        }
+      ]}
+    />
 
-                                        <td>
-                                            {formatDate(post.application_end)}
-                                        </td>
-                                    </>
-                                )}
+    <h1 class="page-title">
 
-                                {category === "results" && (
-                                    <>
-                                        <td>{formatDate(post.latest_status_date)}</td>
+      {categoryTitle}
 
-                                        <td>{formatDate(post.result_date)}</td>
-                                    </>
-                                )}
+    </h1>
 
-                                {category === "admit-card" && (
-                                    <>
-                                        <td>{formatDate(post.exam_date)}</td>
+    <div class="page-count">
 
-                                        <td>
-                                            {formatDate(post.admit_card_date)}
-                                        </td>
-                                    </>
-                                )}
+      Total Posts :
+      {posts.length}
 
-                                {category === "answer-key" && (
-                                    <>
-                                        <td>{formatDate(post.exam_date)}</td>
+    </div>
 
-                                        <td>
-                                            {formatDate(post.answer_key_date)}
-                                        </td>
-                                    </>
-                                )}
+    <p class="page-description">
 
-                                {category === "admission" && (
-                                    <>
-                                        <td>
-                                            {formatDate(post.application_start)}
-                                        </td>
+      Get latest {categoryTitle.toLowerCase()} updates,
+      notifications,
+      exam dates,
+      admit cards,
+      answer keys,
+      admissions and recruitment information
+      from various government organizations.
 
-                                        <td>
-                                            {formatDate(post.application_end)}
-                                        </td>
-                                    </>
-                                )}
+    </p>
 
-                                {category === "syllabus" && (
-                                    <>
-                                        <td>{formatDate(post.latest_status_date)}</td>
+  </section>
 
-                                        <td>
-                                            {formatDate(
-                                                post.latest_status_date,
-                                            )}
-                                        </td>
-                                    </>
-                                )}
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
-        </section>
-    </main>
+  <!-- TABLE -->
+
+  <section class="table-wrap">
+
+    <table class="common-table">
+
+      <thead>
+
+        <tr>
+
+          {
+            columns.map((column)=>(
+
+              <th>
+
+                {column}
+
+              </th>
+
+            ))
+          }
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          posts.map((post)=>(
+
+            <tr>
+
+              <!-- TITLE -->
+
+              <td>
+
+                <a
+                  href={`/${post.slug}/`}
+                  class="table-link"
+                >
+
+                  {post.title}
+
+                </a>
+
+              </td>
+
+              <!-- LATEST JOBS -->
+
+              {
+                category === "latest-jobs" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.application_start
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.application_end
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+              <!-- RESULTS -->
+
+              {
+                category === "results" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.latest_status_date
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.result_date
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+              <!-- ADMIT CARD -->
+
+              {
+                category === "admit-card" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.exam_date
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.admit_card_date
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+              <!-- ANSWER KEY -->
+
+              {
+                category === "answer-key" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.exam_date
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.answer_key_date
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+              <!-- ADMISSION -->
+
+              {
+                category === "admission" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.application_start
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.application_end
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+              <!-- SYLLABUS -->
+
+              {
+                category === "syllabus" && (
+
+                  <>
+                    <td>
+
+                      {
+                        formatDate(
+                          post.latest_status_date
+                        )
+                      }
+
+                    </td>
+
+                    <td>
+
+                      {
+                        formatDate(
+                          post.latest_status_date
+                        )
+                      }
+
+                    </td>
+                  </>
+
+                )
+              }
+
+            </tr>
+
+          ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <!-- SEO -->
+
+  <section class="seo-box common-box">
+
+    <h2>
+
+      Latest {categoryTitle} Updates
+
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides latest
+      {categoryTitle.toLowerCase()} updates,
+      recruitment notifications,
+      admit cards,
+      results,
+      answer keys,
+      syllabus and official announcements.
+
+    </p>
+
+    <p>
+
+      Candidates can check exam dates,
+      application forms,
+      eligibility,
+      results and official notifications
+      for SSC,
+      Railway,
+      Banking,
+      UPSC,
+      Defence,
+      PSU and State Government recruitments.
+
+    </p>
+
+  </section>
+
+</main>
+
 </BaseLayout>

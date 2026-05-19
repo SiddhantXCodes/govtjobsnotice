@@ -1,0 +1,291 @@
+---
+import BaseLayout
+  from "../../layouts/BaseLayout.astro";
+
+import Breadcrumbs
+  from "../../components/Breadcrumbs.astro";
+
+import {
+  getAllExams
+} from "../../lib/repositories/examRepository";
+
+import {
+  getLatestPosts
+} from "../../lib/repositories/postRepository";
+
+/* EXAMS */
+
+const exams =
+  await getAllExams();
+
+/* POSTS */
+
+const latestPosts =
+  await getLatestPosts(100);
+
+/* BUILD UPDATE MAP */
+
+const examsWithUpdates =
+  exams.map((exam)=>{
+
+    const matchedPost =
+      latestPosts.find(
+        (post)=>
+          post.exam_slug === exam.slug
+      );
+
+    return {
+
+      ...exam,
+
+      latest_update_title:
+        matchedPost?.title || "",
+
+      latest_update_slug:
+        matchedPost?.slug || ""
+
+    };
+
+  });
+
+/* SEO */
+
+const schema = {
+
+  "@context":
+    "https://schema.org",
+
+  "@type":
+    "CollectionPage",
+
+  name:
+    "All Government Exams in India",
+
+  description:
+    "Browse all government exams including SSC, UPSC, Railway, Banking, Defence, PSU and State Government Exams.",
+
+  url:
+    "https://govtjobsnotice.com/exams/",
+
+  publisher:{
+    "@type":"Organization",
+    name:"GovtJobsNotice"
+  }
+
+};
+---
+
+<BaseLayout
+  title="All Government Exams in India | SSC, UPSC, Railway, Banking Exams"
+  description="Browse complete exam hubs covering eligibility, important dates, vacancy details, exam patterns, syllabus, admit cards, answer keys and recruitment updates."
+  canonical="/exams/"
+  keywords="
+    govt exams,
+    government exams,
+    ssc exams,
+    railway exams,
+    banking exams,
+    defence exams,
+    upsc exams,
+    sarkari exams,
+    govtjobsnotice exams
+  "
+  schema={schema}
+>
+
+<main class="page-container">
+
+  <!-- HEADER -->
+
+  <section class="page-header common-box">
+
+    <Breadcrumbs
+      items={[
+        {
+          label:"All Exams"
+        }
+      ]}
+    />
+
+    <h1 class="page-title">
+
+      All Government Exams in India
+
+    </h1>
+
+    <div class="page-count">
+
+      Total Exams :
+      {exams.length}
+
+    </div>
+
+    <p class="page-description">
+
+      Browse complete exam hubs covering
+      eligibility,
+      important dates,
+      vacancy details,
+      exam patterns,
+      syllabus,
+      admit cards,
+      answer keys,
+      results and official recruitment notifications.
+
+    </p>
+
+  </section>
+
+  <!-- TABLE -->
+
+  <section class="table-wrap">
+
+    <table class="common-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Exam
+          </th>
+
+          <th>
+            Latest Update
+          </th>
+
+          <th>
+            Last Updated
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          examsWithUpdates.map((exam)=>(
+
+            <tr>
+
+              <!-- EXAM -->
+
+              <td>
+
+                <a
+                  href={`/exam/${exam.slug}/`}
+                  class="table-link"
+                >
+
+                  {
+                    exam.short_name ||
+                    exam.title
+                  }
+
+                </a>
+
+              </td>
+
+              <!-- UPDATE -->
+
+              <td>
+
+                {
+                  exam.latest_update_title ? (
+
+                    <a
+                      href={`/${exam.latest_update_slug}/`}
+                      class="table-link"
+                    >
+
+                      {exam.latest_update_title}
+
+                    </a>
+
+                  ) : (
+
+                    <span>
+
+                      —
+
+                    </span>
+
+                  )
+                }
+
+              </td>
+
+              <!-- DATE -->
+
+              <td>
+
+                {
+                  exam.last_updated
+                    ? new Date(
+                        exam.last_updated
+                      ).toLocaleDateString(
+                        "en-IN",
+                        {
+                          day:"2-digit",
+                          month:"short",
+                          year:"numeric"
+                        }
+                      )
+                    : "-"
+                }
+
+              </td>
+
+            </tr>
+
+          ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <!-- SEO -->
+
+  <section class="seo-box common-box">
+
+    <h2>
+
+      Latest Government Exams in India
+
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides complete
+      information about SSC,
+      UPSC,
+      Railway,
+      Banking,
+      Defence,
+      PSU,
+      Teaching and State Government Exams.
+
+    </p>
+
+    <p>
+
+      Candidates can check eligibility,
+      syllabus,
+      exam pattern,
+      salary,
+      admit cards,
+      answer keys,
+      results and latest recruitment updates
+      in one place.
+
+    </p>
+
+  </section>
+
+</main>
+
+</BaseLayout>

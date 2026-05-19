@@ -1,0 +1,234 @@
+/* =========================================
+   EXAMS PAGE
+========================================= */
+
+.exams-page{
+  max-width:1050px;
+
+  margin:auto;
+
+  padding:14px 8px 30px;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.exams-hero{
+  background:#fff;
+
+  border:1px solid #555;
+
+  padding:18px 20px;
+
+  margin-bottom:14px;
+}
+
+.exams-title{
+  margin:10px 0 0;
+
+  color:#000066;
+
+  font-size:42px;
+
+  font-weight:800;
+
+  line-height:1.35;
+}
+
+.exams-description{
+  margin-top:16px;
+
+  color:#222;
+
+  font-size:16px;
+
+  line-height:1.9;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.exam-table-section{
+  overflow-x:auto;
+}
+
+.exam-table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  background:#fff;
+}
+
+/* =========================================
+   TABLE HEAD
+========================================= */
+
+.exam-table th{
+  background:#000066;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  padding:12px 12px;
+
+  border:1px solid #555;
+
+  text-align:left;
+
+  line-height:1.5;
+}
+
+/* =========================================
+   TABLE BODY
+========================================= */
+
+.exam-table td{
+  border:1px solid #555;
+
+  padding:12px;
+
+  font-size:15px;
+
+  vertical-align:top;
+
+  line-height:1.7;
+
+  font-weight:600;
+
+  color:#111;
+}
+
+.exam-table tr:nth-child(even){
+  background:#fafafa;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+.exam-name-link,
+.exam-update-link{
+  color:#0000cc;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  line-height:1.7;
+}
+
+.exam-name-link:hover,
+.exam-update-link:hover{
+  color:#d40000;
+
+  text-decoration:underline;
+}
+
+/* =========================================
+   DATE
+========================================= */
+
+.exam-date{
+  white-space:nowrap;
+
+  font-weight:600;
+
+  color:#222;
+}
+
+/* =========================================
+   NO UPDATE
+========================================= */
+
+.no-update{
+  color:#555;
+
+  font-weight:600;
+}
+
+/* =========================================
+   SEO CONTENT
+========================================= */
+
+.exams-seo-content{
+  margin-top:18px;
+
+  background:#fff;
+
+  border:1px solid #555;
+
+  padding:18px 20px;
+}
+
+.exams-seo-content h2{
+  margin-top:0;
+
+  margin-bottom:14px;
+
+  color:#c00000;
+
+  font-size:28px;
+
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+.exams-seo-content p{
+  margin-bottom:14px;
+
+  color:#222;
+
+  font-size:15px;
+
+  line-height:1.9;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .exams-page{
+    padding:10px 4px 24px;
+  }
+
+  .exams-hero{
+    padding:14px;
+  }
+
+  .exams-title{
+    font-size:28px;
+
+    line-height:1.4;
+  }
+
+  .exams-description{
+    font-size:15px;
+
+    line-height:1.8;
+  }
+
+  .exam-table th,
+  .exam-table td{
+    padding:8px;
+
+    font-size:13px;
+  }
+
+  .exams-seo-content{
+    padding:14px;
+  }
+
+  .exams-seo-content h2{
+    font-size:22px;
+  }
+
+}

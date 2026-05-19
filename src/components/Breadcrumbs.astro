@@ -4,22 +4,16 @@ type BreadcrumbItem = {
   href?: string;
 };
 
-const {
-  items = [] as BreadcrumbItem[]
-} = Astro.props;
+const { items = [] as BreadcrumbItem[] } = Astro.props;
 
 /* FORMAT LINKS */
 
-function formatHref(href?: string){
-
-  if(!href){
+function formatHref(href?: string) {
+  if (!href) {
     return "";
   }
 
-  const cleanHref =
-    href
-      .replace(/^\/+|\/+$/g, "")
-      .toLowerCase();
+  const cleanHref = href.replace(/^\/+|\/+$/g, "").toLowerCase();
 
   /* CATEGORY PAGES */
 
@@ -29,13 +23,11 @@ function formatHref(href?: string){
     "results",
     "answer-key",
     "syllabus",
-    "admission"
+    "admission",
   ];
 
-  if(categoryPages.includes(cleanHref)){
-
+  if (categoryPages.includes(cleanHref)) {
     return `/category/${cleanHref}/`;
-
   }
 
   /* TAG PAGES */
@@ -48,21 +40,16 @@ function formatHref(href?: string){
     "psu",
     "bank",
     "defence",
-    "teaching"
+    "teaching",
   ];
 
-  if(tagPages.includes(cleanHref)){
-
+  if (tagPages.includes(cleanHref)) {
     return `/tag/${cleanHref}/`;
-
   }
 
   /* NORMAL LINKS */
 
-  return href.startsWith("/")
-    ? href
-    : `/${href}`;
-
+  return href.startsWith("/") ? href : `/${href}`;
 }
 
 /* SCHEMA */
@@ -84,7 +71,6 @@ const breadcrumbSchema = {
     },
 
     ...items.map((item, index) => ({
-
       "@type": "ListItem",
 
       position: index + 2,
@@ -94,66 +80,34 @@ const breadcrumbSchema = {
       item: item.href
         ? `https://govtjobsnotice.com${formatHref(item.href)}`
         : undefined,
-
     })),
   ],
 };
 ---
 
 <!-- SEO SCHEMA -->
-
 <script
   type="application/ld+json"
   set:html={JSON.stringify(breadcrumbSchema)}
-></script>
+/>
 
 <!-- BREADCRUMBS -->
-
-<nav
-  class="breadcrumbs"
-  aria-label="Breadcrumb Navigation"
->
-
-  <a href="/">
-    Home
-  </a>
+<nav class="breadcrumbs" aria-label="Breadcrumb Navigation">
+  <a href="/"> Home </a>
 
   {
     items.map((item: BreadcrumbItem) => (
-
       <>
+        <span class="breadcrumb-separator">›</span>
 
-        <span class="breadcrumb-separator">
-          ›
-        </span>
-
-        {
-          item.href ? (
-
-            <a href={formatHref(item.href)}>
-
-              {item.label}
-
-            </a>
-
-          ) : (
-
-            <span
-              class="breadcrumb-current"
-              aria-current="page"
-            >
-
-              {item.label}
-
-            </span>
-
-          )
-        }
-
+        {item.href ? (
+          <a href={formatHref(item.href)}>{item.label}</a>
+        ) : (
+          <span class="breadcrumb-current" aria-current="page">
+            {item.label}
+          </span>
+        )}
       </>
-
     ))
   }
-
 </nav>
-

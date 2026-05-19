@@ -1,198 +1,242 @@
+---
+import {
+  getAllExams
+} from "../lib/repositories/examRepository";
+
+/* EXAMS */
+
+const exams =
+  await getAllExams();
+---
+
 <footer class="site-footer">
 
-  <div class="container">
+  <!-- EXAMS STRIP -->
 
-    <!-- SEO CONTENT -->
+  <section class="footer-exams-strip">
 
-    <div class="footer-seo-content">
+    <div class="container">
 
-      <h2>
-        Latest Government Jobs, Sarkari Result & Recruitment Updates
+      <h2 class="footer-strip-heading">
+
+        Popular Government Exams
+
       </h2>
 
-      <p>
+      <div class="footer-exams-links">
 
-        GovtJobsNotice provides latest government job notifications,
-        Sarkari Result updates, admit cards,
-        answer keys, syllabus, admissions
-        and recruitment information across India.
+        {
+          exams.slice(0,20).map((exam)=>(
 
-      </p>
+            <a
+              href={`/exam/${exam.slug}/`}
+              class="footer-exam-item"
+            >
 
-      <p>
+              {
+                exam.short_name ||
+                exam.title
+              } {exam.year}
 
-        Get latest updates for SSC, Railway,
-        UPSC, Banking, Police, Defence,
-        Teaching, PSU and State Government Jobs
-        with fast and easy access to recruitment details,
-        online forms, eligibility, exam pattern,
-        results and official notifications.
+            </a>
 
-      </p>
-
-    </div>
-
-    <div class="footer-top">
-
-      <!-- BRAND -->
-
-      <div class="footer-column footer-brand">
-
-        <div class="footer-logo">
-
-          <a href="/">
-
-            GOVT JOBS NOTICE
-
-          </a>
-
-        </div>
-
-        <div class="footer-description">
-
-          GovtJobsNotice is an educational
-          and informational platform
-          providing latest government jobs,
-          Sarkari Result, admit cards,
-          answer keys, syllabus,
-          admissions and recruitment updates.
-
-        </div>
-
-      </div>
-
-      <!-- QUICK LINKS -->
-
-      <div class="footer-column">
-
-        <h2 class="footer-heading">
-          Quick Links
-        </h2>
-
-        <div class="footer-links">
-
-          <a href="/">
-            Home
-          </a>
-
-          <a href="/category/latest-jobs">
-            Latest Govt Jobs
-          </a>
-
-          <a href="/category/results">
-            Sarkari Results
-          </a>
-
-          <a href="/category/admit-card">
-            Admit Card
-          </a>
-
-          <a href="/category/answer-key">
-            Answer Key
-          </a>
-
-          <a href="/category/syllabus">
-            Syllabus
-          </a>
-
-          <a href="/category/admission">
-            Admissions
-          </a>
-
-        </div>
-
-      </div>
-
-      <!-- IMPORTANT LINKS -->
-
-      <div class="footer-column">
-
-        <h2 class="footer-heading">
-          Important Links
-        </h2>
-
-        <div class="footer-links">
-
-          <a href="/about">
-            About Us
-          </a>
-
-          <a href="/contact">
-            Contact Us
-          </a>
-
-          <a href="/privacy-policy">
-            Privacy Policy
-          </a>
-
-          <a href="/disclaimer">
-            Disclaimer
-          </a>
-
-          <a href="/terms-and-conditions">
-            Terms & Conditions
-          </a>
-
-        </div>
-
-      </div>
-
-      <!-- TOP CATEGORIES -->
-
-      <div class="footer-column">
-
-        <h2 class="footer-heading">
-          Top Categories
-        </h2>
-
-        <div class="footer-links">
-
-          <a href="/tag/railway">
-            Railway Jobs
-          </a>
-
-          <a href="/tag/bank">
-            Banking Jobs
-          </a>
-
-          <a href="/tag/defence">
-            Defence Jobs
-          </a>
-
-          <a href="/tag/teaching">
-            Teaching Jobs
-          </a>
-
-          <a href="/tag/engineering">
-            Engineering Jobs
-          </a>
-
-          <a href="/tag/psu">
-            PSU Jobs
-          </a>
-
-        </div>
+          ))
+        }
 
       </div>
 
     </div>
 
-    <!-- DISCLAIMER -->
+  </section>
 
-    <div class="footer-disclaimer">
+  <!-- MAIN FOOTER -->
 
-      GovtJobsNotice is not a government website
-      and is not affiliated with any government organization.
-      Candidates are advised to verify all recruitment details
-      from the official website before applying.
+  <div class="footer-main">
+
+    <div class="container">
+
+    <div class="footer-grid">
+
+  <!-- BRAND -->
+
+  <div class="footer-brand">
+
+    <div class="footer-logo">
+
+      <a href="/">
+
+        GOVT JOBS NOTICE
+
+      </a>
 
     </div>
 
-    <!-- COPYRIGHT -->
+    <p class="footer-description">
 
-    <div class="footer-bottom">
+      Latest government jobs,
+      Sarkari Result,
+      admit cards,
+      answer keys,
+      syllabus and recruitment updates.
 
-      © 2026 GovtJobsNotice.com • All Rights Reserved
+    </p>
+
+  </div>
+
+  <!-- QUICK LINKS -->
+
+  <div class="footer-column">
+
+    <h3>
+
+      Quick Links
+
+    </h3>
+
+    <div class="footer-links">
+
+      <a href="/">
+        Home
+      </a>
+
+      <a href="/all-posts/">
+        All Posts
+      </a>
+
+      <a href="/exams/">
+        Exams
+      </a>
+
+      <a href="/category/latest-jobs">
+        Latest Jobs
+      </a>
+
+      <a href="/category/results">
+        Results
+      </a>
+
+    </div>
+
+  </div>
+
+  <!-- IMPORTANT -->
+
+  <div class="footer-column">
+
+    <h3>
+
+      Important
+
+    </h3>
+
+    <div class="footer-links">
+
+      <a href="/about">
+        About Us
+      </a>
+
+      <a href="/contact">
+        Contact
+      </a>
+
+      <a href="/privacy-policy">
+        Privacy Policy
+      </a>
+
+      <a href="/disclaimer">
+        Disclaimer
+      </a>
+
+
+    </div>
+
+  </div>
+
+  <!-- SOCIAL -->
+
+  <div class="footer-column">
+
+    <h3>
+
+      Follow Us
+
+    </h3>
+
+    <div class="footer-links footer-social-links">
+
+      <a
+        href="https://t.me/GovtJobs_Notice"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        Telegram
+
+      </a>
+
+      <a
+        href="https://whatsapp.com/channel/0029Vb7JzZS1yT2AI8P1gt39"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        WhatsApp
+
+      </a>
+
+      <a
+        href="https://youtube.com/@govtjobs_notice"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        YouTube
+
+      </a>
+
+      <a
+        href="https://instagram.com/govtjobsnotice"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        Instagram
+
+      </a>
+
+      <a
+        href="https://linkedin.com/company/govtjobsnotice"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+
+        LinkedIn
+
+      </a>
+
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- DISCLAIMER -->
+
+      <div class="footer-disclaimer">
+
+        GovtJobsNotice is not affiliated
+        with any government organization.
+        Verify details from official websites.
+
+      </div>
+
+      <!-- COPYRIGHT -->
+
+      <div class="footer-bottom">
+
+        © 2026 GovtJobsNotice.com
+
+      </div>
 
     </div>
 

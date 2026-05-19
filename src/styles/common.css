@@ -1,0 +1,230 @@
+/* =========================================
+   PAGE CONTAINER
+========================================= */
+
+.page-container{
+  max-width:1050px;
+
+  margin:auto;
+
+  padding:14px 8px 30px;
+}
+
+/* =========================================
+   COMMON BOX
+========================================= */
+
+.common-box{
+  background:#fff;
+
+  border:1px solid #555;
+}
+
+/* =========================================
+   PAGE HEADER
+========================================= */
+
+.page-header{
+  padding:18px 20px;
+
+  margin-bottom:14px;
+}
+
+.page-title{
+  margin:0;
+
+  color:#000066;
+
+  font-size:38px;
+
+  font-weight:800;
+
+  line-height:1.35;
+}
+
+.page-count{
+  margin-top:12px;
+
+  color:#444;
+
+  font-size:15px;
+
+  font-weight:700;
+}
+
+.page-description{
+  margin-top:14px;
+
+  color:#222;
+
+  font-size:15px;
+
+  line-height:1.9;
+}
+
+/* =========================================
+   TABLE WRAP
+========================================= */
+
+.table-wrap{
+  overflow-x:auto;
+}
+
+/* =========================================
+   COMMON TABLE
+========================================= */
+
+.common-table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  background:#fff;
+}
+
+.common-table th{
+  background:#000066;
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:700;
+
+  padding:12px 10px;
+
+  border:1px solid #555;
+
+  text-align:left;
+
+  line-height:1.5;
+}
+
+.common-table td{
+  border:1px solid #555;
+
+  padding:11px 10px;
+
+  font-size:15px;
+
+  vertical-align:top;
+
+  font-weight:600;
+
+  line-height:1.7;
+
+  color:#111;
+}
+
+.common-table tr:nth-child(even){
+  background:#fafafa;
+}
+
+/* =========================================
+   TABLE LINKS
+========================================= */
+
+.table-link{
+  color:#0000cc;
+
+  font-weight:700;
+
+  line-height:1.7;
+
+  text-decoration:none;
+}
+
+.table-link:hover{
+  color:#d40000;
+
+  text-decoration:underline;
+}
+
+/* =========================================
+   SEO CONTENT
+========================================= */
+
+.seo-box{
+  margin-top:18px;
+
+  padding:18px 20px;
+}
+
+.seo-box h2{
+  margin-top:0;
+
+  margin-bottom:14px;
+
+  color:#c00000;
+
+  font-size:28px;
+
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+.seo-box p{
+  margin-bottom:14px;
+
+  color:#222;
+
+  font-size:15px;
+
+  line-height:1.9;
+}
+
+/* =========================================
+   SECTION GAP
+========================================= */
+
+.section-gap{
+  margin-top:18px;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .page-container{
+    padding:10px 4px 24px;
+  }
+
+  .page-header{
+    padding:14px;
+  }
+
+  .page-title{
+    font-size:28px;
+
+    line-height:1.4;
+  }
+
+  .page-count{
+    font-size:14px;
+  }
+
+  .page-description{
+    font-size:14px;
+
+    line-height:1.8;
+  }
+
+  .common-table th,
+  .common-table td{
+    padding:8px;
+
+    font-size:13px;
+  }
+
+  .seo-box{
+    padding:14px;
+  }
+
+  .seo-box h2{
+    font-size:22px;
+  }
+
+}

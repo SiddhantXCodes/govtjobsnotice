@@ -2,42 +2,108 @@
 import BaseLayout
   from "../layouts/BaseLayout.astro";
 
-
+import Breadcrumbs
+  from "../components/Breadcrumbs.astro";
 
 import {
   getLatestPosts
 } from "../lib/repositories/postRepository";
 
+/* POSTS */
+
 const posts =
   await getLatestPosts(100);
+
+/* SEO */
+
+const schema = {
+
+  "@context":
+    "https://schema.org",
+
+  "@type":
+    "CollectionPage",
+
+  name:
+    "Latest Government Job Updates",
+
+  description:
+    "Latest government jobs, Sarkari Result, admit cards, answer keys, syllabus and recruitment updates.",
+
+  url:
+    "https://govtjobsnotice.com/all-posts/",
+
+  publisher:{
+    "@type":"Organization",
+    name:"GovtJobsNotice"
+  }
+
+};
 ---
 
 <BaseLayout
-  title="Latest Updates | GovtJobsNotice"
+  title="All Latest Government Job Updates | GovtJobsNotice"
+  description="Check all latest government jobs, Sarkari Result updates, admit cards, answer keys, syllabus, admissions and recruitment notifications."
+  canonical="/all-posts/"
+  keywords="
+    latest govt jobs,
+    sarkari result,
+    admit card,
+    answer key,
+    government jobs,
+    recruitment updates,
+    latest updates,
+    govtjobsnotice
+  "
+  schema={schema}
 >
 
-<main class="category-page">
+<main class="page-container">
 
-  <section class="category-header">
+  <!-- HEADER -->
 
-    <h1 class="category-title">
+  <section class="page-header common-box">
 
-      All Posts
+    <Breadcrumbs
+      items={[
+        {
+          label:"All Posts"
+        }
+      ]}
+    />
+
+    <h1 class="page-title">
+
+      All Latest Updates
 
     </h1>
 
-    <div class="category-count">
+    <div class="page-count">
 
       Total Updates :
       {posts.length}
 
     </div>
 
+    <p class="page-description">
+
+      Browse all latest government jobs,
+      Sarkari Result updates,
+      admit cards,
+      answer keys,
+      admissions,
+      syllabus and recruitment notifications
+      from central and state government organizations.
+
+    </p>
+
   </section>
 
-  <section class="category-table-wrap">
+  <!-- TABLE -->
 
-    <table class="category-table">
+  <section class="table-wrap">
+
+    <table class="common-table">
 
       <thead>
 
@@ -45,6 +111,10 @@ const posts =
 
           <th>
             Latest Update
+          </th>
+
+          <th>
+            Category
           </th>
 
           <th>
@@ -59,13 +129,16 @@ const posts =
 
         {
           posts.map((post)=>(
+
             <tr>
+
+              <!-- TITLE -->
 
               <td>
 
                 <a
                   href={`/${post.slug}/`}
-                  class="category-link"
+                  class="table-link"
                 >
 
                   {post.title}
@@ -73,6 +146,23 @@ const posts =
                 </a>
 
               </td>
+
+              <!-- CATEGORY -->
+
+              <td>
+
+                {
+                  post.category
+                    ?.replaceAll("-"," ")
+                    .replace(
+                      /\b\w/g,
+                      (c:any)=>c.toUpperCase()
+                    )
+                }
+
+              </td>
+
+              <!-- DATE -->
 
               <td>
 
@@ -93,12 +183,55 @@ const posts =
               </td>
 
             </tr>
+
           ))
         }
 
       </tbody>
 
     </table>
+
+  </section>
+
+  <!-- SEO CONTENT -->
+
+  <section class="seo-box common-box">
+
+    <h2>
+
+      Latest Government Job Notifications
+
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides latest government jobs,
+      Sarkari Result updates,
+      admit cards,
+      answer keys,
+      syllabus,
+      admissions and recruitment notifications
+      from SSC,
+      Railway,
+      UPSC,
+      Banking,
+      Defence,
+      PSU and State Government departments.
+
+    </p>
+
+    <p>
+
+      Candidates can check online forms,
+      eligibility criteria,
+      exam dates,
+      syllabus,
+      exam patterns,
+      answer keys,
+      results and official notifications
+      in one place.
+
+    </p>
 
   </section>
 

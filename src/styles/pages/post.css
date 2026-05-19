@@ -3,13 +3,13 @@
 ========================================= */
 
 .post-page{
-  max-width:var(--container-width);
+  max-width:1050px;
 
   margin:auto;
 
-  padding:8px 4px 28px;
+  padding:10px 6px 30px;
 
-  color:var(--text);
+  color:#111827;
 
   font-size:16px;
 
@@ -21,19 +21,25 @@
 ========================================= */
 
 .page-intro-box{
-  margin-bottom:12px;
+  margin-bottom:14px;
+
+  background:#fff;
+
+  border:1px solid #555;
+
+  padding:14px;
 }
 
 .page-intro-title{
-  margin:0 0 8px;
+  margin:0 0 10px;
 
-  color:var(--secondary);
+  color:#000066;
 
   font-size:30px;
 
   font-weight:800;
 
-  line-height:1.45;
+  line-height:1.5;
 }
 
 .page-post-date{
@@ -43,60 +49,41 @@
 
   gap:6px;
 
-  margin-bottom:10px;
+  margin-bottom:12px;
 
   padding:6px 10px;
 
-  background:#fff5f5;
+  background:#fff4f4;
 
-  border:1px solid #ffd2d2;
+  border:1px solid #ffcdcd;
 
-  color:#d10000;
+  color:#c00000;
 
   font-size:14px;
 
   font-weight:700;
-
-  border-radius:4px;
 }
 
 /* =========================================
-   SOCIAL BUTTONS
-========================================= */
-
-.top-buttons{
-  display:flex;
-
-  flex-wrap:wrap;
-
-  gap:10px;
-
-  margin-bottom:14px;
-}
-
-/* =========================================
-   MAIN TITLE BOX
+   MAIN TITLE
 ========================================= */
 
 .main-title-box{
-  background:var(--white);
+  background:#fff;
 
-  border:1px solid var(--border);
+  border:1px solid #555;
 
   text-align:center;
 
-  overflow:hidden;
-
-  box-shadow:
-    0 1px 4px rgba(0,0,0,.04);
+  margin-top:12px;
 }
 
 .main-title{
   margin:0;
 
-  padding:12px 10px 4px;
+  padding:10px 10px 4px;
 
-  color:#d10000;
+  color:#c00000;
 
   font-size:24px;
 
@@ -106,7 +93,7 @@
 }
 
 .site-name{
-  color:var(--secondary);
+  color:#0000cc;
 
   font-size:16px;
 
@@ -118,10 +105,9 @@
 .main-status{
   margin:0;
 
-  padding:
-    4px 10px 12px;
+  padding:4px 10px 10px;
 
-  color:#007a29;
+  color:#008000;
 
   font-size:18px;
 
@@ -163,14 +149,11 @@
 .post-box,
 .age-box,
 .total-post-box{
-  background:var(--white);
+  background:#fff;
 
-  border:1px solid var(--border);
+  border:1px solid #555;
 
   overflow:hidden;
-
-  box-shadow:
-    0 1px 4px rgba(0,0,0,.03);
 }
 
 .post-box,
@@ -183,7 +166,7 @@
 }
 
 /* =========================================
-   SECTION HEADINGS
+   HEADINGS
 ========================================= */
 
 .pink-heading,
@@ -197,7 +180,7 @@
 
   text-align:center;
 
-  font-size:22px;
+  font-size:21px;
 
   font-weight:700;
 
@@ -205,7 +188,7 @@
 }
 
 .pink-heading{
-  background:#7c003f;
+  background:#76003c;
 
   color:#fff;
 }
@@ -223,7 +206,7 @@
 }
 
 .blue-heading{
-  background:var(--secondary);
+  background:#000066;
 
   color:#fff;
 }
@@ -239,11 +222,11 @@
 ========================================= */
 
 .editor-content{
-  padding:5px 6px;
+  padding:10px 12px;
 }
 
 /* =========================================
-   TOTAL POSTS
+   TOTAL POST
 ========================================= */
 
 .total-post-number{
@@ -255,11 +238,11 @@
 
   min-height:160px;
 
-  font-size:36px;
+  color:#111;
+
+  font-size:38px;
 
   font-weight:800;
-
-  color:#111;
 }
 
 /* =========================================
@@ -268,8 +251,6 @@
 
 .bottom-featured-image-wrap{
   margin-top:16px;
-
-  text-align:center;
 }
 
 .bottom-featured-image{
@@ -277,11 +258,11 @@
 
   height:auto;
 
-  border:1px solid var(--border);
+  display:block;
+
+  border:1px solid #555;
 
   background:#fff;
-
-  display:block;
 }
 
 /* =========================================
@@ -291,11 +272,11 @@
 .disclaimer-box{
   margin-top:16px;
 
-  padding:14px;
-
   background:#fffdf2;
 
-  border:1px solid #f3df8d;
+  border:1px solid #f0d978;
+
+  padding:14px;
 
   color:#444;
 
@@ -305,17 +286,29 @@
 }
 
 /* =========================================
+   LINKS INSIDE CONTENT
+========================================= */
+
+.post-page a{
+  transition:.2s;
+}
+
+/* =========================================
    MOBILE
 ========================================= */
 
 @media(max-width:768px){
 
   .post-page{
-    padding:6px 3px 22px;
+    padding:8px 3px 24px;
 
     font-size:15px;
 
     overflow-x:hidden;
+  }
+
+  .page-intro-box{
+    padding:12px;
   }
 
   .page-intro-title{
@@ -334,7 +327,7 @@
   }
 
   .main-title{
-    font-size:20px;
+    font-size:19px;
   }
 
   .main-status{
@@ -350,17 +343,17 @@
   .orange-heading,
   .blue-heading,
   .yellow-heading{
-    font-size:17px;
+    font-size:16px;
 
-    padding:9px 8px;
+    padding:8px;
   }
 
   .editor-content{
-    padding:10px 10px;
+    padding:10px;
   }
 
   .total-post-number{
-    min-height:110px;
+    min-height:100px;
 
     font-size:28px;
   }
