@@ -1,0 +1,368 @@
+/* =========================================
+   POST PAGE
+========================================= */
+
+.post-page{
+  max-width:var(--container-width);
+
+  margin:auto;
+
+  padding:8px 4px 28px;
+
+  color:var(--text);
+
+  font-size:16px;
+
+  line-height:1.8;
+}
+
+/* =========================================
+   PAGE INTRO
+========================================= */
+
+.page-intro-box{
+  margin-bottom:12px;
+}
+
+.page-intro-title{
+  margin:0 0 8px;
+
+  color:var(--secondary);
+
+  font-size:30px;
+
+  font-weight:800;
+
+  line-height:1.45;
+}
+
+.page-post-date{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:6px;
+
+  margin-bottom:10px;
+
+  padding:6px 10px;
+
+  background:#fff5f5;
+
+  border:1px solid #ffd2d2;
+
+  color:#d10000;
+
+  font-size:14px;
+
+  font-weight:700;
+
+  border-radius:4px;
+}
+
+/* =========================================
+   SOCIAL BUTTONS
+========================================= */
+
+.top-buttons{
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:10px;
+
+  margin-bottom:14px;
+}
+
+/* =========================================
+   MAIN TITLE BOX
+========================================= */
+
+.main-title-box{
+  background:var(--white);
+
+  border:1px solid var(--border);
+
+  text-align:center;
+
+  overflow:hidden;
+
+  box-shadow:
+    0 1px 4px rgba(0,0,0,.04);
+}
+
+.main-title{
+  margin:0;
+
+  padding:12px 10px 4px;
+
+  color:#d10000;
+
+  font-size:24px;
+
+  font-weight:800;
+
+  line-height:1.5;
+}
+
+.site-name{
+  color:var(--secondary);
+
+  font-size:16px;
+
+  font-weight:700;
+
+  line-height:1.5;
+}
+
+.main-status{
+  margin:0;
+
+  padding:
+    4px 10px 12px;
+
+  color:#007a29;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  line-height:1.5;
+}
+
+/* =========================================
+   GRID
+========================================= */
+
+.two-column-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:12px;
+
+  margin-top:12px;
+}
+
+.four-grid{
+  display:grid;
+
+  grid-template-columns:
+    3fr 1fr;
+
+  gap:12px;
+
+  margin-top:12px;
+}
+
+/* =========================================
+   BOXES
+========================================= */
+
+.post-box,
+.age-box,
+.total-post-box{
+  background:var(--white);
+
+  border:1px solid var(--border);
+
+  overflow:hidden;
+
+  box-shadow:
+    0 1px 4px rgba(0,0,0,.03);
+}
+
+.post-box,
+.age-box{
+  overflow-x:auto;
+}
+
+.section-gap{
+  margin-top:12px;
+}
+
+/* =========================================
+   SECTION HEADINGS
+========================================= */
+
+.pink-heading,
+.green-heading,
+.orange-heading,
+.blue-heading,
+.yellow-heading{
+  margin:0;
+
+  padding:10px 12px;
+
+  text-align:center;
+
+  font-size:22px;
+
+  font-weight:700;
+
+  line-height:1.5;
+}
+
+.pink-heading{
+  background:#7c003f;
+
+  color:#fff;
+}
+
+.green-heading{
+  background:#006b2d;
+
+  color:#fff;
+}
+
+.orange-heading{
+  background:#ef4e00;
+
+  color:#fff;
+}
+
+.blue-heading{
+  background:var(--secondary);
+
+  color:#fff;
+}
+
+.yellow-heading{
+  background:#fff3a6;
+
+  color:#b00000;
+}
+
+/* =========================================
+   EDITOR CONTENT
+========================================= */
+
+.editor-content{
+  padding:5px 6px;
+}
+
+/* =========================================
+   TOTAL POSTS
+========================================= */
+
+.total-post-number{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-height:160px;
+
+  font-size:36px;
+
+  font-weight:800;
+
+  color:#111;
+}
+
+/* =========================================
+   FEATURED IMAGE
+========================================= */
+
+.bottom-featured-image-wrap{
+  margin-top:16px;
+
+  text-align:center;
+}
+
+.bottom-featured-image{
+  width:100%;
+
+  height:auto;
+
+  border:1px solid var(--border);
+
+  background:#fff;
+
+  display:block;
+}
+
+/* =========================================
+   DISCLAIMER
+========================================= */
+
+.disclaimer-box{
+  margin-top:16px;
+
+  padding:14px;
+
+  background:#fffdf2;
+
+  border:1px solid #f3df8d;
+
+  color:#444;
+
+  font-size:13px;
+
+  line-height:1.8;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .post-page{
+    padding:6px 3px 22px;
+
+    font-size:15px;
+
+    overflow-x:hidden;
+  }
+
+  .page-intro-title{
+    font-size:22px;
+
+    line-height:1.5;
+  }
+
+  .page-post-date{
+    font-size:13px;
+  }
+
+  .two-column-grid,
+  .four-grid{
+    grid-template-columns:1fr;
+  }
+
+  .main-title{
+    font-size:20px;
+  }
+
+  .main-status{
+    font-size:16px;
+  }
+
+  .site-name{
+    font-size:14px;
+  }
+
+  .pink-heading,
+  .green-heading,
+  .orange-heading,
+  .blue-heading,
+  .yellow-heading{
+    font-size:17px;
+
+    padding:9px 8px;
+  }
+
+  .editor-content{
+    padding:10px 10px;
+  }
+
+  .total-post-number{
+    min-height:110px;
+
+    font-size:28px;
+  }
+
+}

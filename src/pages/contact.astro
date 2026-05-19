@@ -1,11 +1,31 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import "../styles/static-page.css";
+
+
+const schema = {
+  "@context": "https://schema.org",
+
+  "@type": "ContactPage",
+
+  name: "Contact GovtJobsNotice",
+
+  url: "https://govtjobsnotice.com/contact",
+
+  description:
+    "Contact GovtJobsNotice for queries, corrections, feedback, copyright concerns and support.",
+};
 ---
 
 <BaseLayout
   title="Contact Us | GovtJobsNotice"
-  description="Contact GovtJobsNotice"
+
+  description="Contact GovtJobsNotice for support, corrections, feedback, copyright concerns and government job related queries."
+
+  canonical="https://govtjobsnotice.com/contact"
+
+  keywords="contact govtjobsnotice, govt jobs notice contact, government jobs website contact, recruitment support, govt jobs support"
+
+  schema={schema}
 >
 
 <main class="static-page">
@@ -20,16 +40,33 @@ import "../styles/static-page.css";
 
       <p>
 
-        If you have any queries,
-        corrections, suggestions,
-        copyright concerns or feedback,
+        If you have any queries, corrections,
+        feedback, suggestions, copyright concerns
+        or issues related to content published on GovtJobsNotice,
         feel free to contact us.
 
       </p>
 
+      <p>
+
+        We continuously work to improve
+        the quality, accuracy and usability
+        of our government job updates,
+        Sarkari Result information,
+        admit cards and recruitment content.
+
+      </p>
+
       <h2>
-        Email
+        Email Support
       </h2>
+
+      <p>
+
+        Users can contact us directly through email
+        for support and assistance.
+
+      </p>
 
       <p>
 
@@ -45,6 +82,38 @@ import "../styles/static-page.css";
       </p>
 
       <h2>
+        Contact For
+      </h2>
+
+      <ul>
+
+        <li>
+          Government Job Information Corrections
+        </li>
+
+        <li>
+          Recruitment Update Queries
+        </li>
+
+        <li>
+          Copyright Concerns
+        </li>
+
+        <li>
+          Technical Issues
+        </li>
+
+        <li>
+          Advertisement & Business Queries
+        </li>
+
+        <li>
+          Feedback & Suggestions
+        </li>
+
+      </ul>
+
+      <h2>
         Response Time
       </h2>
 
@@ -52,6 +121,35 @@ import "../styles/static-page.css";
 
         We usually respond within
         24–48 working hours.
+
+      </p>
+
+      <p>
+
+        Please make sure to include
+        proper details regarding your query
+        for faster assistance.
+
+      </p>
+
+      <h2>
+        Important Note
+      </h2>
+
+      <p>
+
+        GovtJobsNotice is an independent
+        educational and informational platform
+        and is not affiliated with any government organization.
+
+      </p>
+
+      <p>
+
+        Candidates are advised to verify
+        all recruitment details
+        from official government websites
+        before applying.
 
       </p>
 

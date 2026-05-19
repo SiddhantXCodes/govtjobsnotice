@@ -1,50 +1,266 @@
 ---
 import "../styles/global.css";
-import "../styles/editor-content.css";
+
+import "../styles/layout/header.css";
+import "../styles/layout/navbar.css";
+import "../styles/layout/footer.css";
+
+import "../styles/components/breadcrumbs.css";
+import "../styles/components/social-links.css";
+import "../styles/components/post-list.css";
+import "../styles/components/editor-content.css";
+
+import "../styles/pages/home.css";
+import "../styles/pages/post.css";
+import "../styles/pages/category.css";
+import "../styles/pages/static-page.css";
+
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
+/* SITE CONFIG */
+
+const SITE_URL =
+    "https://govtjobsnotice.com";
+
+const SITE_NAME =
+    "GovtJobsNotice";
+
+/* PROPS */
+
 const {
-    title = "GovtJobsNotice",
-    description = "",
-    canonical = "",
-    keywords = "",
+    title =
+        "Latest Govt Jobs, Sarkari Result, Admit Card, Results | GovtJobsNotice",
+
+    description =
+        "GovtJobsNotice provides latest government jobs, Sarkari Result, admit cards, exam notifications, answer keys, syllabus and recruitment updates for SSC, UPSC, Railway, Banking, Police, Defence, PSU and state government jobs in India.",
+
+    canonical = "/",
+
+    keywords =
+        "govt jobs, government jobs, latest govt jobs, sarkari result, govtjobsnotice, govt jobs notice, admit card, results, railway jobs, SSC jobs, UPSC jobs, banking jobs, police jobs, defence jobs, central govt jobs, state govt jobs, government exam notifications, latest recruitment, job alerts, online form, answer key, syllabus, exam pattern, govt vacancy, indian govt jobs",
+
     schema = null,
+
+    ogImage =
+        `${SITE_URL}/default-og.jpg`,
 } = Astro.props;
+
+/* CANONICAL */
+
+const fullCanonical =
+    canonical.startsWith("http")
+        ? canonical
+        : `${SITE_URL}${canonical}`;
+
+/* ORGANIZATION SCHEMA */
+
+const organizationSchema = {
+    "@context": "https://schema.org",
+
+    "@type": "Organization",
+
+    name: SITE_NAME,
+
+    url: SITE_URL,
+
+    logo: `${SITE_URL}/logo.png`,
+
+    sameAs: [
+        "https://t.me/GovtJobs_Notice",
+        "https://youtube.com/@govtjobsnotice",
+        "https://instagram.com/govtjobsnotice",
+        "https://linkedin.com/company/govtjobsnotice",
+    ],
+};
 ---
 
+<!DOCTYPE html>
+
 <html lang="en">
+
     <head>
+
+        <!-- BASIC -->
+
         <meta charset="UTF-8" />
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+        />
 
-        <link rel="icon" href="/favicon.ico" />
+        <meta
+            name="robots"
+            content="index, follow, max-image-preview:large"
+        />
+
+        <meta
+            name="googlebot"
+            content="index, follow"
+        />
+
+        <meta
+            name="author"
+            content="GovtJobsNotice"
+        />
+
+        <meta
+            name="publisher"
+            content="GovtJobsNotice"
+        />
+
+        <meta
+            name="theme-color"
+            content="#d40000"
+        />
+
+        <meta
+            name="color-scheme"
+            content="light"
+        />
+
+        <!-- TITLE -->
+
+        <title>
+            {title}
+        </title>
+
+        <!-- SEO -->
+
+        <meta
+            name="description"
+            content={description}
+        />
+
+        {
+            keywords && (
+                <meta
+                    name="keywords"
+                    content={keywords}
+                />
+            )
+        }
+
+        <link
+            rel="canonical"
+            href={fullCanonical}
+        />
+
+        <!-- OPEN GRAPH -->
+
+        <meta
+            property="og:type"
+            content="website"
+        />
+
+        <meta
+            property="og:title"
+            content={title}
+        />
+
+        <meta
+            property="og:description"
+            content={description}
+        />
+
+        <meta
+            property="og:url"
+            content={fullCanonical}
+        />
+
+        <meta
+            property="og:image"
+            content={ogImage}
+        />
+
+        <meta
+            property="og:site_name"
+            content={SITE_NAME}
+        />
+
+        <meta
+            property="og:locale"
+            content="en_IN"
+        />
+
+        <!-- TWITTER -->
+
+        <meta
+            name="twitter:card"
+            content="summary_large_image"
+        />
+
+        <meta
+            name="twitter:title"
+            content={title}
+        />
+
+        <meta
+            name="twitter:description"
+            content={description}
+        />
+
+        <meta
+            name="twitter:image"
+            content={ogImage}
+        />
+
+        <!-- FAVICONS -->
+
+        <link
+            rel="icon"
+            href="/favicon.ico"
+        />
+
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
             href="/favicon-32x32.png"
         />
+
         <link
             rel="icon"
             type="image/png"
             sizes="16x16"
             href="/favicon-16x16.png"
         />
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#d40000" />
 
-        <title>
-            {title}
-        </title>
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/apple-touch-icon.png"
+        />
 
-        <meta name="description" content={description} />
+        <link
+            rel="manifest"
+            href="/site.webmanifest"
+        />
 
-        {keywords && <meta name="keywords" content={keywords} />}
+        <!-- PERFORMANCE -->
 
-        {canonical && <link rel="canonical" href={canonical} />}
+        <link
+            rel="preconnect"
+            href="https://www.googletagmanager.com"
+        />
+
+        <link
+            rel="preconnect"
+            href="https://pagead2.googlesyndication.com"
+        />
+
+        <link
+            rel="dns-prefetch"
+            href="https://pagead2.googlesyndication.com"
+        />
+
+        <!-- STRUCTURED DATA -->
+
+        <script
+            type="application/ld+json"
+            set:html={JSON.stringify(organizationSchema)}
+        ></script>
 
         {
             schema && (
@@ -55,36 +271,57 @@ const {
             )
         }
 
-        <!-- Google Analytics -->
+        <!-- GOOGLE ANALYTICS -->
+
         <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-ZTJPLW12PR"
         ></script>
 
-        <!-- Google adsense -->
-        <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9442078557440882"
-            crossorigin="anonymous"></script>
-            
         <script is:inline>
-            window.dataLayer = window.dataLayer || [];
+
+            window.dataLayer =
+                window.dataLayer || [];
+
             function gtag() {
                 dataLayer.push(arguments);
             }
-            gtag("js", new Date());
 
-            gtag("config", "G-ZTJPLW12PR");
+            gtag(
+                "js",
+                new Date()
+            );
+
+            gtag(
+                "config",
+                "G-ZTJPLW12PR"
+            );
+
         </script>
+
+        <!-- ADSENSE -->
+        <!-- Better to load conditionally on ad pages only -->
+
+        <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9442078557440882"
+            crossorigin="anonymous"
+        ></script>
+
     </head>
 
     <body>
+
         <Header />
 
         <main>
+
             <slot />
+
         </main>
 
         <Footer />
+
     </body>
+
 </html>

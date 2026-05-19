@@ -2,7 +2,7 @@
 import BaseLayout
   from "../layouts/BaseLayout.astro";
 
-import "../styles/category.css";
+
 
 import {
   searchPosts
@@ -13,36 +13,79 @@ const query =
 
 const posts =
   query
-    ? await searchPosts(query,50)
+    ? await searchPosts(query, 50)
     : [];
+
+/* SEO */
+
+const title = query
+  ? `${query} - Search Results | GovtJobsNotice`
+  : "Search Government Jobs, Sarkari Result & Recruitment Updates | GovtJobsNotice";
+
+const description = query
+  ? `Search results for ${query} on GovtJobsNotice including latest government jobs, Sarkari Result, admit cards, answer keys, admissions and recruitment updates.`
+  : "Search latest government jobs, Sarkari Result, admit cards, answer keys, syllabus, admissions and recruitment updates across India.";
+
+const schema = {
+  "@context": "https://schema.org",
+
+  "@type": "SearchResultsPage",
+
+  name: title,
+
+  url: `https://govtjobsnotice.com/search?q=${query}`,
+
+  description,
+};
 ---
 
 <BaseLayout
-  title="Search | GovtJobsNotice"
+  title={title}
+
+  description={description}
+
+  canonical={`https://govtjobsnotice.com/search?q=${query}`}
+
+  keywords={`search govt jobs, search sarkari result, ${query}, government jobs search, recruitment search, admit card search, results search, govtjobsnotice`}
+
+  schema={schema}
 >
 
 <main class="category-page">
+
+  <!-- SEARCH HEADER -->
 
   <section class="category-header">
 
     <h1 class="category-title">
 
-      Search Jobs
+      Search Government Jobs & Sarkari Result
 
     </h1>
+
+    <p class="search-description">
+
+      Search latest government jobs,
+      Sarkari Result updates,
+      admit cards, answer keys,
+      syllabus, admissions and recruitment notifications.
+
+    </p>
 
     <form
       action="/search/"
       method="GET"
       class="search-form"
+      role="search"
     >
 
       <input
         type="text"
         name="q"
         value={query}
-        placeholder="Search jobs..."
+        placeholder="Search govt jobs, results, admit card..."
         class="search-input"
+        aria-label="Search Government Jobs"
       />
 
       <button
@@ -58,66 +101,118 @@ const posts =
 
   </section>
 
+  <!-- SEARCH RESULTS -->
+
   {
     query && (
 
       <section class="category-table-wrap">
 
-        <table class="category-table">
+        <h2 class="results-heading">
 
-          <thead>
+          Search Results for "{query}"
 
-            <tr>
+        </h2>
 
-              <th>
-                Post Name
-              </th>
+        {
+          posts.length > 0 ? (
 
-              <th>
-                Category
-              </th>
+            <table class="category-table">
 
-            </tr>
+              <thead>
 
-          </thead>
-
-          <tbody>
-
-            {
-              posts.map((post)=>(
                 <tr>
 
-                  <td>
+                  <th>
+                    Post Name
+                  </th>
 
-                    <a
-                      href={`/${post.slug}/`}
-                      class="category-link"
-                    >
-
-                      {post.title}
-
-                    </a>
-
-                  </td>
-
-                  <td>
-
-                    {post.category}
-
-                  </td>
+                  <th>
+                    Category
+                  </th>
 
                 </tr>
-              ))
-            }
 
-          </tbody>
+              </thead>
 
-        </table>
+              <tbody>
+
+                {
+                  posts.map((post) => (
+
+                    <tr>
+
+                      <td>
+
+                        <a
+                          href={`/${post.slug}/`}
+                          class="category-link"
+                        >
+
+                          {post.title}
+
+                        </a>
+
+                      </td>
+
+                      <td>
+
+                        {post.category}
+
+                      </td>
+
+                    </tr>
+
+                  ))
+                }
+
+              </tbody>
+
+            </table>
+
+          ) : (
+
+            <div class="no-results">
+
+              No results found for "{query}".
+
+            </div>
+
+          )
+        }
 
       </section>
 
     )
   }
+
+  <!-- SEO CONTENT -->
+
+  <section class="search-seo-content">
+
+    <h2>
+      Search Latest Government Jobs and Recruitment Updates
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides latest government job notifications,
+      Sarkari Result updates, admit cards,
+      answer keys, syllabus, admissions
+      and recruitment information across India.
+
+    </p>
+
+    <p>
+
+      Candidates can search recruitment details
+      related to SSC, Railway, UPSC,
+      Banking, Police, Defence,
+      Teaching and State Government Jobs.
+
+    </p>
+
+  </section>
 
 </main>
 
@@ -143,6 +238,43 @@ const posts =
   padding:12px 20px;
   font-weight:700;
   cursor:pointer;
+}
+
+.search-description{
+  margin-top:10px;
+  color:#444;
+  font-size:15px;
+  line-height:1.6;
+}
+
+.results-heading{
+  margin-bottom:18px;
+  font-size:22px;
+}
+
+.no-results{
+  background:#fff;
+  padding:20px;
+  border:1px solid #ddd;
+  font-size:16px;
+}
+
+.search-seo-content{
+  margin-top:40px;
+  background:#fff;
+  padding:24px;
+  border:1px solid #ddd;
+}
+
+.search-seo-content h2{
+  margin-bottom:14px;
+  font-size:24px;
+}
+
+.search-seo-content p{
+  margin-bottom:14px;
+  line-height:1.7;
+  color:#333;
 }
 
 </style>

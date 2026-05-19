@@ -1,0 +1,266 @@
+/* =========================================
+   HEADER
+========================================= */
+
+.site-header{
+  width:100%;
+
+  position:relative;
+
+  z-index:100;
+}
+
+/* =========================================
+   TOP HEADER
+========================================= */
+
+.top-header{
+  background:var(--primary);
+
+  padding:16px 10px;
+
+  border-bottom:2px solid rgba(255,255,255,.08);
+}
+
+.logo-wrapper{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:16px;
+
+  text-decoration:none;
+
+  color:#fff;
+}
+
+.logo-wrapper:hover{
+  opacity:.98;
+}
+
+/* =========================================
+   LOGO
+========================================= */
+
+.site-logo{
+  width:74px;
+  height:74px;
+
+  object-fit:contain;
+
+  background:#fff;
+
+  border-radius:10px;
+
+  padding:6px;
+
+  flex-shrink:0;
+
+  box-shadow:
+    0 2px 6px rgba(0,0,0,.18);
+}
+
+/* =========================================
+   LOGO TEXT
+========================================= */
+
+.logo-text{
+  display:flex;
+
+  flex-direction:column;
+
+  justify-content:center;
+}
+
+.logo-title{
+  margin:0;
+
+  color:#fff;
+
+  font-size:40px;
+
+  font-weight:800;
+
+  line-height:1.05;
+
+  letter-spacing:.5px;
+}
+
+.logo-subtitle{
+  margin-top:8px;
+
+  color:#fff;
+
+  font-size:20px;
+
+  font-weight:700;
+
+  line-height:1.4;
+
+  opacity:.96;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.main-navbar{
+  background:var(--primary-dark);
+
+  border-top:1px solid rgba(255,255,255,.05);
+
+  border-bottom:1px solid rgba(0,0,0,.15);
+}
+
+.navbar-container{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  flex-wrap:wrap;
+
+  gap:2px;
+}
+
+.main-navbar a{
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  min-height:48px;
+
+  padding:0 16px;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  transition:var(--transition);
+
+  position:relative;
+}
+
+.main-navbar a:hover{
+  background:rgba(255,255,255,.08);
+}
+
+.main-navbar a::after{
+  content:"";
+
+  position:absolute;
+
+  left:14px;
+  right:14px;
+  bottom:8px;
+
+  height:2px;
+
+  background:#fff;
+
+  transform:scaleX(0);
+
+  transform-origin:center;
+
+  transition:transform .2s ease;
+}
+
+.main-navbar a:hover::after{
+  transform:scaleX(1);
+}
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media(max-width:900px){
+
+  .top-header{
+    padding:14px 10px;
+  }
+
+  .logo-title{
+    font-size:30px;
+  }
+
+  .logo-subtitle{
+    font-size:16px;
+  }
+
+  .main-navbar a{
+    min-height:44px;
+
+    padding:0 13px;
+
+    font-size:15px;
+  }
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .logo-wrapper{
+    gap:12px;
+  }
+
+  .site-logo{
+    width:54px;
+    height:54px;
+
+    padding:5px;
+
+    border-radius:8px;
+  }
+
+  .logo-title{
+    font-size:23px;
+
+    line-height:1.1;
+  }
+
+  .logo-subtitle{
+    margin-top:4px;
+
+    font-size:11px;
+
+    line-height:1.4;
+  }
+
+  .navbar-container{
+    justify-content:flex-start;
+
+    overflow-x:auto;
+
+    flex-wrap:nowrap;
+
+    scrollbar-width:none;
+  }
+
+  .navbar-container::-webkit-scrollbar{
+    display:none;
+  }
+
+  .main-navbar a{
+    flex-shrink:0;
+
+    min-height:42px;
+
+    padding:0 12px;
+
+    font-size:14px;
+  }
+
+}

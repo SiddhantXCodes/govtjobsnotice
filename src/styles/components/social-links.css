@@ -1,0 +1,186 @@
+/* =========================================
+   SOCIAL LINKS SECTION
+========================================= */
+
+.social-links-section{
+
+
+  padding:28px 24px;
+
+  background:#fff;
+
+  border:1px solid #dbe3f0;
+
+  border-radius:8px;
+
+  text-align:center;
+}
+
+/* =========================================
+   HEADING
+========================================= */
+
+.social-heading{
+  margin:0 0 10px;
+
+  color:var(--text);
+
+  font-size:24px;
+
+  font-weight:800;
+
+  line-height:1.3;
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.social-description{
+  max-width:900px;
+
+  margin:0 auto 24px;
+
+  color:#4b5563;
+
+  font-size:16px;
+
+  line-height:1.9;
+}
+
+/* =========================================
+   SOCIAL BUTTONS WRAP
+========================================= */
+
+.social-links{
+  display:flex;
+
+  justify-content:center;
+
+  align-items:center;
+
+  flex-wrap:wrap;
+
+  gap:14px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.social-links a{
+  min-width:160px;
+
+  height:48px;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:0 24px;
+
+  border-radius:8px;
+
+  color:#fff;
+
+  font-size:16px;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  transition:all .2s ease;
+}
+
+.social-links a:hover{
+  transform:translateY(-2px);
+
+  opacity:.95;
+}
+
+/* =========================================
+   BRAND COLORS
+========================================= */
+
+.whatsapp-btn{
+  background:var(--whatsapp);
+}
+
+.telegram-btn{
+  background:var(--telegram);
+}
+
+.youtube-btn{
+  background:var(--youtube);
+}
+
+.instagram-btn{
+  background:linear-gradient(
+    135deg,
+    #fd5949,
+    #d6249f
+  );
+}
+
+.linkedin-btn{
+  background:var(--linkedin);
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .social-links-section{
+    padding:22px 16px;
+  }
+
+  .social-heading{
+    font-size:26px;
+  }
+
+  .social-description{
+    font-size:15px;
+
+    line-height:1.8;
+  }
+
+  .social-links{
+    gap:10px;
+  }
+
+  .social-links a{
+    min-width:140px;
+
+    height:50px;
+
+    font-size:15px;
+
+    padding:0 18px;
+  }
+
+}
+
+@media(max-width:480px){
+
+  .social-links{
+    display:grid;
+
+    grid-template-columns:
+      repeat(2,1fr);
+
+    gap:10px;
+  }
+
+  .social-links a{
+    width:100%;
+
+    min-width:auto;
+
+    font-size:14px;
+  }
+
+}

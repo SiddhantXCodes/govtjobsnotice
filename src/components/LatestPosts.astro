@@ -1,34 +1,107 @@
 ---
-import { getAllPosts } from "../lib/repositories/postRepository";
+import { getAllPosts }
+  from "../lib/repositories/postRepository";
 
-const { currentSlug = "" } = Astro.props;
+const {
+  currentSlug = ""
+} = Astro.props;
 
-const allPosts = await getAllPosts();
+/* FETCH POSTS */
 
-const latestPosts = allPosts
-  .filter((post) => post.slug !== currentSlug)
-  .sort(
-    (a, b) =>
-      new Date(b.latest_status_date).getTime() -
-      new Date(a.latest_status_date).getTime(),
-  )
-  .slice(0, 8);
+const allPosts =
+  await getAllPosts();
+
+/* SORT LATEST */
+
+const latestPosts =
+  allPosts
+    .filter((post) =>
+      post.slug !== currentSlug
+    )
+    .sort(
+      (a, b) =>
+        new Date(b.latest_status_date).getTime() -
+        new Date(a.latest_status_date).getTime()
+    )
+    .slice(0, 8);
+
+/* SCHEMA */
+
+const itemListSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "ItemList",
+
+  name: "Latest Government Job Updates",
+
+  itemListElement: latestPosts.map((post, index) => ({
+
+    "@type": "ListItem",
+
+    position: index + 1,
+
+    url: `https://govtjobsnotice.com/${post.slug}/`,
+
+    name: post.title,
+
+  })),
+};
 ---
 
-<section class="simple-post-box">
-  <h2 class="simple-post-heading red-heading">
-    Latest Posts
+<!-- SEO SCHEMA -->
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(itemListSchema)}
+></script>
+
+<!-- LATEST POSTS -->
+
+<section
+  class="simple-post-box"
+  aria-labelledby="latest-posts-heading"
+>
+
+  <h2
+    id="latest-posts-heading"
+    class="simple-post-heading red-heading"
+  >
+
+    Latest Government Job Updates
+
   </h2>
 
+  <p class="simple-post-description">
+
+    Check latest government jobs,
+    Sarkari Result updates,
+    admit cards, answer keys,
+    syllabus and recruitment notifications.
+
+  </p>
+
   <ul class="simple-post-list">
+
     {
       latestPosts.map((post) => (
-        <li>
-          <a href={`/${post.slug}/`}>
+
+        <li class="simple-post-item">
+
+          <a
+            href={`/${post.slug}/`}
+            class="simple-post-link"
+          >
+
             {post.title}
+
           </a>
+
         </li>
+
       ))
     }
+
   </ul>
+
 </section>
+

@@ -1,0 +1,69 @@
+/* =========================================
+   THEME VARIABLES
+========================================= */
+
+:root{
+
+  /* CONTAINER */
+
+  --container-width:1050px;
+
+  /* COLORS */
+
+  --primary:#d40000;
+  --primary-dark:#b00000;
+
+  --secondary:#00007a;
+  --secondary-hover:#001fd1;
+
+  --text:#111827;
+  --text-light:#555;
+
+  --border:#d4d4d4;
+
+  --bg:#f8fbfa;
+  --white:#ffffff;
+
+  /* LINKS */
+
+  --link:#0000cc;
+  --link-hover:#c00000;
+
+  /* STATUS */
+
+  --success:#008000;
+
+  /* FEATURED */
+
+  --featured-red:#e00000;
+  --featured-orange:#ff7300;
+  --featured-purple:#b000c9;
+  --featured-green:#008f00;
+  --featured-blue:#0069d9;
+  --featured-darkred:#8b0000;
+  --featured-darkgreen:#00752a;
+  --featured-sky:#0094c7;
+
+  /* SOCIAL */
+
+  --whatsapp:#25D366;
+  --telegram:#229ed9;
+  --youtube:#ff0000;
+  --instagram:#e1306c;
+  --linkedin:#0077b5;
+
+  /* RADIUS */
+
+  --radius-sm:3px;
+  --radius-md:6px;
+
+  /* SHADOW */
+
+  --shadow-sm:
+    0 1px 2px rgba(0,0,0,.06);
+
+  /* TRANSITION */
+
+  --transition:.2s ease;
+
+}

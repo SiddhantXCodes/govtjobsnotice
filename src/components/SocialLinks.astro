@@ -7,90 +7,167 @@ const {
   showLinkedin = true,
 } = Astro.props;
 
+/* SOCIAL LINKS */
+
 const socials = {
   telegram: "https://t.me/GovtJobs_Notice",
+
   whatsapp: "https://chat.whatsapp.com/yourlink",
+
   youtube: "https://youtube.com/@govtjobsnotice",
+
   instagram: "https://instagram.com/govtjobsnotice",
+
   linkedin: "https://linkedin.com/company/govtjobsnotice",
+};
+
+/* SOCIAL SCHEMA */
+
+const socialSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "Organization",
+
+  name: "GovtJobsNotice",
+
+  url: "https://govtjobsnotice.com",
+
+  sameAs: [
+    socials.telegram,
+    socials.whatsapp,
+    socials.youtube,
+    socials.instagram,
+    socials.linkedin,
+  ],
 };
 ---
 
-<div class="social-links">
-  {
-    showWhatsApp && (
-      <a href={socials.whatsapp} class="whatsapp-btn" target="_blank">
-        WhatsApp
-      </a>
-    )
-  }
+<!-- SEO SCHEMA -->
 
-  {
-    showTelegram && (
-      <a href={socials.telegram} class="telegram-btn" target="_blank">
-        Telegram
-      </a>
-    )
-  }
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(socialSchema)}
+></script>
 
-  {
-    showYoutube && (
-      <a href={socials.youtube} class="youtube-btn" target="_blank">
-        YouTube
-      </a>
-    )
-  }
+<!-- SOCIAL LINKS -->
 
-  {
-    showInstagram && (
-      <a href={socials.instagram} class="instagram-btn" target="_blank">
-        Instagram
-      </a>
-    )
-  }
+<section
+  class="social-links-section"
+  aria-labelledby="social-links-heading"
+>
 
-  {
-    showLinkedin && (
-      <a href={socials.linkedin} class="linkedin-btn" target="_blank">
-        LinkedIn
-      </a>
-    )
-  }
-</div>
+  <h2
+    id="social-links-heading"
+    class="social-heading"
+  >
 
-<style>
-  .social-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin: 20px 0;
-  }
+    Join GovtJobsNotice on Social Media
 
-  .social-links a {
-    padding: 10px 18px;
-   
-    color: white;
-    text-decoration: none;
-    font-weight: 700;
-  }
+  </h2>
 
-  .telegram-btn {
-    background: #229ed9;
-  }
+  <p class="social-description">
 
-  .whatsapp-btn {
-    background: #25d366;
-  }
+    Get latest government jobs,
+    Sarkari Result updates,
+    admit cards, answer keys,
+    admissions and recruitment notifications
+    through our official social media channels.
 
-  .youtube-btn {
-    background: #ff0000;
-  }
+  </p>
 
-  .instagram-btn {
-    background: #e1306c;
-  }
+  <div class="social-links">
 
-  .linkedin-btn {
-    background: #0077b5;
-  }
-</style>
+    {
+      showWhatsApp && (
+
+        <a
+          href={socials.whatsapp}
+          class="whatsapp-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Join GovtJobsNotice WhatsApp Channel"
+        >
+
+          WhatsApp
+
+        </a>
+
+      )
+    }
+
+    {
+      showTelegram && (
+
+        <a
+          href={socials.telegram}
+          class="telegram-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Join GovtJobsNotice Telegram Channel"
+        >
+
+          Telegram
+
+        </a>
+
+      )
+    }
+
+    {
+      showYoutube && (
+
+        <a
+          href={socials.youtube}
+          class="youtube-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit GovtJobsNotice YouTube Channel"
+        >
+
+          YouTube
+
+        </a>
+
+      )
+    }
+
+    {
+      showInstagram && (
+
+        <a
+          href={socials.instagram}
+          class="instagram-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow GovtJobsNotice on Instagram"
+        >
+
+          Instagram
+
+        </a>
+
+      )
+    }
+
+    {
+      showLinkedin && (
+
+        <a
+          href={socials.linkedin}
+          class="linkedin-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Follow GovtJobsNotice on LinkedIn"
+        >
+
+          LinkedIn
+
+        </a>
+
+      )
+    }
+
+  </div>
+
+</section>
+

@@ -1,15 +1,86 @@
 ---
-import RelatedPosts from "./RelatedPosts.astro";
-import LatestPosts from "./LatestPosts.astro";
+import RelatedPosts
+  from "./RelatedPosts.astro";
 
-const { currentSlug, category } = Astro.props;
+import LatestPosts
+  from "./LatestPosts.astro";
+
+const {
+  currentSlug,
+  category
+} = Astro.props;
+
+/* SCHEMA */
+
+const suggestionSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "ItemList",
+
+  name: "Related Government Job Updates",
+
+  description:
+    "Related government jobs, Sarkari Result, admit cards, answer keys and recruitment updates.",
+};
 ---
 
-<section class="post-suggestion-grid">
-  <RelatedPosts
-    currentSlug={currentSlug}
-    category={category}
-  />
+<!-- SEO SCHEMA -->
 
-  <LatestPosts currentSlug={currentSlug} />
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(suggestionSchema)}
+></script>
+
+<!-- POST SUGGESTIONS -->
+
+<section
+  class="post-suggestion-grid"
+  aria-label="Related Government Job Updates"
+>
+
+  <!-- RELATED POSTS -->
+
+  <section
+    class="suggestion-column"
+    aria-labelledby="related-posts-heading"
+  >
+
+    <h2
+      id="related-posts-heading"
+      class="visually-hidden"
+    >
+
+      Related Government Job Posts
+
+    </h2>
+
+    <RelatedPosts
+      currentSlug={currentSlug}
+      category={category}
+    />
+
+  </section>
+
+  <!-- LATEST POSTS -->
+
+  <section
+    class="suggestion-column"
+    aria-labelledby="latest-posts-heading"
+  >
+
+    <h2
+      id="latest-posts-heading"
+      class="visually-hidden"
+    >
+
+      Latest Sarkari Result and Recruitment Updates
+
+    </h2>
+
+    <LatestPosts
+      currentSlug={currentSlug}
+    />
+
+  </section>
+
 </section>

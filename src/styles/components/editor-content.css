@@ -1,0 +1,327 @@
+/* =========================================
+   UNIVERSAL EDITOR CONTENT
+========================================= */
+
+.editor-content{
+  width:100%;
+
+  overflow-x:auto;
+
+  color:var(--text);
+
+  font-size:16px;
+
+  line-height:1.9;
+
+  word-break:break-word;
+}
+
+/* =========================================
+   REMOVE EXTRA SPACING
+========================================= */
+
+.editor-content > *:first-child{
+  margin-top:0 !important;
+}
+
+.editor-content > *:last-child{
+  margin-bottom:0 !important;
+}
+
+/* REMOVE EMPTY ELEMENTS */
+
+.editor-content p:empty,
+.editor-content div:empty{
+  display:none;
+}
+
+.editor-content p br:only-child{
+  display:none;
+}
+
+.editor-content p:has(> br:only-child){
+  display:none;
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+
+.editor-content p{
+  margin-top:0;
+
+  margin-bottom:12px;
+}
+
+/* =========================================
+   HEADINGS
+========================================= */
+
+.editor-content h1,
+.editor-content h2,
+.editor-content h3,
+.editor-content h4,
+.editor-content h5,
+.editor-content h6{
+  margin-top:18px;
+
+  margin-bottom:10px;
+
+  font-weight:700;
+
+  line-height:1.5;
+
+  color:#111827;
+}
+
+/* H1 */
+
+.editor-content h1{
+  font-size:30px;
+}
+
+/* H2 */
+
+.editor-content h2{
+  font-size:26px;
+
+  color:var(--secondary);
+}
+
+/* H3 */
+
+.editor-content h3{
+  font-size:21px;
+
+  padding-bottom:6px;
+
+  border-bottom:
+    1px solid #e5e7eb;
+}
+
+/* H4 */
+
+.editor-content h4{
+  font-size:19px;
+}
+
+/* H5 */
+
+.editor-content h5{
+  font-size:17px;
+}
+
+/* H6 */
+
+.editor-content h6{
+  font-size:16px;
+}
+
+/* =========================================
+   LINKS
+========================================= */
+
+.editor-content a{
+  color:var(--link);
+
+  font-weight:600;
+
+  text-decoration:none;
+
+  transition:var(--transition);
+}
+
+.editor-content a:hover{
+  color:var(--link-hover);
+
+  text-decoration:underline;
+}
+
+/* =========================================
+   LISTS
+========================================= */
+
+.editor-content ul{
+  list-style:disc;
+}
+
+.editor-content ol{
+  list-style:decimal;
+}
+
+.editor-content ul,
+.editor-content ol{
+  margin-top:0;
+
+  margin-bottom:14px;
+
+  padding-left:26px;
+}
+
+.editor-content li{
+  margin-bottom:6px;
+
+  line-height:1.8;
+}
+
+/* =========================================
+   TABLE
+========================================= */
+
+.editor-content table{
+  width:100%;
+
+  min-width:600px;
+
+  border-collapse:collapse;
+
+  margin:14px 0;
+
+  background:#fff;
+}
+
+.editor-content th,
+.editor-content td{
+  border:1px solid #d1d5db;
+
+  padding:10px 12px;
+
+  text-align:left;
+
+  vertical-align:top;
+
+  line-height:1.7;
+}
+
+.editor-content th{
+  background:#f8fafc;
+
+  color:#111827;
+
+  font-weight:700;
+}
+
+.editor-content tr:nth-child(even){
+  background:#fafafa;
+}
+
+/* =========================================
+   IMAGES
+========================================= */
+
+.editor-content img{
+  max-width:100%;
+
+  height:auto;
+
+  display:block;
+
+  margin:16px auto;
+
+  border-radius:4px;
+}
+
+/* =========================================
+   BLOCKQUOTE
+========================================= */
+
+.editor-content blockquote{
+  margin:16px 0;
+
+  padding:
+    12px 16px;
+
+  border-left:
+    4px solid var(--secondary);
+
+  background:#f8fafc;
+
+  color:#374151;
+
+  font-style:italic;
+
+  line-height:1.8;
+}
+
+/* =========================================
+   PRE / CODE
+========================================= */
+
+.editor-content pre{
+  overflow-x:auto;
+
+  margin:14px 0;
+
+  padding:14px;
+
+  background:#111827;
+
+  color:#fff;
+
+  border-radius:6px;
+
+  line-height:1.7;
+}
+
+.editor-content code{
+  font-family:monospace;
+}
+
+/* =========================================
+   HR
+========================================= */
+
+.editor-content hr{
+  border:none;
+
+  border-top:
+    1px solid #e5e7eb;
+
+  margin:20px 0;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .editor-content{
+    font-size:15px;
+
+    line-height:1.8;
+  }
+
+  .editor-content h1{
+    font-size:24px;
+  }
+
+  .editor-content h2{
+    font-size:22px;
+  }
+
+  .editor-content h3{
+    font-size:19px;
+  }
+
+  .editor-content h4{
+    font-size:17px;
+  }
+
+  .editor-content ul,
+  .editor-content ol{
+    padding-left:22px;
+  }
+
+  .editor-content table{
+    min-width:520px;
+  }
+
+  .editor-content th,
+  .editor-content td{
+    padding:8px;
+
+    font-size:14px;
+  }
+
+}

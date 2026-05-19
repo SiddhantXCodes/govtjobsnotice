@@ -8,17 +8,17 @@ const {
   items = [] as BreadcrumbItem[]
 } = Astro.props;
 
+/* FORMAT LINKS */
+
 function formatHref(href?: string){
 
   if(!href){
     return "";
   }
 
-  /* CLEAN */
-
   const cleanHref =
     href
-      .replace(/^\/+|\/+$/g,"")
+      .replace(/^\/+|\/+$/g, "")
       .toLowerCase();
 
   /* CATEGORY PAGES */
@@ -64,18 +64,65 @@ function formatHref(href?: string){
     : `/${href}`;
 
 }
+
+/* SCHEMA */
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+
+  "@type": "BreadcrumbList",
+
+  itemListElement: [
+    {
+      "@type": "ListItem",
+
+      position: 1,
+
+      name: "Home",
+
+      item: "https://govtjobsnotice.com",
+    },
+
+    ...items.map((item, index) => ({
+
+      "@type": "ListItem",
+
+      position: index + 2,
+
+      name: item.label,
+
+      item: item.href
+        ? `https://govtjobsnotice.com${formatHref(item.href)}`
+        : undefined,
+
+    })),
+  ],
+};
 ---
 
-<nav class="breadcrumbs">
+<!-- SEO SCHEMA -->
+
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(breadcrumbSchema)}
+></script>
+
+<!-- BREADCRUMBS -->
+
+<nav
+  class="breadcrumbs"
+  aria-label="Breadcrumb Navigation"
+>
 
   <a href="/">
     Home
   </a>
 
   {
-    items.map((item: BreadcrumbItem)=>(
+    items.map((item: BreadcrumbItem) => (
 
       <>
+
         <span class="breadcrumb-separator">
           ›
         </span>
@@ -84,17 +131,25 @@ function formatHref(href?: string){
           item.href ? (
 
             <a href={formatHref(item.href)}>
+
               {item.label}
+
             </a>
 
           ) : (
 
-            <span class="breadcrumb-current">
+            <span
+              class="breadcrumb-current"
+              aria-current="page"
+            >
+
               {item.label}
+
             </span>
 
           )
         }
+
       </>
 
     ))
@@ -102,34 +157,3 @@ function formatHref(href?: string){
 
 </nav>
 
-<style>
-
-  .breadcrumbs{
-    margin-bottom:12px;
-    font-size:14px;
-    font-weight:700;
-    color:#555;
-    display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    align-items:center;
-  }
-
-  .breadcrumbs a{
-    color:#0000cc;
-    text-decoration:none;
-  }
-
-  .breadcrumbs a:hover{
-    color:#d40000;
-  }
-
-  .breadcrumb-current{
-    color:#111;
-  }
-
-  .breadcrumb-separator{
-    color:#777;
-  }
-
-</style>

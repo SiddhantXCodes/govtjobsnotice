@@ -1,0 +1,207 @@
+/* =========================================
+   POST SUGGESTION GRID
+========================================= */
+
+.post-suggestion-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:14px;
+
+  margin-top:20px;
+}
+
+.suggestion-column{
+  min-width:0;
+}
+
+/* =========================================
+   SIMPLE POST BOX
+========================================= */
+
+.simple-post-box{
+  background:var(--white);
+
+  border:1px solid var(--border);
+
+  overflow:hidden;
+
+  box-shadow:
+    0 1px 4px rgba(0,0,0,.04);
+}
+
+/* =========================================
+   HEADING
+========================================= */
+
+.simple-post-heading{
+  margin:0;
+
+  background:var(--primary-dark);
+
+  color:#fff;
+
+  padding:10px 14px;
+
+  font-size:20px;
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+/* =========================================
+   DESCRIPTION
+========================================= */
+
+.simple-post-description{
+  margin:0;
+
+  padding:
+    12px 14px 8px;
+
+  color:#444;
+
+  font-size:14px;
+
+  line-height:1.7;
+
+  border-bottom:
+    1px solid #ececec;
+}
+
+/* =========================================
+   LIST
+========================================= */
+
+.simple-post-list{
+  list-style:none;
+
+  margin:0;
+
+  padding:0;
+}
+
+/* =========================================
+   ITEM
+========================================= */
+
+.simple-post-item{
+  border-bottom:
+    1px solid #efefef;
+}
+
+.simple-post-item:last-child{
+  border-bottom:none;
+}
+
+/* =========================================
+   LINK
+========================================= */
+
+.simple-post-link{
+  display:block;
+
+  position:relative;
+
+  padding:
+    12px 14px 12px 28px;
+
+  color:var(--link);
+
+  font-size:15px;
+
+  font-weight:700;
+
+  line-height:1.65;
+
+  transition:var(--transition);
+}
+
+/* BULLET */
+
+.simple-post-link::before{
+  content:"›";
+
+  position:absolute;
+
+  left:14px;
+  top:12px;
+
+  color:var(--primary);
+
+  font-size:18px;
+
+  font-weight:700;
+}
+
+.simple-post-link:hover{
+  background:#fafafa;
+
+  color:var(--link-hover);
+
+  padding-left:32px;
+}
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+.no-related-posts{
+  padding:16px 14px;
+
+  color:#666;
+
+  font-size:14px;
+}
+
+/* =========================================
+   HIDDEN ACCESSIBILITY
+========================================= */
+
+.visually-hidden{
+  position:absolute;
+
+  width:1px;
+  height:1px;
+
+  padding:0;
+  margin:-1px;
+
+  overflow:hidden;
+
+  clip:rect(0,0,0,0);
+
+  white-space:nowrap;
+
+  border:0;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+  .post-suggestion-grid{
+    grid-template-columns:1fr;
+
+    gap:12px;
+  }
+
+  .simple-post-heading{
+    font-size:18px;
+  }
+
+  .simple-post-description{
+    font-size:13px;
+  }
+
+  .simple-post-link{
+    font-size:14px;
+
+    line-height:1.6;
+  }
+
+}
