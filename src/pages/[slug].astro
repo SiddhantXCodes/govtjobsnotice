@@ -20,11 +20,58 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 
 const post = await getPostBySlug(slug);
+
+/* =========================================
+   DATE FORMAT
+========================================= */
+
+const formatDate = (date: string) => {
+  if (!date) return "";
+
+  return new Date(date).toLocaleString("en-IN", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+};
+
+/* =========================================
+   SAFE FAQ JSON PARSE
+========================================= */
+
+let faqData = [];
+
+try {
+  faqData =
+    typeof post?.faq === "string"
+      ? JSON.parse(post?.faq || "[]")
+      : post?.faq || [];
+} catch (error) {
+  faqData = [];
+}
+
+/* =========================================
+   SAFE IMPORTANT LINKS JSON PARSE
+========================================= */
+
+let importantLinksData = [];
+
+try {
+  importantLinksData =
+    typeof post?.important_links === "string"
+      ? JSON.parse(post?.important_links || "[]")
+      : post?.important_links || [];
+} catch (error) {
+  importantLinksData = [];
+}
 ---
 
 <BaseLayout
   title={`${post?.title} | GovtJobsNotice`}
-  description={post?.seo_description || post?.seo_title}
+  description={post?.seo_description || post?.feed_title || post?.title}
   canonical={`https://govtjobsnotice.com/${post?.slug}/`}
   ogImage={post?.featured_image_url?.replace(
     "/upload/",
@@ -40,9 +87,11 @@ const post = await getPostBySlug(slug);
           {
             label: post?.category
               ?.replaceAll("-", " ")
-              .replace(/\b\w/g, (c: any) => c.toUpperCase()),
+              ?.replace(/\b\w/g, (c: any) => c.toUpperCase()),
+
             href: `/${post?.category}/`,
           },
+
           {
             label: post?.title,
           },
@@ -53,22 +102,21 @@ const post = await getPostBySlug(slug);
         {post?.title}
       </h1>
 
-      <div class="page-post-date">
-        Post Date:
+      {
+        post?.latest_status_date && (
+          <div class="page-post-date">
+            <strong>Post Date:</strong>
 
-        {
-          new Date(post?.latest_status_date).toLocaleString("en-IN", {
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-            hour: "numeric",
-            minute: "2-digit",
-            hour12: true,
-          })
-        }
-      </div>
+            {formatDate(post?.latest_status_date)}
+          </div>
+        )
+      }
 
-      <div class="editor-content" set:html={post?.intro_content} />
+      {
+        post?.intro_content && (
+          <div class="editor-content" set:html={post?.intro_content} />
+        )
+      }
     </section>
 
     <!-- SOCIAL LINKS -->
@@ -79,7 +127,7 @@ const post = await getPostBySlug(slug);
 
     <section class="main-title-box">
       <h2 class="main-title">
-        {post?.feed_title}
+        {post?.feed_title || post?.title}
       </h2>
 
       <div class="site-name">www.GovtJobsNotice.Com</div>
@@ -91,99 +139,167 @@ const post = await getPostBySlug(slug);
 
     <!-- IMPORTANT DATES + APPLICATION FEE -->
 
-    <div class="two-column-grid">
-      <section class="post-box">
-        <h2 class="pink-heading">Important Dates</h2>
+    {
+      (post?.important_dates || post?.application_fee) && (
+        <div class="two-column-grid">
+          {post?.important_dates && (
+            <section class="post-box">
+              <h2 class="pink-heading">Important Dates</h2>
 
-        <div class="editor-content" set:html={post?.important_dates} />
-      </section>
+              <div class="editor-content" set:html={post?.important_dates} />
+            </section>
+          )}
 
-      <section class="post-box">
-        <h2 class="pink-heading">Application Fee</h2>
+          {post?.application_fee && (
+            <section class="post-box">
+              <h2 class="pink-heading">Application Fee</h2>
 
-        <div class="editor-content" set:html={post?.application_fee} />
-      </section>
-    </div>
-
-    <!-- AGE LIMIT + TOTAL POST -->
-
-    <div class="four-grid">
-      <section class="age-box">
-        <h2 class="green-heading">
-          {post?.age_limit_title || "Age Limit"}
-        </h2>
-
-        <div class="editor-content" set:html={post?.age_limit} />
-      </section>
-
-      <section class="total-post-box">
-        <h2 class="orange-heading">Total Post</h2>
-
-        <div class="total-post-number">
-          {post?.total_posts}
+              <div class="editor-content" set:html={post?.application_fee} />
+            </section>
+          )}
         </div>
-      </section>
-    </div>
+      )
+    }
+
+    <!-- AGE LIMIT + TOTAL POSTS -->
+
+    {
+      (post?.age_limit || post?.total_posts) && (
+        <div class="four-grid">
+          {post?.age_limit && (
+            <section class="age-box">
+              <h2 class="green-heading">
+                {post?.age_limit_title || "Age Limit"}
+              </h2>
+
+              <div class="editor-content" set:html={post?.age_limit} />
+            </section>
+          )}
+
+          {post?.total_posts && (
+            <section class="total-post-box">
+              <h2 class="orange-heading">Total Posts</h2>
+
+              <div class="total-post-number">{post?.total_posts}</div>
+            </section>
+          )}
+        </div>
+      )
+    }
 
     <!-- VACANCY DETAILS -->
 
-    <section class="post-box section-gap">
-      <h2 class="blue-heading">
-        {post?.title} : Vacancy Details
-      </h2>
+    {
+      post?.vacancies_details && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">{post?.title} : Vacancy Details</h2>
 
-      <div class="editor-content" set:html={post?.vacancy_details} />
-    </section>
+          <div class="editor-content" set:html={post?.vacancies_details} />
+        </section>
+      )
+    }
 
     <!-- ELIGIBILITY -->
 
-    <section class="post-box section-gap">
-      <h2 class="blue-heading">
-        {post?.title} : Eligibility Criteria
-      </h2>
+    {
+      post?.eligibility && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">{post?.title} : Eligibility Criteria</h2>
 
-      <div class="editor-content" set:html={post?.eligibility_criteria} />
-    </section>
+          <div class="editor-content" set:html={post?.eligibility} />
+        </section>
+      )
+    }
+
+    <!-- SALARY -->
+
+    {
+      post?.salary && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">Salary Details</h2>
+
+          <div class="editor-content" set:html={post?.salary} />
+        </section>
+      )
+    }
+    <!-- Selection Process -->
+
+    {
+      post?.selection_process && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">Selection Process</h2>
+
+          <div class="editor-content" set:html={post?.selection_process} />
+        </section>
+      )
+    }
 
     <!-- HOW TO APPLY -->
 
-    <section class="post-box section-gap">
-      <h2 class="blue-heading">
-        {post?.how_to_apply_title}
-      </h2>
+    {
+      post?.how_to_apply && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">
+            {post?.how_to_apply_title || "How To Apply"}
+          </h2>
 
-      <div class="editor-content" set:html={post?.how_to_apply} />
-    </section>
-
-    <!-- SELECTION PROCESS -->
-
-    <section class="post-box section-gap">
-      <h2 class="blue-heading">
-        {post?.title} : Selection Process
-      </h2>
-
-      <div class="editor-content" set:html={post?.selection_process} />
-    </section>
+          <div class="editor-content" set:html={post?.how_to_apply} />
+        </section>
+      )
+    }
 
     <!-- IMPORTANT LINKS -->
 
-    <section class="post-box section-gap">
-      <h2 class="yellow-heading">
-        Some Useful Important Links for {post?.title}
-      </h2>
+    {
+      post?.important_links && (
+        <section class="post-box section-gap">
+          <h2 class="yellow-heading">Important Links</h2>
 
-      <div class="editor-content" set:html={post?.important_links} />
-    </section>
+          {importantLinksData?.length > 0 ? (
+            <div class="important-links-wrapper">
+              {importantLinksData.map((item: any) => (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="nofollow noopener noreferrer"
+                  class="important-link-item"
+                >
+                  <span class="important-link-label">{item.label}</span>
+
+                  <span class="important-link-action">Click Here</span>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <div class="editor-content" set:html={post?.important_links} />
+          )}
+        </section>
+      )
+    }
 
     <!-- FAQ -->
 
-    <section class="post-box section-gap">
-      <h2 class="blue-heading">
-        Important Questions for {post?.title}
-      </h2>
+    {
+      post?.faq && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">Frequently Asked Questions (FAQs)</h2>
 
-      <div class="editor-content" set:html={post?.faq} />
-    </section>
+          {faqData?.length > 0 ? (
+            <div class="faq-wrapper">
+              {faqData.map((item: any) => (
+                <details class="faq-item">
+                  <summary class="faq-question">{item.question}</summary>
+
+                  <div class="faq-answer">{item.answer}</div>
+                </details>
+              ))}
+            </div>
+          ) : (
+            <div class="editor-content" set:html={post?.faq} />
+          )}
+        </section>
+      )
+    }
 
     <!-- POST SUGGESTIONS -->
 
@@ -213,12 +329,11 @@ const post = await getPostBySlug(slug);
     <section class="disclaimer-box">
       <strong> Disclaimer : </strong>
 
-      Information regarding any exam form, results/marks, answer key are
-      published on this website are provided just for the immediate information
-      of the examinees and should not be considered as a legal document. While
-      every effort has been made by Sarkari Result team to ensure the accuracy
-      of the information provided which includes official links, we are not
-      responsible for any inadvertent errors.
+      Information regarding any exam form, result, answer key, admit card and
+      recruitment updates published on GovtJobsNotice.Com are provided only for
+      immediate informational purposes. Candidates are advised to verify all
+      details through the official website and official notification before
+      applying. GovtJobsNotice is not responsible for any inadvertent errors.
     </section>
   </main>
 </BaseLayout>
