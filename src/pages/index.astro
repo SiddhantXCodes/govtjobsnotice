@@ -68,7 +68,7 @@ const sections = [
 
   {
     title: "Admit Card",
-    slug: "admit-card", 
+    slug: "admit-card",
     type: "category",
     posts: admitCards,
   },
@@ -79,13 +79,13 @@ const sections = [
     type: "category",
     posts: answerKeys,
   },
- {
+  {
     title: "Technical Jobs",
     slug: "tech",
     type: "tag",
     posts: technicalJobs,
   },
-   {
+  {
     title: "PSU Jobs",
     slug: "psu",
     type: "tag",
@@ -104,7 +104,6 @@ const sections = [
     type: "category",
     posts: syllabus,
   },
- 
 ];
 
 /* FEATURED COLORS */
@@ -186,7 +185,7 @@ const colors = [
               {section.posts.map((post) => (
                 <li class="home-list-item">
                   <a href={`/${post.slug}/`} class="home-list-link">
-                    {post.title}
+                    {post.feed_title}
                   </a>
                 </li>
               ))}
@@ -194,11 +193,11 @@ const colors = [
 
             <div class="view-more-wrap">
               <a
-              href={
-  section.type === "tag"
-    ? `/tag/${section.slug}/`
-    : `/category/${section.slug}/`
-}
+                href={
+                  section.type === "tag"
+                    ? `/tag/${section.slug}/`
+                    : `/category/${section.slug}/`
+                }
                 class="view-more-btn"
               >
                 View More →
