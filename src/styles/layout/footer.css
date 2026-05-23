@@ -1,4 +1,3 @@
-
 /* =========================================
    FOOTER
 ========================================= */
@@ -18,7 +17,7 @@
 .footer-exams-strip{
   background:#0b1120;
 
-  padding:18px 0;
+  padding:26px 0;
 
   border-top:
     3px solid #c00000;
@@ -28,37 +27,101 @@
 }
 
 .footer-strip-heading{
+  margin:0 0 24px;
+
+  color:#fff;
+
+  font-size:22px;
+
+  font-weight:800;
+
+  line-height:1.4;
+}
+
+/* =========================================
+   EXAMS GRID
+========================================= */
+
+.footer-exams-grid{
+  display:grid;
+
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(220px,1fr)
+    );
+
+  gap:28px;
+}
+
+/* =========================================
+   EXAM CATEGORY
+========================================= */
+
+.footer-exam-category{
+  display:flex;
+
+  flex-direction:column;
+}
+
+.footer-category-title{
   margin:0 0 14px;
 
   color:#fff;
 
-  font-size:18px;
+  font-size:16px;
 
   font-weight:700;
+
+  position:relative;
+
+  padding-bottom:8px;
 }
+
+.footer-category-title::after{
+  content:"";
+
+  position:absolute;
+
+  left:0;
+  bottom:0;
+
+  width:40px;
+  height:2px;
+
+  background:#c00000;
+}
+
+/* =========================================
+   EXAM LINKS
+========================================= */
 
 .footer-exams-links{
   display:flex;
 
-  flex-wrap:wrap;
+  flex-direction:column;
 
-  gap:10px 14px;
+  gap:10px;
 }
 
 .footer-exam-item{
-  color:#ff4d4d;
+  color:#fc1212;
 
   font-size:14px;
 
-  font-weight:700;
+  font-weight:600;
 
   line-height:1.5;
 
   transition:.2s;
+
+  width:fit-content;
 }
 
 .footer-exam-item:hover{
   color:#fff;
+
+  transform:translateX(3px);
 
   text-decoration:underline;
 }
@@ -68,7 +131,7 @@
 ========================================= */
 
 .footer-main{
-  padding:30px 0 0;
+  padding:34px 0 0;
 }
 
 /* =========================================
@@ -83,6 +146,7 @@
 
   gap:34px;
 }
+
 /* =========================================
    BRAND
 ========================================= */
@@ -110,18 +174,13 @@
 }
 
 /* =========================================
-   SOCIALS
-========================================= */
-
-
-/* =========================================
    COLUMN
 ========================================= */
 
 .footer-column h3{
   margin-top:0;
 
-  margin-bottom:14px;
+  margin-bottom:16px;
 
   color:#fff;
 
@@ -152,6 +211,20 @@
   color:#fff;
 
   text-decoration:underline;
+}
+
+/* =========================================
+   SOCIAL LINKS
+========================================= */
+
+.footer-social-links a{
+  color:#ffb3b3;
+
+  font-weight:600;
+}
+
+.footer-social-links a:hover{
+  color:#fff;
 }
 
 /* =========================================
@@ -187,9 +260,9 @@
 ========================================= */
 
 .footer-disclaimer{
-  margin-top:28px;
+  margin-top:34px;
 
-  padding-top:18px;
+  padding-top:20px;
 
   border-top:
     1px solid rgba(255,255,255,.08);
@@ -198,7 +271,7 @@
 
   font-size:13px;
 
-  line-height:1.8;
+  line-height:1.9;
 }
 
 /* =========================================
@@ -206,7 +279,7 @@
 ========================================= */
 
 .footer-bottom{
-  padding:18px 0;
+  padding:20px 0;
 
   text-align:center;
 
@@ -221,40 +294,71 @@
 
 @media(max-width:768px){
 
+  .footer-exams-strip{
+    padding:22px 0;
+  }
+
+  .footer-strip-heading{
+    font-size:18px;
+
+    margin-bottom:20px;
+  }
+
+  .footer-exams-grid{
+    grid-template-columns:
+      repeat(2,1fr);
+
+    gap:22px 18px;
+  }
+
+  .footer-category-title{
+    font-size:15px;
+  }
+
+  .footer-exam-item{
+    font-size:13px;
+  }
+
   .footer-grid{
     grid-template-columns:1fr;
 
-    gap:26px;
+    gap:28px;
   }
 
   .footer-logo a{
     font-size:23px;
   }
 
-  .footer-strip-heading{
-    font-size:16px;
-  }
+}
 
-  .footer-exams-links{
-    gap:8px 12px;
-  }
+@media(max-width:520px){
 
-  .footer-socials{
-    gap:8px;
+  .footer-exams-grid{
+    grid-template-columns:1fr;
   }
 
 }
 
 /* =========================================
-   SOCIAL COLUMN
+   EXAMS GRID
 ========================================= */
 
-.footer-social-links a{
-  color:#ffb3b3;
+.footer-exams-grid{
+  column-width:220px;
 
-  font-weight:600;
+  column-gap:40px;
 }
 
-.footer-social-links a:hover{
-  color:#fff;
+/* =========================================
+   EXAM CATEGORY
+========================================= */
+
+.footer-exam-category{
+  break-inside:avoid;
+
+  margin-bottom:34px;
+
+  display:inline-block;
+
+  width:100%;
 }

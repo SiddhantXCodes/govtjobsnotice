@@ -1,12 +1,6 @@
 ---
-import {
-  getAllExams
-} from "../lib/repositories/examRepository";
-
-/* EXAMS */
-
-const exams =
-  await getAllExams();
+import { FOOTER_EXAMS }
+from "../constants/footerExams";
 ---
 
 <footer class="site-footer">
@@ -23,22 +17,39 @@ const exams =
 
       </h2>
 
-      <div class="footer-exams-links">
+      <div class="footer-exams-grid">
 
         {
-          exams.slice(0,20).map((exam)=>(
+          FOOTER_EXAMS.map((group) => (
 
-            <a
-              href={`/exam/${exam.slug}/`}
-              class="footer-exam-item"
-            >
+            <div class="footer-exam-category">
 
-              {
-                exam.short_name ||
-                exam.title
-              } {exam.year}
+              <h3 class="footer-category-title">
 
-            </a>
+                {group.category}
+
+              </h3>
+
+              <div class="footer-exams-links">
+
+                {
+                  group.exams.map((exam) => (
+
+                    <a
+                      href={`/exam/${exam.slug}/`}
+                      class="footer-exam-item"
+                    >
+
+                      {exam.name}
+
+                    </a>
+
+                  ))
+                }
+
+              </div>
+
+            </div>
 
           ))
         }
@@ -55,170 +66,169 @@ const exams =
 
     <div class="container">
 
-    <div class="footer-grid">
+      <div class="footer-grid">
 
-  <!-- BRAND -->
+        <!-- BRAND -->
 
-  <div class="footer-brand">
+        <div class="footer-brand">
 
-    <div class="footer-logo">
+          <div class="footer-logo">
 
-      <a href="/">
+            <a href="/">
 
-        GOVT JOBS NOTICE
+              GOVT JOBS NOTICE
 
-      </a>
+            </a>
 
-    </div>
+          </div>
 
-    <p class="footer-description">
+          <p class="footer-description">
 
-      Latest government jobs,
-      Sarkari Result,
-      admit cards,
-      answer keys,
-      syllabus and recruitment updates.
+            Latest government jobs,
+            Sarkari Result,
+            admit cards,
+            answer keys,
+            syllabus and recruitment updates.
 
-    </p>
+          </p>
 
-  </div>
+        </div>
 
-  <!-- QUICK LINKS -->
+        <!-- QUICK LINKS -->
 
-  <div class="footer-column">
+        <div class="footer-column">
 
-    <h3>
+          <h3>
 
-      Quick Links
+            Quick Links
 
-    </h3>
+          </h3>
 
-    <div class="footer-links">
+          <div class="footer-links">
 
-      <a href="/">
-        Home
-      </a>
+            <a href="/">
+              Home
+            </a>
 
-      <a href="/all-posts/">
-        All Posts
-      </a>
+            <a href="/all-posts/">
+              All Posts
+            </a>
 
-      <a href="/exams/">
-        Exams
-      </a>
+            <a href="/exams/">
+              Exams
+            </a>
 
-      <a href="/category/latest-jobs">
-        Latest Jobs
-      </a>
+            <a href="/category/latest-jobs">
+              Latest Jobs
+            </a>
 
-      <a href="/category/results">
-        Results
-      </a>
+            <a href="/category/results">
+              Results
+            </a>
 
-    </div>
+          </div>
 
-  </div>
+        </div>
 
-  <!-- IMPORTANT -->
+        <!-- IMPORTANT -->
 
-  <div class="footer-column">
+        <div class="footer-column">
 
-    <h3>
+          <h3>
 
-      Important
+            Important
 
-    </h3>
+          </h3>
 
-    <div class="footer-links">
+          <div class="footer-links">
 
-      <a href="/about">
-        About Us
-      </a>
+            <a href="/about">
+              About Us
+            </a>
 
-      <a href="/contact">
-        Contact
-      </a>
+            <a href="/contact">
+              Contact
+            </a>
 
-      <a href="/privacy-policy">
-        Privacy Policy
-      </a>
+            <a href="/privacy-policy">
+              Privacy Policy
+            </a>
 
-      <a href="/disclaimer">
-        Disclaimer
-      </a>
+            <a href="/disclaimer">
+              Disclaimer
+            </a>
 
+          </div>
 
-    </div>
+        </div>
 
-  </div>
+        <!-- SOCIAL -->
 
-  <!-- SOCIAL -->
+        <div class="footer-column">
 
-  <div class="footer-column">
+          <h3>
 
-    <h3>
+            Follow Us
 
-      Follow Us
+          </h3>
 
-    </h3>
+          <div class="footer-links footer-social-links">
 
-    <div class="footer-links footer-social-links">
+            <a
+              href="https://t.me/GovtJobs_Notice"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
 
-      <a
-        href="https://t.me/GovtJobs_Notice"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+              Telegram
 
-        Telegram
+            </a>
 
-      </a>
+            <a
+              href="https://whatsapp.com/channel/0029Vb7JzZS1yT2AI8P1gt39"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
 
-      <a
-        href="https://whatsapp.com/channel/0029Vb7JzZS1yT2AI8P1gt39"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+              WhatsApp
 
-        WhatsApp
+            </a>
 
-      </a>
+            <a
+              href="https://youtube.com/@govtjobs_notice"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
 
-      <a
-        href="https://youtube.com/@govtjobs_notice"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+              YouTube
 
-        YouTube
+            </a>
 
-      </a>
+            <a
+              href="https://instagram.com/govtjobsnotice"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
 
-      <a
-        href="https://instagram.com/govtjobsnotice"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+              Instagram
 
-        Instagram
+            </a>
 
-      </a>
+            <a
+              href="https://linkedin.com/company/govtjobsnotice"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
 
-      <a
-        href="https://linkedin.com/company/govtjobsnotice"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
+              LinkedIn
 
-        LinkedIn
+            </a>
 
-      </a>
+          </div>
 
-    </div>
+        </div>
 
-  </div>
-
-</div>
+      </div>
 
       <!-- DISCLAIMER -->
 
@@ -243,4 +253,3 @@ const exams =
   </div>
 
 </footer>
-
