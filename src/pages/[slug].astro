@@ -210,7 +210,17 @@ try {
         </section>
       )
     }
+   <!-- Educational Qualification -->
 
+    {
+      post?.educational_qualification && (
+        <section class="post-box section-gap">
+          <h2 class="blue-heading">{post?.title} : Educational Qualification</h2>
+
+          <div class="editor-content" set:html={post?.educational_qualification} />
+        </section>
+      )
+    }
     <!-- SALARY -->
 
     {
