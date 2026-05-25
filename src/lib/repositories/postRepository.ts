@@ -184,8 +184,6 @@ export async function searchPosts(
 
 }
 
-/* POSTS BY TAG */
-
 export async function getPostsByTag(
   tag: string,
   limit = 10
@@ -199,12 +197,11 @@ export async function getPostsByTag(
       .order(
         "latest_status_date",
         {
-          ascending:false
+          ascending: false
         }
-      )
-      .limit(limit);
+      );
 
-  if(error){
+  if (error) {
 
     console.error(error);
 
@@ -212,29 +209,29 @@ export async function getPostsByTag(
 
   }
 
-  if(!data){
+  if (!data) {
     return [];
   }
 
   /* FILTER TAGS MANUALLY */
 
-  return data.filter((post:any)=>{
+  const filtered = data.filter((post: any) => {
 
-    if(!post.tags){
+    if (!post.tags) {
       return false;
     }
 
     /* ARRAY */
 
-    if(Array.isArray(post.tags)){
+    if (Array.isArray(post.tags)) {
 
       return post.tags.some(
-        (item:string)=>
+        (item: string) =>
 
           item
             .trim()
             .toLowerCase()
-            === tag.toLowerCase()
+          === tag.toLowerCase()
 
       );
 
@@ -243,5 +240,7 @@ export async function getPostsByTag(
     return false;
 
   });
+
+  return filtered.slice(0, limit);
 
 }
