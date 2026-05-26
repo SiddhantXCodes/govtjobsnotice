@@ -238,6 +238,7 @@
   font-size:15px;
 
   transition:var(--transition);
+  text-decoration: underline;
 }
 
 .home-list-link:hover{

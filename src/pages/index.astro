@@ -7,7 +7,9 @@ import {
 } from "../lib/repositories/postRepository";
 import { getPostsByTag } from "../lib/repositories/postRepository";
 import SocialLinks from "../components/SocialLinks.astro";
-
+import {
+  getFeedTitle
+} from "../lib/helpers/postHelpers";
 /* SEO SCHEMA */
 
 const schema = {
@@ -164,7 +166,7 @@ const colors = [
             class={`featured-card ${colors[index % colors.length]}`}
           >
             <h2 class="featured-title">
-              {post.title} ({post.total_posts} Posts)
+          {getFeedTitle(post)}
             </h2>
           </a>
         ))
@@ -185,7 +187,7 @@ const colors = [
               {section.posts.map((post) => (
                 <li class="home-list-item">
                   <a href={`/${post.slug}/`} class="home-list-link">
-                    {post.feed_title}
+                   {getFeedTitle(post)}
                   </a>
                 </li>
               ))}

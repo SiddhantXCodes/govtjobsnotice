@@ -1,5 +1,55 @@
+export function getFeedTitle(post: any) {
 
-/* =========================================
+  const overview =
+    typeof post?.posts_data_json === "string"
+      ? JSON.parse(post.posts_data_json)?.overview
+      : post?.posts_data_json?.overview;
+
+  const shortName =
+    overview?.short_name ||
+    overview?.short_title ||
+    post?.title ||
+    "";
+
+  let currentStage = "";
+
+  // CASE 1: object
+  if (
+    post?.current_stage &&
+    typeof post.current_stage === "object"
+  ) {
+    currentStage =
+     
+      post.current_stage.value ||
+      "";
+  }
+
+  // CASE 2: string
+  else if (
+    typeof post?.current_stage === "string"
+  ) {
+    currentStage = post.current_stage;
+  }
+
+  const totalPosts =
+    overview?.total_posts;
+
+ let title = shortName;
+
+if (
+  totalPosts &&
+  totalPosts !== "Not Applicable"
+) {
+  title += ` (${totalPosts} Posts)`;
+}
+
+if (currentStage) {
+  title += ` - ${currentStage}`;
+}
+
+  return title.trim();
+}
+/*===================================
    SAFE POST DATA PARSER
 ========================================= */
 
