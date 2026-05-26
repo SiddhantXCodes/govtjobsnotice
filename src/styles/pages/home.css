@@ -74,7 +74,87 @@
 
   margin-top:22px;
 }
+.closing-section{
+  border:1px solid #dcdcdc;
+  background:#fff;
+  margin:16px 0;
+}
 
+.closing-header{
+  background:#b30000;
+  color:#fff;
+  text-align:center;
+  font-size:18px;
+  font-weight:700;
+  padding:12px;
+}
+
+.closing-columns{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+}
+
+.closing-column{
+  padding:10px 14px;
+  border-right:1px solid #ececec;
+}
+
+.closing-column:last-child{
+  border-right:none;
+}
+
+.closing-line{
+  margin-bottom:14px;
+  line-height:1.7;
+}
+
+.closing-line:last-child{
+  margin-bottom:0;
+}
+
+.closing-link{
+  color:#0044cc;
+  text-decoration:none;
+  font-size:15px;
+}
+
+.closing-link:hover{
+  text-decoration:underline;
+}
+
+.closing-days{
+  color:#cc0000;
+  font-weight:700;
+}
+
+.closing-view-all{
+  text-align:center;
+  border-top:1px solid #ececec;
+  padding:10px;
+}
+
+.closing-view-all a{
+  color:#0056b3;
+  font-weight:700;
+  text-decoration:none;
+}
+
+@media(max-width:768px){
+
+  .closing-columns{
+    grid-template-columns:1fr;
+  }
+
+  .closing-column{
+    border-right:none;
+    border-bottom:1px solid #ececec;
+  }
+
+  .closing-column:last-child{
+    border-bottom:none;
+  }
+
+}
 /* =========================================
    FEATURED POSTS
 ========================================= */

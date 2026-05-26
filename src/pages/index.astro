@@ -7,9 +7,10 @@ import {
 } from "../lib/repositories/postRepository";
 import { getPostsByTag } from "../lib/repositories/postRepository";
 import SocialLinks from "../components/SocialLinks.astro";
-import {
-  getFeedTitle
-} from "../lib/helpers/postHelpers";
+import { getFeedTitle } from "../lib/helpers/postHelpers";
+
+import { getClosingSoonPosts } from "../lib/helpers/getClosingSoonPosts";
+
 /* SEO SCHEMA */
 
 const schema = {
@@ -51,6 +52,9 @@ const syllabus = await getPostsByCategory("syllabus", 10);
 
 const technicalJobs = await getPostsByTag("tech", 10);
 const psuJobs = await getPostsByTag("psu", 10);
+const allPostsForDeadlines = [...latestJobs, ...featuredPosts];
+
+const closingSoonPosts = getClosingSoonPosts(allPostsForDeadlines);
 /* HOME SECTIONS */
 
 const sections = [
@@ -155,7 +159,54 @@ const colors = [
         </div>
       </div>
     </section>
+<section class="closing-section">
 
+  <div class="closing-header">
+    Application Closing Soon
+  </div>
+
+<div class="closing-columns">
+
+  {
+    closingSoonPosts
+      .filter(Boolean)
+      .slice(0, 9)
+      .map((item: any) => (
+
+        <div class="closing-line">
+
+          <a
+            href={`/${item.post.slug}/`}
+            class="closing-link"
+          >
+
+            • {getFeedTitle(item.post)}
+
+            <span class="closing-days">
+
+              {
+                item.diffDays === 0
+                  ? " - Form Closes Today"
+                  : ` - Only ${item.diffDays} Days Left`
+              }
+
+            </span>
+
+          </a>
+
+        </div>
+
+      ))
+  }
+
+</div>
+  <div class="closing-view-all">
+    <a href="#">
+      View All →
+    </a>
+  </div>
+
+</section>
     <!-- FEATURED POSTS -->
 
     <section class="featured-grid">
@@ -165,9 +216,7 @@ const colors = [
             href={`/${post.slug}/`}
             class={`featured-card ${colors[index % colors.length]}`}
           >
-            <h2 class="featured-title">
-          {getFeedTitle(post)}
-            </h2>
+            <h2 class="featured-title">{getFeedTitle(post)}</h2>
           </a>
         ))
       }
@@ -187,7 +236,7 @@ const colors = [
               {section.posts.map((post) => (
                 <li class="home-list-item">
                   <a href={`/${post.slug}/`} class="home-list-link">
-                   {getFeedTitle(post)}
+                    {getFeedTitle(post)}
                   </a>
                 </li>
               ))}
