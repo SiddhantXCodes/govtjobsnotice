@@ -1,0 +1,293 @@
+{
+    "schema_version": "1.0",
+    "overview": {
+        "organization": {
+            "name": "Railway Recruitment Board",
+            "short_name": "RRB"
+        },
+        "title": "Railway RRB ALP Recruitment 2026",
+        "short_title": "RRB ALP 2026",
+        "post_name": "Assistant Loco Pilot (ALP)",
+        "advertisement_no": "CEN 01/2026",
+        "application_mode": "Online",
+        "job_location": "India",
+        "total_posts": 11127,
+        "qualification_short": "10th + ITI / Diploma / Degree",
+        "age_limit_short": "18-30 Years",
+        "selection_process_short": "CBT, CBAT, DV & Medical",
+        "seo": {
+            "title": "RRB ALP Recruitment 2026 Apply Online for 11127 Posts",
+            "description": "Railway RRB ALP Recruitment 2026 notification released for 11127 Assistant Loco Pilot posts. Check eligibility, age limit, important dates, application fee and apply online details."
+        }
+    },
+    "important_dates": [
+        {
+            "key": "notification",
+            "label": "Official Notification Release Date",
+            "datetime": "2026-05-13T00:00:00+05:30",
+            "display_text": "13 May 2026"
+        },
+        {
+            "key": "apply_start",
+            "label": "Online Apply Start Date",
+            "datetime": "2026-05-15T00:00:00+05:30",
+            "display_text": "15 May 2026"
+        },
+        {
+            "key": "last_date",
+            "label": "Online Apply Last Date",
+            "datetime": "2026-06-14T23:59:00+05:30",
+            "display_text": "14 June 2026",
+            "highlight": true
+        },
+        {
+            "key": "fee_payment",
+            "label": "Last Date For Fee Payment",
+            "datetime": "2026-06-16T23:59:00+05:30",
+            "display_text": "16 June 2026"
+        },
+        {
+            "key": "correction",
+            "label": "Application Correction Date",
+            "display_text": "17 June to 26 June 2026"
+        },
+        {
+            "key": "exam_date",
+            "label": "CBT Stage-I Exam Date",
+            "display_text": "Available Soon"
+        },
+        {
+            "key": "admit_card",
+            "label": "Admit Card Release",
+            "display_text": "04 Days Before Exam"
+        },
+        {
+            "key": "cbat_exam",
+            "label": "CBAT Exam Date",
+            "display_text": "To Be Announced"
+        },
+        {
+            "key": "result",
+            "label": "Result Date",
+            "display_text": "Available Later"
+        }
+    ],
+    "application_fee": {
+        "items": [
+            {
+                "key": "general_obc",
+                "label": "For General / OBC Candidates",
+                "amount": "₹500000/-"
+            },
+            {
+                "key": "reserved",
+                "label": "For SC / ST / PwBD / Ex-Serviceman Candidates",
+                "amount": "₹250/-"
+            },
+            {
+                "key": "general_refund",
+                "label": "Fee Refund for General / OBC Candidates",
+                "amount": "₹400/- after appearing in CBT Stage-I Exam"
+            },
+            {
+                "key": "reserved_refund",
+                "label": "Fee Refund for Reserved Category Candidates",
+                "amount": "₹250/- after appearing in CBT Stage-I Exam"
+            }
+        ],
+        "payment_modes": [
+            "Debit Card",
+            "Credit Card",
+            "Internet Banking",
+            "IMPS",
+            "Cash Card / Mobile Wallet"
+        ],
+        "note": "Application fee can be paid through online mode only."
+    },
+    "age_limit": {
+        "short_age_limit": "18-30 Years",
+        "title": "Age Limit as 30 January 2026",
+        "items": [
+            {
+                "key": "minimum_age",
+                "label": "Minimum Age",
+                "value": "18 Years"
+            },
+            {
+                "key": "maximum_age",
+                "label": "Maximum Age",
+                "value": "30 Years"
+            }
+        ],
+        "relaxation": "Age relaxation will be provided as per Railway Recruitment Board (RRB) rules."
+    },
+    "vacancies": {
+        "title": "Vacancy Details",
+        "total_posts": "11127",
+        "short_note": "Total 11127 Assistant Loco Pilot (ALP) Posts Available",
+        "sections": [
+            {
+                "title": "Category Wise Vacancy Details",
+                "columns": [
+                    {
+                        "key": "category",
+                        "label": "Category"
+                    },
+                    {
+                        "key": "posts",
+                        "label": "No. Of Posts"
+                    }
+                ],
+                "rows": [
+                    {
+                        "category": "UR",
+                        "posts": "4860"
+                    },
+                    {
+                        "category": "OBC",
+                        "posts": "2598"
+                    },
+                    {
+                        "category": "EWS",
+                        "posts": "1004"
+                    },
+                    {
+                        "category": "SC",
+                        "posts": "1746"
+                    },
+                    {
+                        "category": "ST",
+                        "posts": "919"
+                    },
+                    {
+                        "category": "Total",
+                        "posts": "11127"
+                    }
+                ]
+            }
+        ],
+        "note": "Candidates are advised to read official notification carefully for complete vacancy details."
+    },
+    "eligibility": {
+        "title": "Eligibility Criteria",
+        "short_eligibility": "10th Pass / ITI / Diploma / Degree Candidates Eligible",
+        "sections": [
+            {
+                "title": "Post Wise Educational Qualification",
+                "type": "table",
+                "columns": [
+                    {
+                        "key": "post_name",
+                        "label": "Post Name"
+                    },
+                    {
+                        "key": "qualification",
+                        "label": "Educational Qualification"
+                    }
+                ],
+                "rows": [
+                    {
+                        "post_name": "Assistant Loco Pilot (ALP)",
+                        "qualification": "Candidates must have passed Class 10th Examination along with ITI Certificate in relevant trade OR Diploma / Degree in Engineering from recognized institution."
+                    }
+                ]
+            },
+            {
+                "title": "Other Eligibility",
+                "type": "list",
+                "items": [
+                    "Zone-wise and trade-wise eligibility criteria must be checked carefully through the official notification before applying online.",
+                    "Candidates must fulfill all medical and physical fitness standards prescribed by Railway Recruitment Board.",
+                    "Candidates are advised to read the official notification carefully before submitting the online application form."
+                ]
+            }
+        ],
+        "note": "Eligibility criteria may vary according to post and railway zone."
+    },
+    "selection_process": {
+        "title": "Selection Process",
+        "short_selection_process": "CBT, CBAT, DV & Medical Test",
+        "sections": [
+            {
+                "title": "Selection Stages",
+                "type": "list",
+                "items": [
+                    "CBT Stage-I (Computer Based Test)",
+                    "CBT Stage-II (Computer Based Test)",
+                    "CBAT (Computer Based Aptitude Test)",
+                    "Document Verification",
+                    "Medical Examination",
+                    "Final Merit List"
+                ]
+            }
+        ],
+        "note": "Selection stages may vary according to post and category."
+    },
+    "how_to_apply": {
+        "title": "How To Apply for RRB ALP 2026",
+        "mode": "online",
+        "steps": [
+            "Interested candidates who wish to apply for this recruitment can submit their application online before the last date.",
+            "Use the Apply Online link provided below under Important Links section to apply directly.",
+            "Candidates are advised to read the official notification carefully before filling the application form.",
+            "Fill all required details carefully including personal, educational and communication details.",
+            "Upload scanned photograph, signature and required documents in prescribed format.",
+            "Pay the application fee through available online payment modes if applicable.",
+            "Verify all entered details carefully before final submission of the application form.",
+            "Take a printout of final submitted application form for future reference."
+        ],
+        "note": "Candidates are advised to complete the application process before the last date to avoid technical issues."
+    },
+    "important_links": [
+        {
+            "key": "apply_online",
+            "label": "Apply Online",
+            "url": "https://www.rrbapply.gov.in/#/auth/home",
+            "highlight": true
+        },
+        {
+            "key": "official_notification",
+            "label": "Official Notification",
+            "url": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf"
+        },
+        {
+            "key": "official_website",
+            "label": "RRB Official Website",
+            "url": "https://indianrailways.gov.in/"
+        }
+    ],
+    "faq": [
+        {
+            "question": "When will the online application for Railway RRB ALP Recruitment 2026 start?",
+            "answer": "The online application process for Railway RRB ALP Recruitment 2026 started on 15 May 2026."
+        },
+        {
+            "question": "What is the last date to apply online for Railway RRB ALP Recruitment 2026?",
+            "answer": "The last date to submit the online application form is 14 June 2026."
+        },
+        {
+            "question": "How many vacancies are available in Railway RRB ALP Recruitment 2026?",
+            "answer": "A total of 11,127 Assistant Loco Pilot vacancies have been announced under Railway RRB ALP Recruitment 2026."
+        },
+        {
+            "question": "What is the age limit for Railway RRB ALP Bharti 2026?",
+            "answer": "Candidates must be between 18 to 30 years as on 01 July 2026."
+        },
+        {
+            "question": "What is the educational qualification required for Railway RRB ALP Recruitment 2026?",
+            "answer": "Candidates must have passed 10th with ITI certificate in relevant trade or possess Diploma / Degree in Engineering."
+        },
+        {
+            "question": "What is the selection process for Railway RRB ALP Recruitment 2026?",
+            "answer": "The selection process includes CBT Stage-I, CBT Stage-II, CBAT Aptitude Test, Document Verification, and Medical Examination."
+        },
+        {
+            "question": "What is the application fee for Railway RRB ALP Recruitment 2026?",
+            "answer": "The application fee is ₹500 for General/OBC candidates and ₹250 for SC/ST/PwBD/Ex-Serviceman candidates."
+        },
+        {
+            "question": "What is the official website of Railway Recruitment Board?",
+            "answer": "The official website of Railway Recruitment Board is https://indianrailways.gov.in/."
+        }
+    ]
+}

@@ -2,174 +2,174 @@
    POST PAGE
 ========================================= */
 
-.post-page{
-  max-width:1050px;
+.post-page {
+  max-width: 1050px;
 
-  margin:auto;
+  margin: auto;
 
-  padding:10px 6px 30px;
+  padding: 10px 6px 30px;
 
-  color:#111827;
+  color: #111827;
 
-  font-size:16px;
+  font-size: 16px;
 
-  line-height:1.8;
+  line-height: 1.8;
 }
 
 /* =========================================
    PAGE INTRO
 ========================================= */
 
-.page-intro-box{
-  margin-bottom:14px;
+.page-intro-box {
+  margin-bottom: 14px;
 
-  background:#fff;
+  background: #fff;
 
-  border:1px solid #b7b7b7;
+  border: 1px solid #b7b7b7;
 
-  padding:14px;
+  padding: 14px;
 }
 
-.page-intro-title{
-  margin:0 0 10px;
+.page-intro-title {
+  margin: 0 0 10px;
 
-  color:#000066;
+  color: #000066;
 
-  font-size:30px;
+  font-size: 30px;
 
-  font-weight:800;
+  font-weight: 800;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
-.page-post-date{
-  display:inline-flex;
+.page-post-date {
+  display: inline-flex;
 
-  align-items:center;
+  align-items: center;
 
-  gap:6px;
+  gap: 6px;
 
-  margin-bottom:12px;
+  margin-bottom: 12px;
 
-  padding:6px 10px;
+  padding: 6px 10px;
 
-  background:#fff4f4;
+  background: #fff4f4;
 
-  border:1px solid #ffcdcd;
+  border: 1px solid #ffcdcd;
 
-  color:#c00000;
+  color: #c00000;
 
-  font-size:14px;
+  font-size: 14px;
 
-  font-weight:700;
+  font-weight: 700;
 }
 
 /* =========================================
    LATEST STATUS
 ========================================= */
 
-.latest-status-badge{
-  display:inline-flex;
+.latest-status-badge {
+  display: inline-flex;
 
-  align-items:center;
+  align-items: center;
 
-  justify-content:center;
+  justify-content: center;
 
-  gap:6px;
+  gap: 6px;
 
-  margin-bottom:12px;
+  margin-bottom: 12px;
 
-  padding:6px 12px;
+  padding: 6px 12px;
 
-  background:#e9f8ed;
+  background: #e9f8ed;
 
-  border:1px solid #9fddb0;
+  border: 1px solid #9fddb0;
 
-  color:#007a33;
+  color: #007a33;
 
-  font-size:14px;
+  font-size: 14px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  border-radius:4px;
+  border-radius: 4px;
 }
 
 /* =========================================
    MAIN TITLE
 ========================================= */
 
-.main-title-box{
-  background:#fff;
+.main-title-box {
+  background: #fff;
 
-  border:1px solid #b7b7b7;
+  border: 1px solid #b7b7b7;
 
-  text-align:center;
+  text-align: center;
 
-  margin-top:12px;
+  margin-top: 12px;
 }
 
-.main-title{
-  margin:0;
+.main-title {
+  margin: 0;
 
-  padding:10px 10px 4px;
+  padding: 10px 10px 4px;
 
-  color:#c00000;
+  color: #c00000;
 
-  font-size:24px;
+  font-size: 24px;
 
-  font-weight:800;
+  font-weight: 800;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
-.site-name{
-  color:#0000cc;
+.site-name {
+  color: #0000cc;
 
-  font-size:16px;
+  font-size: 16px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
-.main-status{
-  margin:0;
+.main-status {
+  margin: 0;
 
-  padding:4px 10px 10px;
+  padding: 4px 10px 10px;
 
-  color:#008000;
+  color: #008000;
 
-  font-size:18px;
+  font-size: 18px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
 /* =========================================
    GRID
 ========================================= */
 
-.two-column-grid{
-  display:grid;
+.two-column-grid {
+  display: grid;
 
   grid-template-columns:
-    repeat(2,1fr);
+    repeat(2, 1fr);
 
-  gap:12px;
+  gap: 12px;
 
-  margin-top:12px;
+  margin-top: 12px;
 }
 
-.four-grid{
-  display:grid;
+.four-grid {
+  display: grid;
 
   grid-template-columns:
     3fr 1fr;
 
-  gap:12px;
+  gap: 12px;
 
-  margin-top:12px;
+  margin-top: 12px;
 }
 
 /* =========================================
@@ -178,21 +178,21 @@
 
 .post-box,
 .age-box,
-.total-post-box{
-  background:#fff;
+.total-post-box {
+  background: #fff;
 
-  border:1px solid #b7b7b7;
+  border: 1px solid #b7b7b7;
 
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .post-box,
-.age-box{
-  overflow-x:auto;
+.age-box {
+  overflow-x: auto;
 }
 
-.section-gap{
-  margin-top:12px;
+.section-gap {
+  margin-top: 12px;
 }
 
 /* =========================================
@@ -203,243 +203,207 @@
 .green-heading,
 .orange-heading,
 .blue-heading,
-.yellow-heading{
-  margin:0;
+.yellow-heading {
+  margin: 0;
 
-  padding:10px 12px;
+  padding: 10px 12px;
 
-  text-align:center;
+  text-align: center;
 
-  font-size:21px;
+  font-size: 21px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  line-height:1.5;
+  line-height: 1.5;
 }
 
-.pink-heading{
-  background:#76003c;
+.pink-heading {
+  background: #76003c;
 
-  color:#fff;
+  color: #fff;
 }
 
-.green-heading{
-  background:#006b2d;
+.green-heading {
+  background: #006b2d;
 
-  color:#fff;
+  color: #fff;
 }
 
-.orange-heading{
-  background:#ef4e00;
+.orange-heading {
+  background: #ef4e00;
 
-  color:#fff;
+  color: #fff;
 }
 
-.blue-heading{
-  background:#000066;
+.blue-heading {
+  background: #000066;
 
-  color:#fff;
+  color: #fff;
 }
 
-.yellow-heading{
-  background:#f5e78b;
+.yellow-heading {
+  background: #f5e78b;
 
-  color:#8b0000;
+  color: #8b0000;
 }
 
-/* =========================================
-   EDITOR CONTENT
-========================================= */
 
-.editor-content{
-  padding:10px 12px;
-}
 
-/* =========================================
-   EDITOR TABLES
-========================================= */
-
-.editor-content table{
-  width:100%;
-
-  border-collapse:collapse;
-
-  margin:0;
-
-  background:#fff;
-}
-
-.editor-content table td,
-.editor-content table th{
-  border:1px solid #a7a7a7;
-
-  padding:10px;
-
-  text-align:center;
-
-  vertical-align:middle;
-}
-
-.editor-content table th{
-  background:#f7f7f7;
-
-  font-weight:700;
-}
 /* =========================================
    IMPORTANT LINKS
 ========================================= */
 
-.important-links-wrapper{
-  width:100%;
+.important-links-wrapper {
+  width: 100%;
 }
 
-.important-link-item{
-  display:grid;
+.important-link-item {
+  display: grid;
 
-  grid-template-columns:1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 
-  align-items:stretch;
+  align-items: stretch;
 
-  text-decoration:none;
+  text-decoration: none;
 
-  background:#f5e78b;
+  background: #f5e78b;
 
-  border-top:1px solid #a9a178;
+  border-top: 1px solid #a9a178;
 
-  transition:.2s;
+  transition: .2s;
 }
 
-.important-link-item:last-child{
-  border-bottom:1px solid #a9a178;
+.important-link-item:last-child {
+  border-bottom: 1px solid #a9a178;
 }
 
-.important-link-item:hover{
-  background:#f8ec9f;
+.important-link-item:hover {
+  background: #f8ec9f;
 }
 
-.important-link-label{
-  display:flex;
+.important-link-label {
+  display: flex;
 
-  align-items:center;
+  align-items: center;
 
-  justify-content:center;
+  justify-content: center;
 
-  padding:12px 10px;
+  padding: 12px 10px;
 
-  border-right:1px solid #a9a178;
+  border-right: 1px solid #a9a178;
 
-  color:#111827;
+  color: #111827;
 
-  font-size:16px;
+  font-size: 16px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  text-align:center;
+  text-align: center;
 
-  line-height:1.7;
+  line-height: 1.7;
 
-  word-break:break-word;
+  word-break: break-word;
 }
 
-.important-link-action{
-  display:flex;
+.important-link-action {
+  display: flex;
 
-  align-items:center;
+  align-items: center;
 
-  justify-content:center;
+  justify-content: center;
 
-  padding:12px 10px;
+  padding: 12px 10px;
 
-  color:#0a33ff;
+  color: #0a33ff;
 
-  font-size:16px;
+  font-size: 16px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  text-align:center;
+  text-align: center;
 
-  line-height:1.7;
+  line-height: 1.7;
 
-  word-break:break-word;
+  word-break: break-word;
 }
 
 /* =========================================
    FAQ
 ========================================= */
 
-.faq-wrapper{
-  padding:0;
+.faq-wrapper {
+  padding: 0;
 }
 
-.faq-item{
-  border-top:1px solid #dcdcdc;
+.faq-item {
+  border-top: 1px solid #dcdcdc;
 }
 
-.faq-item:first-child{
-  border-top:none;
+.faq-item:first-child {
+  border-top: none;
 }
 
-.faq-question{
-  padding:12px 14px;
+.faq-question {
+  padding: 12px 14px;
 
-  background:#fafafa;
+  background: #fafafa;
 
-  color:#111827;
+  color: #111827;
 
-  font-size:16px;
+  font-size: 16px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  line-height:1.6;
+  line-height: 1.6;
 }
 
-.faq-answer{
-  padding:0 14px 12px;
+.faq-answer {
+  padding: 0 14px 12px;
 
-  background:#fff;
+  background: #fff;
 
-  color:#444;
+  color: #444;
 
-  font-size:15px;
+  font-size: 15px;
 
-  line-height:1.8;
+  line-height: 1.8;
 }
 
 /* remove default arrow */
 
-.faq-question::-webkit-details-marker{
-  display:none;
+.faq-question::-webkit-details-marker {
+  display: none;
 }
 
 /* =========================================
    MOBILE
 ========================================= */
 
-@media(max-width:768px){
+@media(max-width:768px) {
 
-  .important-link-item{
-    grid-template-columns:1fr 1fr;
+  .important-link-item {
+    grid-template-columns: 1fr 1fr;
   }
 
   .important-link-label,
-  .important-link-action{
-    font-size:14px;
+  .important-link-action {
+    font-size: 14px;
 
-    padding:10px 8px;
+    padding: 10px 8px;
 
-    line-height:1.7;
+    line-height: 1.7;
   }
 
-  .faq-question{
-    font-size:15px;
+  .faq-question {
+    font-size: 15px;
 
-    padding:10px 12px;
+    padding: 10px 12px;
   }
 
-  .faq-answer{
-    font-size:14px;
+  .faq-answer {
+    font-size: 14px;
 
-    padding:0 12px 10px;
+    padding: 0 12px 10px;
   }
 
 }
@@ -448,64 +412,32 @@
    SMALL MOBILE
 ========================================= */
 
-@media(max-width:480px){
+@media(max-width:480px) {
 
-  .important-link-item{
-    grid-template-columns:1fr 1fr !important;
+  .important-link-item {
+    grid-template-columns: 1fr 1fr !important;
   }
 
   .important-link-label,
-  .important-link-action{
-    font-size:13px;
+  .important-link-action {
+    font-size: 13px;
 
-    padding:10px 6px;
+    padding: 10px 6px;
 
-    line-height:1.8;
+    line-height: 1.8;
   }
 
-  .important-link-label{
-    border-right:1px solid #a9a178;
+  .important-link-label {
+    border-right: 1px solid #a9a178;
   }
 
 }
-/* =========================================
-   LISTS
-========================================= */
 
-.editor-content ul{
-  margin:0;
 
-  padding-left:22px;
-
-  list-style:disc;
-}
-
-.editor-content ul li{
-  margin-bottom:10px;
-
-  line-height:1.8;
-}
-
-.editor-content ol{
-  padding-left:22px;
-
-  margin:0;
-}
-
-.editor-content li:last-child{
-  margin-bottom:0;
-}
 /* =========================================
    PARAGRAPH
 ========================================= */
 
-.editor-content p{
-  margin:0 0 12px;
-}
-
-.editor-content p:last-child{
-  margin-bottom:0;
-}
 
 
 
@@ -513,60 +445,344 @@
    TOTAL POST
 ========================================= */
 
-.total-post-number{
-  display:flex;
+.total-post-number {
+  display: flex;
 
-  align-items:center;
+  align-items: center;
 
-  justify-content:center;
+  justify-content: center;
 
-  min-height:160px;
+  min-height: 160px;
 
-  color:#111;
+  color: #111;
 
-  font-size:38px;
+  font-size: 38px;
 
-  font-weight:800;
+  font-weight: 800;
 }
 
 /* =========================================
    FEATURED IMAGE
 ========================================= */
 
-.bottom-featured-image-wrap{
-  margin-top:16px;
+.bottom-featured-image-wrap {
+  margin-top: 16px;
 }
 
-.bottom-featured-image{
-  width:100%;
+.bottom-featured-image {
+  width: 100%;
 
-  height:auto;
+  height: auto;
 
-  display:block;
+  display: block;
 
-  border:1px solid #b7b7b7;
+  border: 1px solid #b7b7b7;
 
-  background:#fff;
+  background: #fff;
 }
 
 /* =========================================
    DISCLAIMER
 ========================================= */
 
-.disclaimer-box{
-  margin-top:16px;
+.disclaimer-box {
+  margin-top: 16px;
 
-  background:#fffdf2;
+  background: #fffdf2;
 
-  border:1px solid #f0d978;
+  border: 1px solid #f0d978;
 
-  padding:14px;
+  padding: 14px;
 
-  color:#444;
+  color: #444;
 
-  font-size:13px;
+  font-size: 13px;
 
-  line-height:1.8;
+  line-height: 1.8;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px) {
+
+  .post-page {
+    padding: 8px 3px 24px;
+
+    font-size: 15px;
+
+    overflow-x: hidden;
+  }
+
+  .page-intro-box {
+    padding: 12px;
+  }
+
+  .page-intro-title {
+    font-size: 22px;
+  }
+
+  .page-post-date,
+  .latest-status-badge {
+    font-size: 13px;
+  }
+
+  .two-column-grid,
+  .four-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .main-title {
+    font-size: 19px;
+  }
+
+  .main-status {
+    font-size: 16px;
+  }
+
+  .site-name {
+    font-size: 14px;
+  }
+
+  .pink-heading,
+  .green-heading,
+  .orange-heading,
+  .blue-heading,
+  .yellow-heading {
+    font-size: 16px;
+
+    padding: 8px;
+  }
+
+ 
+
+  .total-post-number {
+    min-height: 100px;
+
+    font-size: 28px;
+  }
+
+  .important-link-label,
+  .important-link-action {
+    font-size: 14px;
+
+    min-height: 50px;
+
+    padding: 8px;
+  }
+
+  .faq-question {
+    font-size: 15px;
+
+    padding: 14px 44px 14px 14px;
+  }
+
+  .faq-answer {
+    padding: 12px 14px;
+
+    font-size: 14px;
+  }
+
+}
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media(max-width:480px) {
+
+  .page-intro-title {
+    font-size: 20px;
+  }
+
+  .main-title {
+    font-size: 18px;
+  }
+
+  .important-link-item {
+    grid-template-columns: 1fr;
+  }
+
+  .important-link-label {
+    border-right: none;
+
+    border-bottom: 1px solid #a9a178;
+  }
+
+}
+
+
+/* =========================================
+   JSON IMPORTANT LIST STYLE
+========================================= */
+
+.important-dates-wrapper {
+  padding: 10px 12px;
+}
+
+.important-date-item {
+  padding: 10px 0;
+
+  line-height: 1.1;
+
+  color: #111827;
+
+  font-size: 16px;
+
+  border-bottom: none;
+}
+
+.important-date-item:last-child {
+  margin-bottom: 0;
+}
+
+.important-date-item::before {
+  content: "• ";
+
+  color: #111;
+}
+
+.important-date-label {
+  color: #111;
+
+  font-weight: 500;
+}
+
+.important-date-value {
+  color: #111;
+
+  font-weight: 700;
+}
+
+.active-date .important-date-value {
+  color: #ff0000;
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px) {
+
+  .important-dates-wrapper {
+    padding: 8px 10px;
+  }
+
+  .important-date-item {
+    font-size: 15px;
+
+    line-height: 1.1;
+  }
+
+}
+/* =========================================
+   EDITOR CONTENT
+========================================= */
+
+.editor-content{
+padding:10px 12px
+}
+
+/* remove padding when table exists */
+
+.editor-content:has(table){
+padding:0
+}
+
+/* =========================================
+   JSON SECTION HEADINGS
+========================================= */
+
+.editor-content h3{
+margin:0;
+padding:10px 12px;
+background:#f7f7f7;
+border-top:1px solid #dcdcdc;
+border-bottom:1px solid #dcdcdc;
+color:#111827;
+font-size:18px;
+font-weight:700;
+line-height:1.6
+}
+
+.editor-content h3:first-child{
+border-top:none
+}
+
+/* =========================================
+   TABLES
+========================================= */
+
+.editor-content table{
+width:100%;
+border-collapse:collapse;
+margin:0;
+background:#fff
+}
+
+.editor-content table th{
+background:#f5f5f5;
+color:#111827;
+font-weight:700
+}
+
+.editor-content table td,
+.editor-content table th{
+border:1px solid #a7a7a7;
+padding:10px;
+text-align:center;
+vertical-align:middle;
+line-height:1.7;
+word-break:break-word
+}
+
+/* =========================================
+   LISTS
+========================================= */
+
+.editor-content ul,
+.editor-content ol{
+margin:0;
+padding-left:22px
+}
+
+.editor-content ul{
+list-style:disc
+}
+
+.editor-content li{
+margin-bottom:10px;
+line-height:1.8
+}
+
+.editor-content li:last-child{
+margin-bottom:0
+}
+
+/* =========================================
+   PARAGRAPHS
+========================================= */
+
+.editor-content p{
+margin:0 0 12px;
+line-height:1.8
+}
+
+.editor-content p:last-child{
+margin-bottom:0
+}
+
+/* =========================================
+   JSON NOTES
+========================================= */
+
+.section-note{
+
+padding:5px 6px;
+font-weight:700;
+
+
 }
 
 /* =========================================
@@ -575,84 +791,24 @@
 
 @media(max-width:768px){
 
-  .post-page{
-    padding:8px 3px 24px;
+.editor-content{
+padding:10px
+}
 
-    font-size:15px;
+.editor-content h3{
+padding:10px;
+font-size:16px
+}
 
-    overflow-x:hidden;
-  }
+.editor-content table td,
+.editor-content table th{
+padding:8px;
+font-size:14px
+}
 
-  .page-intro-box{
-    padding:12px;
-  }
-
-  .page-intro-title{
-    font-size:22px;
-  }
-
-  .page-post-date,
-  .latest-status-badge{
-    font-size:13px;
-  }
-
-  .two-column-grid,
-  .four-grid{
-    grid-template-columns:1fr;
-  }
-
-  .main-title{
-    font-size:19px;
-  }
-
-  .main-status{
-    font-size:16px;
-  }
-
-  .site-name{
-    font-size:14px;
-  }
-
-  .pink-heading,
-  .green-heading,
-  .orange-heading,
-  .blue-heading,
-  .yellow-heading{
-    font-size:16px;
-
-    padding:8px;
-  }
-
-  .editor-content{
-    padding:10px;
-  }
-
-  .total-post-number{
-    min-height:100px;
-
-    font-size:28px;
-  }
-
-  .important-link-label,
-  .important-link-action{
-    font-size:14px;
-
-    min-height:50px;
-
-    padding:8px;
-  }
-
-  .faq-question{
-    font-size:15px;
-
-    padding:14px 44px 14px 14px;
-  }
-
-  .faq-answer{
-    padding:12px 14px;
-
-    font-size:14px;
-  }
+.editor-content li{
+font-size:15px
+}
 
 }
 
@@ -662,67 +818,15 @@
 
 @media(max-width:480px){
 
-  .page-intro-title{
-    font-size:20px;
-  }
-
-  .main-title{
-    font-size:18px;
-  }
-
-  .important-link-item{
-    grid-template-columns:1fr;
-  }
-
-  .important-link-label{
-    border-right:none;
-
-    border-bottom:1px solid #a9a178;
-  }
-
-}
-
-/* =========================================
-   EDITOR CONTENT
-========================================= */
-
-.editor-content{
-  padding:10px 12px;
-}
-
-/* remove padding when table exists */
-
-.editor-content:has(table){
-  padding:0;
-}
-
-/* =========================================
-   EDITOR TABLES
-========================================= */
-
-.editor-content table{
-  width:100%;
-
-  border-collapse:collapse;
-
-  margin:0;
-
-  background:#fff;
-}
-
 .editor-content table td,
 .editor-content table th{
-  border:1px solid #a7a7a7;
-
-  padding:10px;
-
-  text-align:center;
-
-  vertical-align:middle;
+padding:7px 6px;
+font-size:13px;
+line-height:1.6
 }
 
-.editor-content table th{
-  background:#f7f7f7;
+.editor-content h3{
+font-size:15px
+}
 
-  font-weight:700;
 }

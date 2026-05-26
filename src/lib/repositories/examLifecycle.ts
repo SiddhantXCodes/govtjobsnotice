@@ -23,7 +23,7 @@ export function buildExamLifecycle(
 
     const currentType =
 
-      post.latest_status_type
+      post.current_stage
         ?.trim()
         ?.toLowerCase();
 
@@ -54,7 +54,7 @@ export function buildExamLifecycle(
 
       posts.find((post)=>
 
-        post.latest_status_type
+        post.current_stage
           ?.trim()
           ?.toLowerCase()
 
