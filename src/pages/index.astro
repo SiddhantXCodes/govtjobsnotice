@@ -52,7 +52,11 @@ const syllabus = await getPostsByCategory("syllabus", 10);
 
 const technicalJobs = await getPostsByTag("tech", 10);
 const psuJobs = await getPostsByTag("psu", 10);
-const allPostsForDeadlines = [...latestJobs, ...featuredPosts];
+const allPostsForDeadlines = [
+  ...new Map(
+    [...latestJobs, ...featuredPosts].map((post) => [post.slug, post]),
+  ).values(),
+];
 
 const closingSoonPosts = getClosingSoonPosts(allPostsForDeadlines);
 /* HOME SECTIONS */
@@ -135,12 +139,10 @@ const colors = [
 >
   <main class="home-page">
     <!-- HERO -->
-
     <section class="hero-section">
       <div class="hero-box">
         <h1 class="hero-heading">
-          Latest Government Jobs, Sarkari Result, Admit Card & Recruitment
-          Updates
+          Latest Govt Jobs, Sarkari Result & Admit Card Updates
         </h1>
 
         <div class="hero-top-line">
@@ -149,9 +151,8 @@ const colors = [
         </div>
 
         <p class="hero-description">
-          Get fastest updates for latest government jobs, Sarkari Result, admit
-          cards, answer keys, exam notifications, admissions, syllabus and
-          recruitment updates across India.
+          Get fastest updates for latest government jobs, results, admit cards,
+          answer keys and recruitment notifications across India.
         </p>
 
         <div class="hero-buttons">
@@ -159,56 +160,36 @@ const colors = [
         </div>
       </div>
     </section>
-<section class="closing-section">
 
-  <div class="closing-header">
-    Application Closing Soon
-  </div>
+    <!-- Application Closing Soon -->
+    <section class="closing-section">
+      <div class="closing-header">Application Closing Soon</div>
 
-<div class="closing-columns">
+      <div class="closing-columns">
+        {
+          closingSoonPosts
+            .filter(Boolean)
+            .slice(0, 9)
+            .map((item: any) => (
+              <div class="closing-line">
+                <a href={`/${item.post.slug}/`} class="closing-link">
+                  • {item.post.title}
+                  <span class="closing-days">
+                    {item.diffDays === 0
+                      ? " - Form Closes Today"
+                      : ` - Only ${item.diffDays} Days Left`}
+                  </span>
+                </a>
+              </div>
+            ))
+        }
+      </div>
+      <div class="closing-view-all">
+        <a href="/last-date/"> View All → </a>
+      </div>
+    </section>
 
-  {
-    closingSoonPosts
-      .filter(Boolean)
-      .slice(0, 9)
-      .map((item: any) => (
-
-        <div class="closing-line">
-
-          <a
-            href={`/${item.post.slug}/`}
-            class="closing-link"
-          >
-
-            • {getFeedTitle(item.post)}
-
-            <span class="closing-days">
-
-              {
-                item.diffDays === 0
-                  ? " - Form Closes Today"
-                  : ` - Only ${item.diffDays} Days Left`
-              }
-
-            </span>
-
-          </a>
-
-        </div>
-
-      ))
-  }
-
-</div>
-  <div class="closing-view-all">
-    <a href="#">
-      View All →
-    </a>
-  </div>
-
-</section>
     <!-- FEATURED POSTS -->
-
     <section class="featured-grid">
       {
         featuredPosts.map((post, index) => (
@@ -223,7 +204,6 @@ const colors = [
     </section>
 
     <!-- HOME SECTIONS -->
-
     <section class="home-sections">
       {
         sections.map((section) => (
@@ -260,7 +240,6 @@ const colors = [
     </section>
 
     <!-- SEO CONTENT BLOCK -->
-
     <section class="seo-content-section">
       <h2>Latest Sarkari Result and Government Job Notifications</h2>
 

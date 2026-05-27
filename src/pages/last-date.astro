@@ -1,0 +1,224 @@
+---
+import BaseLayout
+  from "../layouts/BaseLayout.astro";
+
+import Breadcrumbs
+  from "../components/Breadcrumbs.astro";
+
+import {
+  getFeaturedPosts,
+  getPostsByCategory
+} from "../lib/repositories/postRepository";
+
+import {
+  getClosingSoonPosts
+} from "../lib/helpers/getClosingSoonPosts";
+
+/* FETCH POSTS */
+
+const latestJobs =
+  await getPostsByCategory(
+    "latest-jobs",
+    100
+  );
+
+const featuredPosts =
+  await getFeaturedPosts(50);
+
+/* REMOVE DUPLICATES */
+
+const allPosts = [
+  ...new Map(
+    [...latestJobs, ...featuredPosts]
+      .map((post)=>[
+        post.slug,
+        post
+      ])
+  ).values()
+];
+
+/* GET DEADLINES */
+
+const closingSoonPosts =
+  getClosingSoonPosts(allPosts);
+
+/* DATE FORMAT */
+
+const formatDate = (date:any)=>{
+
+  if(!date){
+    return "-";
+  }
+
+  return new Date(date)
+    .toLocaleDateString(
+      "en-IN",
+      {
+        day:"numeric",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+};
+---
+
+<BaseLayout
+  title="Application Closing Soon | GovtJobsNotice"
+  description="Check latest government jobs and application forms closing soon with last date and days remaining."
+>
+
+<main class="page-container">
+
+  <!-- HEADER -->
+
+  <section class="page-header common-box">
+
+    <Breadcrumbs
+      items={[
+        {
+          label:"Application Closing Soon"
+        }
+      ]}
+    />
+
+    <h1 class="page-title">
+
+      Application Closing Soon
+
+    </h1>
+
+    <div class="page-count">
+
+      Total Posts :
+      {closingSoonPosts.length}
+
+    </div>
+
+    <p class="page-description">
+
+      Check latest government job applications,
+      online forms and recruitment notifications
+      closing soon. Candidates should complete
+      their application forms before the last date.
+
+    </p>
+
+  </section>
+
+  <!-- TABLE -->
+
+  <section class="table-wrap">
+
+    <table class="common-table">
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Post Name
+          </th>
+
+          <th>
+            Last Date
+          </th>
+
+          <th>
+            Days Left
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {
+          closingSoonPosts.map((item:any)=>(
+
+            <tr>
+
+              <!-- TITLE -->
+
+              <td>
+
+                <a
+                  href={`/${item.post.slug}/`}
+                  class="table-link"
+                >
+
+                  {item.post.title}
+
+                </a>
+
+              </td>
+
+              <!-- LAST DATE -->
+
+              <td>
+
+                {
+                  formatDate(
+                    item.post.application_end_date
+                  )
+                }
+
+              </td>
+
+              <!-- DAYS LEFT -->
+
+              <td>
+
+                {
+                  item.diffDays === 0
+                    ? "Closing Today"
+                    : `${item.diffDays} Days Left`
+                }
+
+              </td>
+
+            </tr>
+
+          ))
+        }
+
+      </tbody>
+
+    </table>
+
+  </section>
+
+  <!-- SEO -->
+
+  <section class="seo-box common-box">
+
+    <h2>
+
+      Latest Govt Job Forms Closing Soon
+
+    </h2>
+
+    <p>
+
+      GovtJobsNotice provides latest government
+      job notifications and online forms that are
+      closing soon for SSC, Railway, Banking,
+      UPSC, Defence, PSU and State Government jobs.
+
+    </p>
+
+    <p>
+
+      Candidates should regularly check the
+      application last date, eligibility,
+      notification details and official updates
+      before applying online.
+
+    </p>
+
+  </section>
+
+</main>
+
+</BaseLayout>
