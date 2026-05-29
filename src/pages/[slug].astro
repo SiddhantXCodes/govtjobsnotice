@@ -7,21 +7,11 @@ import Breadcrumbs from "../components/Breadcrumbs.astro";
 import PostSuggestions from "../components/PostSuggestions.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 
-import {
-  getSeoTitle,
-  getSeoDescription,
-  getShortName,
-  getApplicationFee,
-  getAgeLimit,
-  getVacancies,
-  getEligibility,
-  getSelectionProcess,
-  getHowToApply,
-  getImportantLinks,
-  getFaq,
-  getImportantDates,
-  getOverview,
-} from "../lib/helpers/postHelpers";
+import SectionRenderer from "../components/post/SectionRenderer.astro";
+
+/* =========================================
+   STATIC PATHS
+========================================= */
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -33,16 +23,26 @@ export async function getStaticPaths() {
   }));
 }
 
+/* =========================================
+   POST
+========================================= */
+
 const { slug } = Astro.params;
 
 const post = await getPostBySlug(slug);
+
+if (!post) {
+  return Astro.redirect("/404");
+}
 
 /* =========================================
    DATE FORMAT
 ========================================= */
 
 const formatDate = (date: string) => {
-  if (!date) return "";
+  if (!date) {
+    return "";
+  }
 
   return new Date(date).toLocaleString("en-IN", {
     day: "numeric",
@@ -54,32 +54,39 @@ const formatDate = (date: string) => {
   });
 };
 
-const overview = getOverview(post);
+/* =========================================
+   SEO
+========================================= */
 
-const finalImportantDates = getImportantDates(post);
+const seoTitle = post?.overview?.seo?.title || post?.title;
 
-const finalApplicationFee = getApplicationFee(post);
+const seoDescription = post?.overview?.seo?.description || "";
 
-const finalAgeLimit = getAgeLimit(post);
+const postTitle = post?.title || "GovtJobsNotice";
 
-const finalVacancy = getVacancies(post);
+const shortName = post?.feed_title || "GovtJobsNotice";
 
-const finalEligibility = getEligibility(post);
+/* =========================================
+   IMPORTANT DATES
+========================================= */
 
-const finalSelectionProcess = getSelectionProcess(post);
+const importantDates = Object.values(post?.important_dates || {});
 
-const finalHowToApply = getHowToApply(post);
+/* =========================================
+   SECTIONS
+========================================= */
+const applicationFee = post?.application_fee || null;
 
-const finalImportantLinks = getImportantLinks(post);
+const ageLimit = post?.age_limit || null;
 
-const finalFaq = getFaq(post);
+const importantLinks = post?.important_links || null;
 
-const shortName = getShortName(post);
+const normalSections = post?.sections || [];
 ---
 
 <BaseLayout
-  title={`${getSeoTitle(post)} | GovtJobsNotice`}
-  description={getSeoDescription(post)}
+  title={`${seoTitle} | GovtJobsNotice`}
+  description={seoDescription}
   canonical={`https://govtjobsnotice.com/${post?.slug}/`}
   ogImage={post?.featured_image_url?.replace(
     "/upload/",
@@ -87,7 +94,6 @@ const shortName = getShortName(post);
   )}
 >
   <main class="post-page">
-
     <!-- PAGE INTRO -->
 
     <section class="page-intro-box">
@@ -112,11 +118,11 @@ const shortName = getShortName(post);
       </h1>
 
       {
-        post?.latest_status_date && (
+        post?.published_at && (
           <div class="page-post-date">
-            <strong>Post Date:</strong>
+            <strong>Last Updated:</strong>
 
-            {formatDate(post?.latest_status_date)}
+            {formatDate(post?.published_at)}
           </div>
         )
       }
@@ -139,540 +145,87 @@ const shortName = getShortName(post);
         {shortName}
       </h2>
 
-      <div class="site-name">
-        www.GovtJobsNotice.Com
-      </div>
+      <div class="site-name">www.govtjobsnotice.com</div>
 
       <div class="main-status">
-        {shortName} : Overview
+        {postTitle} : Overview
       </div>
     </section>
 
-    <!-- IMPORTANT DATES + APPLICATION FEE -->
-
-    {
-      (finalImportantDates?.length > 0 || finalApplicationFee) && (
-        <div class="two-column-grid">
-
-          {
-            finalImportantDates?.length > 0 && (
-              <section class="post-box">
-                <h2 class="pink-heading">
-                  Important Dates
-                </h2>
-
-                <div class="important-dates-wrapper">
-
-                  {
-                    finalImportantDates.map((item: any) => (
-                      <div
-                        class={`important-date-item ${
-                          item.highlight ? "active-date" : ""
-                        }`}
-                      >
-                        <span class="important-date-label">
-                          {item.label}
-                        </span>
-
-                        :
-
-                        <span class="important-date-value">
-                          {item.display_text}
-                        </span>
-                      </div>
-                    ))
-                  }
-
-                </div>
-              </section>
-            )
-          }
-
-          {
-            finalApplicationFee && (
-              <section class="post-box">
-
-                <h2 class="pink-heading">
-                  Application Fee
-                </h2>
-
-                <div class="important-dates-wrapper">
-
-                  {
-                    finalApplicationFee?.items?.map((item: any) => (
-                      <div class="important-date-item">
-
-                        <span class="important-date-label">
-                          {item.label}
-                        </span>
-
-                        :
-
-                        <span class="important-date-value">
-                          {item.amount}
-                        </span>
-
-                      </div>
-                    ))
-                  }
-
-                  {
-                    finalApplicationFee?.payment_modes?.length > 0 && (
-                      <div class="important-date-item">
-
-                        <span class="important-date-label">
-                          Payment Mode
-                        </span>
-
-                        :
-
-                        <span class="important-date-value">
-                          {finalApplicationFee.payment_modes.join(", ")}
-                        </span>
-
-                      </div>
-                    )
-                  }
-
-                  {
-                    finalApplicationFee?.note && (
-                      <div class="section-note">
-                        {finalApplicationFee.note}
-                      </div>
-                    )
-                  }
-
-                </div>
-              </section>
-            )
-          }
-
-        </div>
-      )
-    }
-
-    <!-- AGE LIMIT + TOTAL POSTS -->
-
-    {
-      (finalAgeLimit || overview?.total_posts) && (
-        <div class="four-grid">
-
-          {
-            finalAgeLimit && (
-              <section class="age-box">
-
-                <h2 class="green-heading">
-                  {finalAgeLimit?.title || "Age Limit"}
-                </h2>
-
-                <div class="important-dates-wrapper">
-
-                  {
-                    finalAgeLimit?.items?.map((item: any) => (
-                      <div class="important-date-item">
-
-                        <span class="important-date-label">
-                          {item.label}
-                        </span>
-
-                        :
-
-                        <span class="important-date-value">
-                          {item.value}
-                        </span>
-
-                      </div>
-                    ))
-                  }
-
-                  {
-                    finalAgeLimit?.relaxation && (
-                      <div class="section-note">
-                        {finalAgeLimit.relaxation}
-                      </div>
-                    )
-                  }
-
-                </div>
-              </section>
-            )
-          }
-
-          {
-            overview?.total_posts && (
-              <section class="total-post-box">
-
-                <h2 class="orange-heading">
-                  Total Posts
-                </h2>
-
-                <div class="total-post-number">
-                  {overview?.total_posts}
-                </div>
-
-              </section>
-            )
-          }
-
-        </div>
-      )
-    }
-
-    <!-- VACANCY DETAILS -->
-
-    {
-      finalVacancy && (
-        <section class="post-box section-gap">
-
-          <h2 class="blue-heading">
-            {shortName} : {finalVacancy?.title || "Vacancy Details"}
-          </h2>
-
-          <div class="editor-content">
-
-            {
-              finalVacancy?.sections?.map((section: any) => (
-                <Fragment>
-
-                  <h3>{section.title}</h3>
-
-                  <table>
-
-                    <thead>
-                      <tr>
-
-                        {
-                          section.columns?.map((column: any) => (
-                            <th>{column.label}</th>
-                          ))
-                        }
-
-                      </tr>
-                    </thead>
-
-                    <tbody>
-
-                      {
-                        section.rows?.map((row: any) => (
-                          <tr>
-
-                            {
-                              section.columns?.map((column: any) => (
-                                <td>{row[column.key]}</td>
-                              ))
-                            }
-
-                          </tr>
-                        ))
-                      }
-
-                    </tbody>
-
-                  </table>
-
-                </Fragment>
-              ))
-            }
-
-            {
-              finalVacancy?.note && (
-                <p class="section-note">
-                  {finalVacancy.note}
-                </p>
-              )
-            }
-
-          </div>
-        </section>
-      )
-    }
-
-    <!-- ELIGIBILITY -->
-
-    {
-      finalEligibility && (
-        <section class="post-box section-gap">
-
-          <h2 class="blue-heading">
-            {shortName} : {finalEligibility?.title || "Eligibility Criteria"}
-          </h2>
-
-          <div class="editor-content">
-
-            {
-              finalEligibility?.sections?.map((section: any) => (
-                <Fragment>
-
-                  <h3>{section.title}</h3>
-
-                  {
-                    section.type === "table" && (
-                      <table>
-
-                        <thead>
-                          <tr>
-
-                            {
-                              section.columns?.map((column: any) => (
-                                <th>{column.label}</th>
-                              ))
-                            }
-
-                          </tr>
-                        </thead>
-
-                        <tbody>
-
-                          {
-                            section.rows?.map((row: any) => (
-                              <tr>
-
-                                {
-                                  section.columns?.map((column: any) => (
-                                    <td>{row[column.key]}</td>
-                                  ))
-                                }
-
-                              </tr>
-                            ))
-                          }
-
-                        </tbody>
-
-                      </table>
-                    )
-                  }
-
-                  {
-                    section.type === "list" && (
-                      <ul>
-
-                        {
-                          section.items?.map((item: any) => (
-                            <li>{item}</li>
-                          ))
-                        }
-
-                      </ul>
-                    )
-                  }
-
-                </Fragment>
-              ))
-            }
-
-            {
-              finalEligibility?.note && (
-                <p class="section-note">
-                  {finalEligibility.note}
-                </p>
-              )
-            }
-
-          </div>
-        </section>
-      )
-    }
-
-    <!-- SALARY -->
-
-    {
-      post?.salary && (
-        <section class="post-box section-gap">
-
-          <h2 class="blue-heading">
-            Salary Details
-          </h2>
-
-          <div
-            class="editor-content"
-            set:html={post?.salary}
-          />
-
-        </section>
-      )
-    }
-
-    <!-- SELECTION PROCESS -->
-
-    {
-      finalSelectionProcess && (
-        <section class="post-box section-gap">
-
-          <h2 class="blue-heading">
-            {shortName} : {finalSelectionProcess?.title || "Selection Process"}
-          </h2>
-
-          <div class="editor-content">
-
-            {
-              finalSelectionProcess?.sections?.map((section: any) => (
-                <ul>
-
-                  {
-                    section.items?.map((item: any) => (
-                      <li>{item}</li>
-                    ))
-                  }
-
-                </ul>
-              ))
-            }
-
-            {
-              finalSelectionProcess?.note && (
-                <p class="section-note">
-                  {finalSelectionProcess.note}
-                </p>
-              )
-            }
-
-          </div>
-        </section>
-      )
-    }
-
-    <!-- HOW TO APPLY -->
-
-    {
-      finalHowToApply && (
-        <section class="post-box section-gap">
-
-          <h2 class="blue-heading">
-            {finalHowToApply?.title || "How To Apply"}
-          </h2>
-
-          <div class="editor-content">
-
-            <ul>
-
-              {
-                finalHowToApply?.steps?.map((item: any) => (
-                  <li>{item}</li>
-                ))
-              }
-
-            </ul>
-
-            {
-              finalHowToApply?.documents_required?.length > 0 && (
-                <Fragment>
-
-                  <h3>
-                    Required Documents
-                  </h3>
-
-                  <ul>
-
-                    {
-                      finalHowToApply.documents_required.map((doc: any) => (
-                        <li>{doc}</li>
-                      ))
-                    }
-
-                  </ul>
-
-                </Fragment>
-              )
-            }
-
-            {
-              finalHowToApply?.note && (
-                <p class="section-note">
-                  <strong>Note :</strong> {finalHowToApply.note}
-                </p>
-              )
-            }
-
-          </div>
-        </section>
-      )
-    }
-
-    <!-- IMPORTANT LINKS -->
-
-    {
-      finalImportantLinks?.length > 0 && (
-        <section class="post-box section-gap">
-
-          <h2 class="yellow-heading">
-            Important Links
-          </h2>
-
-          <div class="important-links-wrapper">
-
-            {
-              finalImportantLinks.map((item: any) => (
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="nofollow noopener noreferrer"
-                  class="important-link-item"
+    <!-- FIRST ROW -->
+
+    <div class="top-grid">
+      <!-- IMPORTANT DATES -->
+
+      {
+        importantDates?.length > 0 && (
+          <section class="post-box">
+            <h2 class="pink-heading">Important Dates</h2>
+
+            <div class="important-dates-wrapper">
+              {importantDates.map((item: any) => (
+                <div
+                  class={`important-date-item ${
+                    item?.ui?.highlight ? "active-date" : ""
+                  }`}
                 >
+                  <span class="important-date-label">{item.label}</span>:
+                  <span class="important-date-value">{item.display_text}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+        )
+      }
 
-                  <span class="important-link-label">
-                    {item.label}
-                  </span>
+      <!-- APPLICATION FEE -->
+      {applicationFee && <SectionRenderer section={applicationFee} />}
+    </div>
 
-                  <span class="important-link-action">
-                    Click Here
-                  </span>
+    <!-- SECOND ROW -->
 
-                </a>
-              ))
-            }
+    <div class="bottom-grid">
+      <!-- AGE LIMIT -->
 
-          </div>
-        </section>
-      )
-    }
+      {ageLimit && <SectionRenderer section={ageLimit} />}
 
-    <!-- FAQ -->
+      <!-- TOTAL POSTS -->
 
-    {
-      finalFaq?.length > 0 && (
-        <section class="post-box section-gap">
+      <section class="post-box">
+        <div class="orange-heading">Total Posts</div>
 
-          <h2 class="blue-heading">
-            Frequently Asked Questions (FAQs)
-          </h2>
+        <div class="total-post-number">
+          {post.total_posts}
+        </div>
+      </section>
+    </div>
 
-          <div class="faq-wrapper">
-
-            {
-              finalFaq.map((item: any) => (
-                <details class="faq-item">
-
-                  <summary class="faq-question">
-                    {item.question}
-                  </summary>
-
-                  <div class="faq-answer">
-                    {item.answer}
-                  </div>
-
-                </details>
-              ))
-            }
-
-          </div>
-        </section>
-      )
-    }
-
+    <!-- NORMAL SECTIONS -->
+{
+  normalSections.map(
+    (section: any) => (
+      <SectionRenderer
+        section={section}
+      />
+    )
+  )
+}
+{
+  importantLinks && (
+    <SectionRenderer
+      section={importantLinks}
+    />
+  )
+}
     <!-- POST SUGGESTIONS -->
 
-    <PostSuggestions
-      currentSlug={post?.slug}
-      category={post?.category}
-    />
+    <PostSuggestions currentSlug={post?.slug} category={post?.category} />
 
     <!-- FEATURED IMAGE -->
 
     {
       post?.featured_image_url && (
         <section class="bottom-featured-image-wrap">
-
           <img
             src={post.featured_image_url.replace(
               "/upload/",
@@ -683,7 +236,6 @@ const shortName = getShortName(post);
             loading="lazy"
             decoding="async"
           />
-
         </section>
       )
     }
@@ -691,16 +243,37 @@ const shortName = getShortName(post);
     <!-- DISCLAIMER -->
 
     <section class="disclaimer-box">
-
-      <strong>Disclaimer :</strong>
+      <strong> Disclaimer : </strong>
 
       Information regarding any exam form, result, answer key, admit card and
       recruitment updates published on GovtJobsNotice.Com are provided only for
       immediate informational purposes. Candidates are advised to verify all
       details through the official website and official notification before
       applying. GovtJobsNotice is not responsible for any inadvertent errors.
-
     </section>
-
   </main>
 </BaseLayout>
+
+<style>
+  .top-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .bottom-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .top-grid,
+    .bottom-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

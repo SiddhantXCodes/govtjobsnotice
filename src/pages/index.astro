@@ -4,14 +4,20 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import {
   getFeaturedPosts,
   getPostsByCategory,
+  getPostsByTag,
 } from "../lib/repositories/postRepository";
-import { getPostsByTag } from "../lib/repositories/postRepository";
+
 import SocialLinks from "../components/SocialLinks.astro";
-import { getFeedTitle } from "../lib/helpers/postHelpers";
 
-import { getClosingSoonPosts } from "../lib/helpers/getClosingSoonPosts";
-
-/* SEO SCHEMA */
+import {
+  getClosingSoonPosts,
+} from "../lib/helpers/getClosingSoonPosts";
+import {
+  getFeedTitle
+} from "../lib/helpers/postHelpers";
+/* =========================================
+   SEO SCHEMA
+========================================= */
 
 const schema = {
   "@context": "https://schema.org",
@@ -28,40 +34,100 @@ const schema = {
   potentialAction: {
     "@type": "SearchAction",
 
-    target: "https://govtjobsnotice.com/search?q={search_term_string}",
+    target:
+      "https://govtjobsnotice.com/search?q={search_term_string}",
 
-    "query-input": "required name=search_term_string",
+    "query-input":
+      "required name=search_term_string",
   },
 };
 
-/* FETCH POSTS */
+/* =========================================
+   FETCH POSTS
+========================================= */
 
-const featuredPosts = await getFeaturedPosts(8);
+const featuredPosts =
+  await getFeaturedPosts(8);
 
-const latestJobs = await getPostsByCategory("latest-jobs", 10);
+const latestJobs =
+  await getPostsByCategory(
+    "latest-jobs",
+    10
+  );
 
-const results = await getPostsByCategory("results", 10);
+const results =
+  await getPostsByCategory(
+    "results",
+    10
+  );
 
-const admitCards = await getPostsByCategory("admit-card", 10);
+const admitCards =
+  await getPostsByCategory(
+    "admit-card",
+    10
+  );
 
-const answerKeys = await getPostsByCategory("answer-key", 10);
+const answerKeys =
+  await getPostsByCategory(
+    "answer-key",
+    10
+  );
 
-const admissions = await getPostsByCategory("admission", 10);
+const admissions =
+  await getPostsByCategory(
+    "admission",
+    10
+  );
 
-const syllabus = await getPostsByCategory("syllabus", 10);
+const syllabus =
+  await getPostsByCategory(
+    "syllabus",
+    10
+  );
 
-const technicalJobs = await getPostsByTag("tech", 10);
-const psuJobs = await getPostsByTag("psu", 10);
-const allPostsForDeadlines = [
-  ...new Map(
-    [...latestJobs, ...featuredPosts].map((post) => [post.slug, post]),
-  ).values(),
-];
+const technicalJobs =
+  await getPostsByTag(
+    "tech",
+    10
+  );
 
-const closingSoonPosts = getClosingSoonPosts(allPostsForDeadlines);
-/* HOME SECTIONS */
+const psuJobs =
+  await getPostsByTag(
+    "psu",
+    10
+  );
+
+/* =========================================
+   CLOSING SOON POSTS
+========================================= */
+
+const allPostsForDeadlines =
+  [
+    ...new Map(
+
+      [
+        ...latestJobs,
+        ...featuredPosts,
+
+      ].map((post) => [
+        post.slug,
+        post,
+      ])
+
+    ).values(),
+  ];
+
+const closingSoonPosts =
+  getClosingSoonPosts(
+    allPostsForDeadlines
+  );
+
+/* =========================================
+   HOME SECTIONS
+========================================= */
 
 const sections = [
+
   {
     title: "Latest Govt Jobs",
     slug: "latest-jobs",
@@ -89,18 +155,21 @@ const sections = [
     type: "category",
     posts: answerKeys,
   },
+
   {
     title: "Technical Jobs",
     slug: "tech",
     type: "tag",
     posts: technicalJobs,
   },
+
   {
     title: "PSU Jobs",
     slug: "psu",
     type: "tag",
     posts: psuJobs,
   },
+
   {
     title: "Admission",
     slug: "admission",
@@ -114,9 +183,12 @@ const sections = [
     type: "category",
     posts: syllabus,
   },
+
 ];
 
-/* FEATURED COLORS */
+/* =========================================
+   FEATURED COLORS
+========================================= */
 
 const colors = [
   "red",
@@ -128,6 +200,7 @@ const colors = [
   "darkgreen",
   "sky",
 ];
+
 ---
 
 <BaseLayout
@@ -137,124 +210,241 @@ const colors = [
   keywords="govt jobs, government jobs, latest govt jobs, sarkari result, govtjobsnotice, govt jobs notice, admit card, results, answer key, recruitment, railway jobs, SSC jobs, banking jobs, UPSC jobs, police jobs, defence jobs, online form, govt vacancy"
   schema={schema}
 >
+
   <main class="home-page">
+
     <!-- HERO -->
+
     <section class="hero-section">
+
       <div class="hero-box">
+
         <h1 class="hero-heading">
-          Latest Govt Jobs, Sarkari Result & Admit Card Updates
+          Latest Govt Jobs,
+          Sarkari Result &
+          Admit Card Updates
         </h1>
 
         <div class="hero-top-line">
-          Railway Jobs • SSC • UPSC • Banking • Police • Defence • Teaching •
-          State Government Jobs
+          Railway Jobs • SSC • UPSC •
+          Banking • Police • Defence •
+          Teaching • State Government Jobs
         </div>
 
         <p class="hero-description">
-          Get fastest updates for latest government jobs, results, admit cards,
-          answer keys and recruitment notifications across India.
+          Get fastest updates for latest
+          government jobs, results,
+          admit cards, answer keys and
+          recruitment notifications
+          across India.
         </p>
 
         <div class="hero-buttons">
           <SocialLinks />
         </div>
+
       </div>
+
     </section>
 
-    <!-- Application Closing Soon -->
-    <section class="closing-section">
-      <div class="closing-header">Application Closing Soon</div>
+    <!-- APPLICATION CLOSING SOON -->
 
-      <div class="closing-columns">
-        {
-          closingSoonPosts
-            .filter(Boolean)
-            .slice(0, 9)
-            .map((item: any) => (
-              <div class="closing-line">
-                <a href={`/${item.post.slug}/`} class="closing-link">
-                  • {item.post.title}
-                  <span class="closing-days">
-                    {item.diffDays === 0
-                      ? " - Form Closes Today"
-                      : ` - Only ${item.diffDays} Days Left`}
-                  </span>
-                </a>
-              </div>
-            ))
-        }
-      </div>
-      <div class="closing-view-all">
-        <a href="/last-date/"> View All → </a>
-      </div>
-    </section>
+    {
+      closingSoonPosts?.length > 0 && (
+        <section class="closing-section">
+
+          <div class="closing-header">
+            Application Closing Soon
+          </div>
+
+          <div class="closing-columns">
+
+            {
+              closingSoonPosts
+                .filter(Boolean)
+                .slice(0, 9)
+                .map((item: any) => (
+
+                  <div class="closing-line">
+
+                    <a
+                      href={`/${item.post.slug}/`}
+                      class="closing-link"
+                    >
+
+             • {getFeedTitle(item.post)}
+
+                      <span class="closing-days">
+
+                        {
+                          item.diffDays === 0
+                            ? " - Form Closes Today"
+                            : ` - Only ${item.diffDays} Days Left`
+                        }
+
+                      </span>
+
+                    </a>
+
+                  </div>
+
+                ))
+            }
+
+          </div>
+
+          <div class="closing-view-all">
+
+            <a href="/last-date/">
+              View All →
+            </a>
+
+          </div>
+
+        </section>
+      )
+    }
 
     <!-- FEATURED POSTS -->
-    <section class="featured-grid">
-      {
-        featuredPosts.map((post, index) => (
-          <a
-            href={`/${post.slug}/`}
-            class={`featured-card ${colors[index % colors.length]}`}
-          >
-            <h2 class="featured-title">{getFeedTitle(post)}</h2>
-          </a>
-        ))
-      }
-    </section>
+
+    {
+      featuredPosts?.length > 0 && (
+        <section class="featured-grid">
+
+          {
+            featuredPosts.map(
+              (post, index) => (
+
+                <a
+                  href={`/${post.slug}/`}
+                  class={`featured-card ${
+                    colors[
+                      index % colors.length
+                    ]
+                  }`}
+                >
+
+                  <h2 class="featured-title">
+                    {getFeedTitle(post)}
+                  </h2>
+
+                </a>
+
+              )
+            )
+          }
+
+        </section>
+      )
+    }
 
     <!-- HOME SECTIONS -->
+
     <section class="home-sections">
+
       {
-        sections.map((section) => (
-          <section class="home-card">
-            <div class="home-card-heading">
-              <h2>{section.title}</h2>
-            </div>
+        sections.map(
+          (section) => (
 
-            <ul class="home-list">
-              {section.posts.map((post) => (
-                <li class="home-list-item">
-                  <a href={`/${post.slug}/`} class="home-list-link">
-                    {getFeedTitle(post)}
+            section?.posts?.length > 0 && (
+
+              <section class="home-card">
+
+                <div class="home-card-heading">
+
+                  <h2>
+                    {section.title}
+                  </h2>
+
+                </div>
+
+                <ul class="home-list">
+
+                  {
+                    section.posts.map(
+                      (post: any) => (
+
+                        <li class="home-list-item">
+
+                          <a
+                            href={`/${post.slug}/`}
+                            class="home-list-link"
+                          >
+
+                            {
+                              getFeedTitle(post)
+                            }
+
+                          </a>
+
+                        </li>
+
+                      )
+                    )
+                  }
+
+                </ul>
+
+                <div class="view-more-wrap">
+
+                  <a
+                    href={
+                      section.type === "tag"
+                        ? `/tag/${section.slug}/`
+                        : `/category/${section.slug}/`
+                    }
+                    class="view-more-btn"
+                  >
+
+                    View More →
+
                   </a>
-                </li>
-              ))}
-            </ul>
 
-            <div class="view-more-wrap">
-              <a
-                href={
-                  section.type === "tag"
-                    ? `/tag/${section.slug}/`
-                    : `/category/${section.slug}/`
-                }
-                class="view-more-btn"
-              >
-                View More →
-              </a>
-            </div>
-          </section>
-        ))
+                </div>
+
+              </section>
+
+            )
+
+          )
+        )
       }
+
     </section>
 
-    <!-- SEO CONTENT BLOCK -->
+    <!-- SEO CONTENT -->
+
     <section class="seo-content-section">
-      <h2>Latest Sarkari Result and Government Job Notifications</h2>
+
+      <h2>
+        Latest Sarkari Result and
+        Government Job Notifications
+      </h2>
 
       <p>
-        GovtJobsNotice provides latest government job notifications, Sarkari
-        Result updates, admit cards, answer keys, syllabus, admissions and
-        recruitment information for SSC, Railway, UPSC, Banking, Police,
-        Defence, Teaching and State Government Jobs.
+        GovtJobsNotice provides latest
+        government job notifications,
+        Sarkari Result updates,
+        admit cards, answer keys,
+        syllabus, admissions and
+        recruitment information for
+        SSC, Railway, UPSC, Banking,
+        Police, Defence, Teaching and
+        State Government Jobs.
       </p>
 
       <p>
-        Candidates can check latest online forms, eligibility, important dates,
-        exam patterns, selection process, results and recruitment notifications
-        for all major government exams across India.
+        Candidates can check latest
+        online forms, eligibility,
+        important dates, exam patterns,
+        selection process, results and
+        recruitment notifications
+        for all major government exams
+        across India.
       </p>
+
     </section>
+
   </main>
+
 </BaseLayout>

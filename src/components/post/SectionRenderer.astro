@@ -1,0 +1,144 @@
+---
+import PostSuggestions from "../PostSuggestions.astro";
+
+const { section } = Astro.props;
+
+/* =========================================
+   HELPERS
+========================================= */
+
+const hasNotes = Array.isArray(section?.note) && section.note.length > 0;
+
+let headingClass = "blue-heading";
+
+if (section?.title === "Application Fee") {
+  headingClass = "pink-heading";
+} else if (section?.title === "Age Limit") {
+  headingClass = "green-heading";
+} else {
+  headingClass = `${section?.theme || "blue"}-heading`;
+}
+---
+
+<section
+  class={`post-box ${section?.variant === "info_card" ? "" : "section-gap"}`}
+>
+  {section?.title && <div class={headingClass}>{section.title}</div>}
+
+  <!-- =====================================
+       LIST SECTION
+  ====================================== -->
+
+  {
+    section.type === "list" && (
+      <div class="important-dates-wrapper">
+        {section.items?.map((item: any) => (
+          <div class="important-date-item">
+            <span class="important-date-label">{item.label}</span>:
+            <span class="important-date-value">
+              {item.value || item.amount}
+            </span>
+          </div>
+        ))}
+
+        {hasNotes && (
+          <div class="section-note">
+            {section.note.map((note: string) => (
+              <p>{note}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  <!-- =====================================
+       TABLE SECTION
+  ====================================== -->
+
+  {
+    section.type === "table" && (
+      <div class="editor-content">
+        <table
+          class={
+            section.title === "Important Links" ? "important-links-table" : ""
+          }
+        >
+          {section.variant !== "links_table" && (
+            <thead>
+              <tr>
+                {section.columns?.map((column: string) => (
+                  <th>{column}</th>
+                ))}
+              </tr>
+            </thead>
+          )}
+
+          <tbody>
+            {section.rows?.map((row: any[]) => (
+              <tr>
+                {row.map((cell: any) => (
+                  <td>
+                    {typeof cell === "string" && cell.startsWith("http") ? (
+                      <a
+                        href={cell}
+                        target="_blank"
+                        rel="nofollow noopener noreferrer"
+                      >
+                        Click Here
+                      </a>
+                    ) : (
+                      cell
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+
+        {hasNotes && (
+          <div class="section-note">
+            {section.note.map((note: string) => (
+              <p>{note}</p>
+            ))}
+          </div>
+        )}
+      </div>
+    )
+  }
+
+  <!-- =====================================
+       STEPS SECTION
+  ====================================== -->
+
+  {
+    section.type === "steps" && (
+      <div class="editor-content">
+        <ul>
+          {section.steps?.map((step: string) => (
+            <li>{step}</li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  <!-- =====================================
+       FAQ SECTION
+  ====================================== -->
+
+  {
+    section.type === "faq" && (
+      <div class="faq-wrapper">
+        {section.items?.map((item: any) => (
+          <details class="faq-item">
+            <summary class="faq-question">{item.question}</summary>
+
+            <div class="faq-answer">{item.answer}</div>
+          </details>
+        ))}
+      </div>
+    )
+  }
+</section>

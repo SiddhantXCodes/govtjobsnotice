@@ -66,7 +66,7 @@ export async function getExamPosts(
             .eq("status", "published")
             .eq("related_exam", examId)
             .order(
-                "latest_status_date",
+                "published_at",
                 {
                     ascending: false
                 }

@@ -167,9 +167,9 @@ const schema = {
               <td>
 
                 {
-                  post.latest_status_date &&
+                  post.published_at &&
                   new Date(
-                    post.latest_status_date
+                    post.published_at
                   ).toLocaleDateString(
                     "en-IN",
                     {

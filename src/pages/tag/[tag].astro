@@ -1,13 +1,9 @@
 ---
-import BaseLayout
-  from "../../layouts/BaseLayout.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 
-import Breadcrumbs
-  from "../../components/Breadcrumbs.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-import {
-  getAllPosts
-} from "../../lib/repositories/postRepository";
+import { getAllPosts,  getPostsByTag } from "../../lib/repositories/postRepository";
 
 export async function getStaticPaths() {
 
@@ -16,136 +12,47 @@ export async function getStaticPaths() {
 
   const tags = [
     ...new Set(
+      posts.flatMap((post: any) => {
 
-      posts.flatMap((post:any)=>{
-
-        if(!post.tags){
+        if (
+          !post.tags ||
+          !Array.isArray(post.tags)
+        ) {
           return [];
         }
 
-        /* ARRAY */
-
-        if(Array.isArray(post.tags)){
-
-          return post.tags.map(
-            (tag:string)=>
-
-              tag
-                .trim()
-                .toLowerCase()
-                .replace(/\s+/g,"-")
-
-          );
-
-        }
-
-        /* JSON STRING */
-
-        try{
-
-          const parsed =
-            JSON.parse(post.tags);
-
-          if(Array.isArray(parsed)){
-
-            return parsed.map(
-              (tag:string)=>
-
-                tag
-                  .trim()
-                  .toLowerCase()
-                  .replace(/\s+/g,"-")
-
-            );
-
-          }
-
-        }catch(err){
-
-          console.error(err);
-
-        }
-
-        return [];
+        return post.tags.map(
+          (tag: string) =>
+            tag
+              .trim()
+              .toLowerCase()
+              .replace(/\s+/g, "-")
+        );
 
       })
-
     )
   ];
 
-  return tags.map((tag)=>({
 
-    params:{
-      tag
-    }
 
-  }));
+  return tags.map(
+    (tag) => ({
+      params: { tag }
+    })
+  );
 
 }
-
-const { tag } =
-  Astro.params;
-
-const allPosts =
-  await getAllPosts();
-
-/* FILTER POSTS */
+const { tag } = Astro.params;
 
 const posts =
-  allPosts.filter((post:any)=>{
+  await getPostsByTag(
+    tag || "",
+    100
+  );
 
-    if(!post.tags){
-      return false;
-    }
-
-    let tagsArray:any[] = [];
-
-    /* ARRAY */
-
-    if(Array.isArray(post.tags)){
-
-      tagsArray =
-        post.tags;
-
-    }
-
-    /* JSON STRING */
-
-    else{
-
-      try{
-
-        tagsArray =
-          JSON.parse(post.tags);
-
-      }catch{
-
-        return false;
-
-      }
-
-    }
-
-    return tagsArray.some(
-      (item:string)=>
-
-        item
-          .trim()
-          .toLowerCase()
-          .replace(/\s+/g,"-")
-          === tag
-
-    );
-
-  });
-
-const tagTitle =
-  tag
-    ?.replaceAll("-"," ")
-    .replace(
-      /\b\w/g,
-      (c:string)=>c.toUpperCase()
-    );
+const tagTitle = tag
+  ?.replaceAll("-", " ")
+  .replace(/\b\w/g, (c: string) => c.toUpperCase());
 ---
 
 <BaseLayout
@@ -153,175 +60,98 @@ const tagTitle =
   description={`${tagTitle} government jobs, admit cards, results, answer keys and latest recruitment updates`}
   canonical={`/tag/${tag}/`}
 >
+  <main class="page-container">
+    <!-- HEADER -->
 
-<main class="page-container">
+    <section class="page-header common-box">
+      <Breadcrumbs
+        items={[
+          {
+            label: `${tagTitle} Jobs`,
+          },
+        ]}
+      />
 
-  <!-- HEADER -->
+      <h1 class="page-title">
+        {tagTitle} Jobs
+      </h1>
 
-  <section class="page-header common-box">
+      <div class="page-count">
+        Total Posts :
+        {posts.length}
+      </div>
 
-    <Breadcrumbs
-      items={[
-        {
-          label:`${tagTitle} Jobs`
-        }
-      ]}
-    />
+      <p class="page-description">
+        Get latest {tagTitle.toLowerCase()} government jobs, recruitment notifications,
+        admit cards, results, answer keys, exam dates and official updates from various
+        central and state government departments.
+      </p>
+    </section>
 
-    <h1 class="page-title">
+    <!-- TABLE -->
 
-      {tagTitle} Jobs
+    <section class="table-wrap">
+      <table class="common-table">
+        <thead>
+          <tr>
+            <th> Post Name </th>
 
-    </h1>
+            <th> Category </th>
 
-    <div class="page-count">
+            <th> Updated Date </th>
+          </tr>
+        </thead>
 
-      Total Posts :
-      {posts.length}
+        <tbody>
+          {
+            posts.map((post) => (
+              <tr>
+                <td>
+                  <a href={`/${post.slug}/`} class="table-link">
+                    {post.title}
+                  </a>
+                </td>
 
-    </div>
+                <td>
+                  {post.category
+                    ?.replaceAll("-", " ")
+                    .replace(/\b\w/g, (c: any) => c.toUpperCase())}
+                </td>
 
-    <p class="page-description">
+                <td>
+                  {post.published_at
+                    ? new Date(post.published_at).toLocaleDateString("en-IN", {
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
+                      })
+                    : "-"}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </section>
 
-      Get latest {tagTitle.toLowerCase()} government jobs,
-      recruitment notifications,
-      admit cards,
-      results,
-      answer keys,
-      exam dates and official updates
-      from various central and state government departments.
+    <!-- SEO CONTENT -->
 
-    </p>
+    <section class="seo-box common-box">
+      <h2>
+        Latest {tagTitle} Government Jobs
+      </h2>
 
-  </section>
+      <p>
+        GovtJobsNotice provides latest
+        {tagTitle.toLowerCase()} government jobs, recruitment notifications, admit
+        cards, results, answer keys, syllabus and official announcements.
+      </p>
 
-  <!-- TABLE -->
-
-  <section class="table-wrap">
-
-    <table class="common-table">
-
-      <thead>
-
-        <tr>
-
-          <th>
-            Post Name
-          </th>
-
-          <th>
-            Category
-          </th>
-
-          <th>
-            Updated Date
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <tbody>
-
-        {
-          posts.map((post)=>(
-
-            <tr>
-
-              <td>
-
-                <a
-                  href={`/${post.slug}/`}
-                  class="table-link"
-                >
-
-                  {post.title}
-
-                </a>
-
-              </td>
-
-              <td>
-
-                {
-                  post.category
-                    ?.replaceAll("-"," ")
-                    .replace(
-                      /\b\w/g,
-                      (c:any)=>c.toUpperCase()
-                    )
-                }
-
-              </td>
-
-              <td>
-
-                {
-                  post.latest_status_date &&
-                  new Date(
-                    post.latest_status_date
-                  ).toLocaleDateString(
-                    "en-IN",
-                    {
-                      day:"numeric",
-                      month:"short",
-                      year:"numeric"
-                    }
-                  )
-                }
-
-              </td>
-
-            </tr>
-
-          ))
-        }
-
-      </tbody>
-
-    </table>
-
-  </section>
-
-  <!-- SEO CONTENT -->
-
-  <section class="seo-box common-box">
-
-    <h2>
-
-      Latest {tagTitle} Government Jobs
-
-    </h2>
-
-    <p>
-
-      GovtJobsNotice provides latest
-      {tagTitle.toLowerCase()} government jobs,
-      recruitment notifications,
-      admit cards,
-      results,
-      answer keys,
-      syllabus and official announcements.
-
-    </p>
-
-    <p>
-
-      Candidates can check exam dates,
-      application forms,
-      eligibility,
-      results and official notifications
-      for SSC,
-      Railway,
-      Banking,
-      UPSC,
-      Defence,
-      PSU and State Government recruitments.
-
-    </p>
-
-  </section>
-
-</main>
-
+      <p>
+        Candidates can check exam dates, application forms, eligibility, results
+        and official notifications for SSC, Railway, Banking, UPSC, Defence, PSU
+        and State Government recruitments.
+      </p>
+    </section>
+  </main>
 </BaseLayout>

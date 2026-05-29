@@ -14,6 +14,7 @@ import {
   getClosingSoonPosts
 } from "../lib/helpers/getClosingSoonPosts";
 
+import "../styles/pages/last-date.css";
 /* FETCH POSTS */
 
 const latestJobs =
@@ -42,30 +43,25 @@ const allPosts = [
 const closingSoonPosts =
   getClosingSoonPosts(allPosts);
 
-/* DATE FORMAT */
+/* FILTER VALID POSTS */
+const validPosts =
+  closingSoonPosts.filter(
+    (item) => {
 
-const formatDate = (date:any)=>{
+      return Boolean(
+        item?.post
+          ?.important_dates
+          ?.application_end
+          ?.date
+      );
 
-  if(!date){
-    return "-";
-  }
-
-  return new Date(date)
-    .toLocaleDateString(
-      "en-IN",
-      {
-        day:"numeric",
-        month:"short",
-        year:"numeric"
-      }
-    );
-
-};
+    }
+  );
 ---
 
 <BaseLayout
   title="Application Closing Soon | GovtJobsNotice"
-  description="Check latest government jobs and application forms closing soon with last date and days remaining."
+  description="Check latest government jobs and application forms closing soon with application last dates."
 >
 
 <main class="page-container">
@@ -91,7 +87,7 @@ const formatDate = (date:any)=>{
     <div class="page-count">
 
       Total Posts :
-      {closingSoonPosts.length}
+      {validPosts.length}
 
     </div>
 
@@ -99,8 +95,9 @@ const formatDate = (date:any)=>{
 
       Check latest government job applications,
       online forms and recruitment notifications
-      closing soon. Candidates should complete
-      their application forms before the last date.
+      with upcoming application last dates for
+      SSC, Railway, Banking, UPSC, Defence,
+      PSU and State Government recruitments.
 
     </p>
 
@@ -124,10 +121,6 @@ const formatDate = (date:any)=>{
             Last Date
           </th>
 
-          <th>
-            Days Left
-          </th>
-
         </tr>
 
       </thead>
@@ -135,46 +128,41 @@ const formatDate = (date:any)=>{
       <tbody>
 
         {
-          closingSoonPosts.map((item:any)=>(
+          validPosts.map((item:any)=>(
 
             <tr>
+        <td>
+          <a href={`/${item.post.slug}/`} class="table-link" >
+            {item.post.title}
+          </a>
 
-              <!-- TITLE -->
+          {
+            item.diffDays >= 0 && (
+              <span class="last-date-urgency">
+                (
+                  {
+                    item.diffDays === 0
+                      ? "Closing Today"
+                      : `${item.diffDays} Days Left`
+                  }
+                )
 
-              <td>
+              </span>
 
-                <a
-                  href={`/${item.post.slug}/`}
-                  class="table-link"
-                >
+            )
+          }
 
-                  {item.post.title}
-
-                </a>
-
-              </td>
+        </td>
 
               <!-- LAST DATE -->
 
               <td>
-
-                {
-                  formatDate(
-                    item.post.application_end_date
-                  )
-                }
-
-              </td>
-
-              <!-- DAYS LEFT -->
-
-              <td>
-
-                {
-                  item.diffDays === 0
-                    ? "Closing Today"
-                    : `${item.diffDays} Days Left`
-                }
+                  {
+                    item.post
+                      ?.important_dates
+                      ?.application_end
+                      ?.display_text || "-"
+                  }
 
               </td>
 
@@ -202,18 +190,19 @@ const formatDate = (date:any)=>{
     <p>
 
       GovtJobsNotice provides latest government
-      job notifications and online forms that are
-      closing soon for SSC, Railway, Banking,
-      UPSC, Defence, PSU and State Government jobs.
+      job notifications and online forms with
+      upcoming application last dates for SSC,
+      Railway, Banking, UPSC, Defence, PSU and
+      State Government jobs.
 
     </p>
 
     <p>
 
-      Candidates should regularly check the
-      application last date, eligibility,
-      notification details and official updates
-      before applying online.
+      Candidates should regularly check
+      application last dates, eligibility,
+      important notifications and official
+      announcements before applying online.
 
     </p>
 

@@ -736,7 +736,49 @@ vertical-align:middle;
 line-height:1.7;
 word-break:break-word
 }
+/* IMPORTANT LINKS TABLE */
 
+.important-links-table {
+
+  background: #fff799;
+
+}
+
+.important-links-table th {
+
+  background: #fff799;
+
+  text-align: center;
+
+  font-weight: 700;
+
+}
+
+.important-links-table td {
+
+  background: #fff799;
+
+  text-align: center;
+
+}
+
+/* BLUE LINKS */
+
+.important-links-table a {
+
+  color: #0047ff;
+
+  font-weight: 700;
+
+  text-decoration: none;
+
+}
+
+.important-links-table a:hover {
+
+  text-decoration: underline;
+
+}
 /* =========================================
    LISTS
 ========================================= */

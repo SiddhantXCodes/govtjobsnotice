@@ -1,96 +1,38 @@
+
+/* =========================================
+   FEED TITLE
+========================================= */
+
 export function getFeedTitle(post: any) {
 
-  const overview =
-    typeof post?.posts_data_json === "string"
-      ? JSON.parse(post.posts_data_json)?.overview
-      : post?.posts_data_json?.overview;
-
   const shortName =
-    overview?.short_name ||
-    overview?.short_title ||
+    post?.feed_title ||
+    post?.overview?.organization?.short_name ||
+    post?.overview?.post_name ||
     post?.title ||
     "";
 
-  let currentStage = "";
-
-  // CASE 1: object
-  if (
-    post?.current_stage &&
-    typeof post.current_stage === "object"
-  ) {
-    currentStage =
-     
-      post.current_stage.value ||
-      "";
-  }
-
-  // CASE 2: string
-  else if (
-    typeof post?.current_stage === "string"
-  ) {
-    currentStage = post.current_stage;
-  }
-
   const totalPosts =
-    overview?.total_posts;
+    post?.total_posts;
 
- let title = shortName;
+  let title = shortName;
 
-if (
-  totalPosts &&
-  totalPosts !== "Not Applicable"
-) {
-  title += ` (${totalPosts} Posts)`;
-}
+  if (
+    totalPosts &&
+    totalPosts !== "Not Applicable"
+  ) {
 
-if (currentStage) {
-  title += ` - ${currentStage}`;
-}
+    title += ` (${totalPosts} Posts)`;
+
+  }
+
+  if (post?.current_stage) {
+
+    title += ` - ${post.current_stage}`;
+
+  }
 
   return title.trim();
-}
-/*===================================
-   SAFE POST DATA PARSER
-========================================= */
-
-export function parsePostData(post: any) {
-
-  try {
-
-    return typeof post?.posts_data_json === "string"
-      ? JSON.parse(post.posts_data_json)
-      : post?.posts_data_json || {};
-
-  } catch (error) {
-
-    return {};
-
-  }
-
-}
-
-/* =========================================
-   OVERVIEW
-========================================= */
-
-export function getOverview(post: any) {
-
-  return parsePostData(post)?.overview || {};
-
-}
-
-/* =========================================
-   SHORT NAME
-========================================= */
-
-export function getShortName(post: any) {
-
-  return (
-    getOverview(post)?.short_name
-    || getOverview(post)?.title
-    || post?.title
-    || ""
-  );
 
 }
 
@@ -98,13 +40,18 @@ export function getShortName(post: any) {
    SEO TITLE
 ========================================= */
 
-export function getSeoTitle(post: any) {
+export function getSeoTitle(
+  post: any
+) {
 
   return (
-    getOverview(post)?.seo?.title
-    || getOverview(post)?.title
-    || post?.title
-    || ""
+
+    post?.overview?.seo?.title ||
+
+    post?.title ||
+
+    ""
+
   );
 
 }
@@ -113,12 +60,55 @@ export function getSeoTitle(post: any) {
    SEO DESCRIPTION
 ========================================= */
 
-export function getSeoDescription(post: any) {
+export function getSeoDescription(
+  post: any
+) {
 
   return (
-    getOverview(post)?.seo?.description
-    || post?.excerpt
-    || ""
+
+    post?.overview?.seo?.description ||
+
+    post?.excerpt ||
+
+    ""
+
+  );
+
+}
+
+/* =========================================
+   ORGANIZATION
+========================================= */
+
+export function getOrganization(
+  post: any
+) {
+
+  return (
+    post?.overview?.organization ||
+    {}
+  );
+
+}
+
+/* =========================================
+   SHORT NAME
+========================================= */
+
+export function getShortName(
+  post: any
+) {
+
+  return (
+
+    post?.overview?.organization?.short_name ||
+
+    post?.overview?.organization?.name ||
+
+    post?.title ||
+
+    ""
+
   );
 
 }
@@ -127,105 +117,44 @@ export function getSeoDescription(post: any) {
    IMPORTANT DATES
 ========================================= */
 
-export function getImportantDates(post: any) {
-
-  return (
-    parsePostData(post)?.important_dates
-    || []
-  );
-
-}
-
-/* =========================================
-   SINGLE IMPORTANT DATE
-========================================= */
-
-export function getImportantDate(
-  post: any,
-  key: string
+export function getImportantDates(
+  post: any
 ) {
 
-  return getImportantDates(post)
-    .find(
-      (item: any) => item.key === key
-    );
-
-}
-
-/* =========================================
-   APPLICATION START DATE
-========================================= */
-
-export function getApplicationStartDate(post: any) {
-
-  return getImportantDate(
-    post,
-    "apply_start"
+  return Object.values(
+    post?.important_dates || {}
   );
 
 }
 
 /* =========================================
-   APPLICATION END DATE
+   SECTIONS
 ========================================= */
 
-export function getApplicationEndDate(post: any) {
+export function getSections(
+  post: any
+) {
 
-  return getImportantDate(
-    post,
-    "last_date"
+  return (
+    post?.sections || []
   );
 
 }
 
 /* =========================================
-   EXAM DATE
+   SECTION BY TITLE
 ========================================= */
 
-export function getExamDate(post: any) {
+export function getSectionByTitle(
+  post: any,
+  title: string
+) {
 
-  return getImportantDate(
-    post,
-    "exam_date"
-  );
-
-}
-
-/* =========================================
-   RESULT DATE
-========================================= */
-
-export function getResultDate(post: any) {
-
-  return getImportantDate(
-    post,
-    "result"
-  );
-
-}
-
-/* =========================================
-   ADMIT CARD DATE
-========================================= */
-
-export function getAdmitCardDate(post: any) {
-
-  return getImportantDate(
-    post,
-    "admit_card"
-  );
-
-}
-
-/* =========================================
-   ANSWER KEY DATE
-========================================= */
-
-export function getAnswerKeyDate(post: any) {
-
-  return getImportantDate(
-    post,
-    "answer_key"
+  return (
+    post?.sections?.find(
+      (section: any) =>
+        section.title === title
+    ) || null
   );
 
 }
@@ -234,11 +163,13 @@ export function getAnswerKeyDate(post: any) {
    APPLICATION FEE
 ========================================= */
 
-export function getApplicationFee(post: any) {
+export function getApplicationFee(
+  post: any
+) {
 
   return (
-    parsePostData(post)?.application_fee
-    || null
+    post?.application_fee ||
+    null
   );
 
 }
@@ -247,63 +178,13 @@ export function getApplicationFee(post: any) {
    AGE LIMIT
 ========================================= */
 
-export function getAgeLimit(post: any) {
+export function getAgeLimit(
+  post: any
+) {
 
   return (
-    parsePostData(post)?.age_limit
-    || null
-  );
-
-}
-
-/* =========================================
-   VACANCIES
-========================================= */
-
-export function getVacancies(post: any) {
-
-  return (
-    parsePostData(post)?.vacancies
-    || null
-  );
-
-}
-
-/* =========================================
-   ELIGIBILITY
-========================================= */
-
-export function getEligibility(post: any) {
-
-  return (
-    parsePostData(post)?.eligibility
-    || null
-  );
-
-}
-
-/* =========================================
-   SELECTION PROCESS
-========================================= */
-
-export function getSelectionProcess(post: any) {
-
-  return (
-    parsePostData(post)?.selection_process
-    || null
-  );
-
-}
-
-/* =========================================
-   HOW TO APPLY
-========================================= */
-
-export function getHowToApply(post: any) {
-
-  return (
-    parsePostData(post)?.how_to_apply
-    || null
+    post?.age_limit ||
+    null
   );
 
 }
@@ -312,11 +193,13 @@ export function getHowToApply(post: any) {
    IMPORTANT LINKS
 ========================================= */
 
-export function getImportantLinks(post: any) {
+export function getImportantLinks(
+  post: any
+) {
 
   return (
-    parsePostData(post)?.important_links
-    || []
+    post?.important_links ||
+    null
   );
 
 }
@@ -325,11 +208,28 @@ export function getImportantLinks(post: any) {
    FAQ
 ========================================= */
 
-export function getFaq(post: any) {
+export function getFaq(
+  post: any
+) {
+
+  return getSectionByTitle(
+    post,
+    "FAQ"
+  );
+
+}
+
+/* =========================================
+   TOTAL POSTS
+========================================= */
+
+export function getTotalPosts(
+  post: any
+) {
 
   return (
-    parsePostData(post)?.faq
-    || []
+    post?.total_posts ||
+    null
   );
 
 }

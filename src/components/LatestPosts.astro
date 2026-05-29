@@ -13,8 +13,8 @@ const latestPosts = allPosts
   .filter((post) => post.slug !== currentSlug)
   .sort(
     (a, b) =>
-      new Date(b.latest_status_date).getTime() -
-      new Date(a.latest_status_date).getTime(),
+      new Date(b.published_at).getTime() -
+      new Date(a.published_at).getTime(),
   )
   .slice(0, 8);
 

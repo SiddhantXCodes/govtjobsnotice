@@ -8,6 +8,17 @@ import Breadcrumbs
 import {
   getPostsByCategory
 } from "../../lib/repositories/postRepository";
+const getDate = (
+  post: any,
+  key: string
+) => {
+
+  return (
+    post?.important_dates?.[key] ||
+    null
+  );
+
+};
 
 export async function getStaticPaths() {
 
@@ -118,23 +129,6 @@ const getColumns = ()=>{
 const columns =
   getColumns();
 
-const formatDate = (date:any)=>{
-
-  if(!date){
-    return "-";
-  }
-
-  return new Date(date)
-    .toLocaleDateString(
-      "en-IN",
-      {
-        day:"numeric",
-        month:"short",
-        year:"numeric"
-      }
-    );
-
-};
 ---
 
 <BaseLayout
@@ -238,11 +232,11 @@ const formatDate = (date:any)=>{
 
                   <>
                     <td>
-
-                      {
-                        formatDate(
-                          post.application_start_date
-                        )
+                      { getDate(
+                      post,
+                      "application_start"
+                    )
+                      ?.display_text || "-"
                       }
 
                     </td>
@@ -250,9 +244,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.application_end_date
-                        )
+                        getDate(
+                        post,
+                        "application_end"
+                      )
+                        ?.display_text || "-"
                       }
 
                     </td>
@@ -270,9 +266,17 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.latest_status_date
-                        )
+                      post.published_at
+                            ? new Date(post.published_at)
+                                .toLocaleDateString(
+                                  "en-IN",
+                                  {
+                                    day:"numeric",
+                                    month:"short",
+                                    year:"numeric"
+                                  }
+                                )
+                            : "-"
                       }
 
                     </td>
@@ -280,9 +284,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.result_date
-                        )
+                getDate(
+                      post,
+                      "result_date"
+                    )
+                      ?.display_text || "-"
                       }
 
                     </td>
@@ -300,9 +306,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.exam_date
-                        )
+              getDate(
+                    post,
+                    "cbt_exam_date"
+                  )
+                    ?.display_text || "-"
                       }
 
                     </td>
@@ -310,9 +318,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.admit_card_date
+              getDate(
+                          post,
+                          "admit_card_release"
                         )
+                          ?.display_text || "-"
                       }
 
                     </td>
@@ -330,9 +340,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.exam_date
-                        )
+                  getDate(
+                      post,
+                      "cbt_exam_date"
+                    )
+                      ?.display_text || "-"
                       }
 
                     </td>
@@ -340,9 +352,11 @@ const formatDate = (date:any)=>{
                     <td>
 
                       {
-                        formatDate(
-                          post.answer_key_date
+                   getDate(
+                          post,
+                          "answer_key_release"
                         )
+                          ?.display_text || "-"
                       }
 
                     </td>
@@ -358,21 +372,21 @@ const formatDate = (date:any)=>{
 
                   <>
                     <td>
-
                       {
-                        formatDate(
-                          post.application_start
-                        )
+                    getDate(
+                      post,
+                      "application_start"
+                              )
+                              ?.display_text || "-"
                       }
-
                     </td>
-
                     <td>
-
                       {
-                        formatDate(
-                          post.application_end
-                        )
+                   getDate(
+                      post, 
+                    "application_end"
+                    )
+                      ?.display_text || "-"
                       }
 
                     </td>
@@ -381,35 +395,7 @@ const formatDate = (date:any)=>{
                 )
               }
 
-              <!-- SYLLABUS -->
-
-              {
-                category === "syllabus" && (
-
-                  <>
-                    <td>
-
-                      {
-                        formatDate(
-                          post.latest_status_date
-                        )
-                      }
-
-                    </td>
-
-                    <td>
-
-                      {
-                        formatDate(
-                          post.latest_status_date
-                        )
-                      }
-
-                    </td>
-                  </>
-
-                )
-              }
+            
 
             </tr>
 

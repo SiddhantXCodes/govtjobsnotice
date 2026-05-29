@@ -1,56 +1,48 @@
-export function getClosingSoonPosts(posts: any[]) {
+
+export function getClosingSoonPosts(
+  posts: any[]
+) {
 
   const today = new Date();
 
   return posts
-    .map(post => {
 
-      const data =
-        typeof post?.posts_data_json === "string"
-          ? JSON.parse(post.posts_data_json)
-          : post?.posts_data_json;
+    .map((post) => {
 
-      const dates =
-        data?.important_dates || [];
+      const endDateString =
+        post?.important_dates
+          ?.application_end
+          ?.date;
 
-      const lastDate = dates.find(
-        (d: any) => d.key === "last_date"
-      );
-
-      if (!lastDate?.datetime) {
+      if (!endDateString) {
         return null;
       }
 
-      const lastDateObj =
-        new Date(lastDate.datetime);
+      const endDate =
+        new Date(endDateString);
 
       const diffDays =
         Math.ceil(
           (
-            lastDateObj.getTime() -
+            endDate.getTime() -
             today.getTime()
-          ) / (1000 * 60 * 60 * 24)
+          ) / 86400000
         );
+
 
       return {
         post,
         diffDays,
       };
-
     })
-
     .filter(Boolean)
-
-    // only upcoming / active
-    .filter((item: any) =>
-      item.diffDays >= 0
+    .filter(
+      (item: any) =>
+        item.diffDays >= 0
     )
-
-    // nearest date first
-    .sort((a: any, b: any) =>
-      a.diffDays - b.diffDays
+    .sort(
+      (a: any, b: any) =>
+        a.diffDays - b.diffDays
     )
-
-    // limit 10
     .slice(0, 10);
 }

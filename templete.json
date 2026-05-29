@@ -1,293 +1,279 @@
 {
-    "schema_version": "1.0",
+    "title": "RRB Assistant Loco Pilot ALP Recruitment 2026",
+    "slug": "rrb-alp-recruitment-2026",
+    "feed_title": "RRB Assistant Loco Pilot ALP Online form 2026 - Apply Now",
+    "tag": [
+        "tech",
+        "non-tech"
+    ],
+    "total_posts": 11127,
+    "application_start_date": "15 may 2026",
     "overview": {
         "organization": {
-            "name": "Railway Recruitment Board",
-            "short_name": "RRB"
+            "name": "Union Public Service Commission",
+            "short_name": "UPSC"
         },
-        "title": "Railway RRB ALP Recruitment 2026",
-        "short_title": "RRB ALP 2026",
-        "post_name": "Assistant Loco Pilot (ALP)",
-        "advertisement_no": "CEN 01/2026",
+        "post_name": "Combined Defence Services Examination II 2026",
+        "advertisement_no": "UPSC CDS II Examination 2026",
         "application_mode": "Online",
         "job_location": "India",
-        "total_posts": 11127,
-        "qualification_short": "10th + ITI / Diploma / Degree",
-        "age_limit_short": "18-30 Years",
-        "selection_process_short": "CBT, CBAT, DV & Medical",
+        "qualification_short": "Graduation / Engineering Degree",
+        "age_limit_short": "Born Between 01 July 2003 to 01 July 2008",
+        "selection_process_short": "Written Exam -> SSB & Medical",
         "seo": {
-            "title": "RRB ALP Recruitment 2026 Apply Online for 11127 Posts",
-            "description": "Railway RRB ALP Recruitment 2026 notification released for 11127 Assistant Loco Pilot posts. Check eligibility, age limit, important dates, application fee and apply online details."
+            "title": "UPSC CDS II Recruitment 2026 Apply Online for 451 Posts",
+            "description": "UPSC CDS II Recruitment 2026 notification released for 451 vacancies in IMA, INA, Air Force Academy and OTA. Check eligibility, age limit, exam date, salary and apply online details."
         }
     },
-    "important_dates": [
-        {
-            "key": "notification",
-            "label": "Official Notification Release Date",
-            "datetime": "2026-05-13T00:00:00+05:30",
-            "display_text": "13 May 2026"
+    "intro_content": {
+        "html": "<p><strong>Union Public Service Commission (UPSC)</strong> has officially released the latest notification for <strong>Combined Defence Services Examination II 2026</strong> across various locations in India. A total of <strong>451 vacancies</strong> have been announced for eligible candidates who have completed <strong>Graduation or Engineering Degree</strong> in related fields. The online registration process started from <strong>15 May 2026</strong> and candidates can submit the application form till <strong><span style='color:#e03e2d;'>14 June 2026</span></strong>. Applicants are advised to check complete eligibility criteria, age limit, application fee, selection process and official guidelines before applying online. <strong><span style='color:#e03e2d;'>(CEN - 01/2026)</span></strong></p>"
+    },
+    "important_dates": {
+        "notification_released": {
+            "label": "Notification Release Date",
+            "date": "2026-05-15",
+            "display_text": "15 May 2026",
+            "ui": {
+                "highlight": false
+            }
         },
-        {
-            "key": "apply_start",
+        "application_start": {
             "label": "Online Apply Start Date",
-            "datetime": "2026-05-15T00:00:00+05:30",
-            "display_text": "15 May 2026"
+            "date": "2026-05-15",
+            "display_text": "15 May 2026",
+            "ui": {
+                "highlight": false
+            }
         },
-        {
-            "key": "last_date",
+        "application_end": {
             "label": "Online Apply Last Date",
-            "datetime": "2026-06-14T23:59:00+05:30",
+            "date": "2026-06-14",
             "display_text": "14 June 2026",
-            "highlight": true
+            "ui": {
+                "highlight": true,
+                "color": "red"
+            }
         },
-        {
-            "key": "fee_payment",
+        "fee_payment_last_date": {
             "label": "Last Date For Fee Payment",
-            "datetime": "2026-06-16T23:59:00+05:30",
-            "display_text": "16 June 2026"
+            "date": "2026-06-16",
+            "display_text": "16 June 2026",
+            "ui": {
+                "highlight": false
+            }
         },
-        {
-            "key": "correction",
-            "label": "Application Correction Date",
-            "display_text": "17 June to 26 June 2026"
+        "correction_window": {
+            "label": "Correction Window",
+            "start_date": "2026-06-18",
+            "end_date": "2026-06-20",
+            "display_text": "18-20 June 2026",
+            "ui": {
+                "highlight": false
+            }
         },
-        {
-            "key": "exam_date",
-            "label": "CBT Stage-I Exam Date",
-            "display_text": "Available Soon"
+        "cbt_exam_date": {
+            "label": "CBT Exam Date",
+            "display_text": "Notify Later",
+            "ui": {
+                "highlight": false
+            }
         },
-        {
-            "key": "admit_card",
+        "admit_card_release": {
             "label": "Admit Card Release",
-            "display_text": "04 Days Before Exam"
-        },
-        {
-            "key": "cbat_exam",
-            "label": "CBAT Exam Date",
-            "display_text": "To Be Announced"
-        },
-        {
-            "key": "result",
-            "label": "Result Date",
-            "display_text": "Available Later"
+            "display_text": "Before Exam",
+            "ui": {
+                "highlight": false
+            }
         }
-    ],
+    },
     "application_fee": {
+        "type": "list",
+        "variant": "info_card",
+        "theme": "purple",
+        "title": "Application Fee",
         "items": [
             {
-                "key": "general_obc",
-                "label": "For General / OBC Candidates",
-                "amount": "₹500000/-"
+                "label": "General / OBC / EWS",
+                "value": "₹500/-"
             },
             {
-                "key": "reserved",
-                "label": "For SC / ST / PwBD / Ex-Serviceman Candidates",
-                "amount": "₹250/-"
+                "label": "SC / ST / PH / Female",
+                "value": "₹250/-"
             },
             {
-                "key": "general_refund",
-                "label": "Fee Refund for General / OBC Candidates",
-                "amount": "₹400/- after appearing in CBT Stage-I Exam"
-            },
-            {
-                "key": "reserved_refund",
-                "label": "Fee Refund for Reserved Category Candidates",
-                "amount": "₹250/- after appearing in CBT Stage-I Exam"
+                "label": "Payment Mode",
+                "value": "Debit Card, Credit Card, Net Banking, UPI"
             }
         ],
-        "payment_modes": [
-            "Debit Card",
-            "Credit Card",
-            "Internet Banking",
-            "IMPS",
-            "Cash Card / Mobile Wallet"
-        ],
-        "note": "Application fee can be paid through online mode only."
+        "note": [
+            "Application fee can be paid through online mode only."
+        ]
     },
     "age_limit": {
-        "short_age_limit": "18-30 Years",
-        "title": "Age Limit as 30 January 2026",
+        "type": "list",
+        "variant": "info_card",
+        "theme": "green",
+        "title": "Age Limit As On 01 July 2026",
         "items": [
             {
-                "key": "minimum_age",
                 "label": "Minimum Age",
                 "value": "18 Years"
             },
             {
-                "key": "maximum_age",
                 "label": "Maximum Age",
                 "value": "30 Years"
-            }
-        ],
-        "relaxation": "Age relaxation will be provided as per Railway Recruitment Board (RRB) rules."
-    },
-    "vacancies": {
-        "title": "Vacancy Details",
-        "total_posts": "11127",
-        "short_note": "Total 11127 Assistant Loco Pilot (ALP) Posts Available",
-        "sections": [
-            {
-                "title": "Category Wise Vacancy Details",
-                "columns": [
-                    {
-                        "key": "category",
-                        "label": "Category"
-                    },
-                    {
-                        "key": "posts",
-                        "label": "No. Of Posts"
-                    }
-                ],
-                "rows": [
-                    {
-                        "category": "UR",
-                        "posts": "4860"
-                    },
-                    {
-                        "category": "OBC",
-                        "posts": "2598"
-                    },
-                    {
-                        "category": "EWS",
-                        "posts": "1004"
-                    },
-                    {
-                        "category": "SC",
-                        "posts": "1746"
-                    },
-                    {
-                        "category": "ST",
-                        "posts": "919"
-                    },
-                    {
-                        "category": "Total",
-                        "posts": "11127"
-                    }
-                ]
-            }
-        ],
-        "note": "Candidates are advised to read official notification carefully for complete vacancy details."
-    },
-    "eligibility": {
-        "title": "Eligibility Criteria",
-        "short_eligibility": "10th Pass / ITI / Diploma / Degree Candidates Eligible",
-        "sections": [
-            {
-                "title": "Post Wise Educational Qualification",
-                "type": "table",
-                "columns": [
-                    {
-                        "key": "post_name",
-                        "label": "Post Name"
-                    },
-                    {
-                        "key": "qualification",
-                        "label": "Educational Qualification"
-                    }
-                ],
-                "rows": [
-                    {
-                        "post_name": "Assistant Loco Pilot (ALP)",
-                        "qualification": "Candidates must have passed Class 10th Examination along with ITI Certificate in relevant trade OR Diploma / Degree in Engineering from recognized institution."
-                    }
-                ]
             },
             {
-                "title": "Other Eligibility",
-                "type": "list",
-                "items": [
-                    "Zone-wise and trade-wise eligibility criteria must be checked carefully through the official notification before applying online.",
-                    "Candidates must fulfill all medical and physical fitness standards prescribed by Railway Recruitment Board.",
-                    "Candidates are advised to read the official notification carefully before submitting the online application form."
-                ]
+                "label": "Age Relaxation",
+                "value": "As per RRB Recruitment Rules for reserved categories"
             }
-        ],
-        "note": "Eligibility criteria may vary according to post and railway zone."
+        ]
     },
-    "selection_process": {
-        "title": "Selection Process",
-        "short_selection_process": "CBT, CBAT, DV & Medical Test",
-        "sections": [
-            {
-                "title": "Selection Stages",
-                "type": "list",
-                "items": [
-                    "CBT Stage-I (Computer Based Test)",
-                    "CBT Stage-II (Computer Based Test)",
-                    "CBAT (Computer Based Aptitude Test)",
-                    "Document Verification",
-                    "Medical Examination",
-                    "Final Merit List"
-                ]
-            }
-        ],
-        "note": "Selection stages may vary according to post and category."
-    },
-    "how_to_apply": {
-        "title": "How To Apply for RRB ALP 2026",
-        "mode": "online",
-        "steps": [
-            "Interested candidates who wish to apply for this recruitment can submit their application online before the last date.",
-            "Use the Apply Online link provided below under Important Links section to apply directly.",
-            "Candidates are advised to read the official notification carefully before filling the application form.",
-            "Fill all required details carefully including personal, educational and communication details.",
-            "Upload scanned photograph, signature and required documents in prescribed format.",
-            "Pay the application fee through available online payment modes if applicable.",
-            "Verify all entered details carefully before final submission of the application form.",
-            "Take a printout of final submitted application form for future reference."
-        ],
-        "note": "Candidates are advised to complete the application process before the last date to avoid technical issues."
-    },
-    "important_links": [
+    "sections": [
         {
-            "key": "apply_online",
-            "label": "Apply Online",
-            "url": "https://www.rrbapply.gov.in/#/auth/home",
-            "highlight": true
+            "type": "table",
+            "variant": "default",
+            "title": "Zone Wise Vacancy Details",
+            "columns": [
+                "Railway Zone",
+                "Posts"
+            ],
+            "rows": [
+                [
+                    "Northern Railway",
+                    "1520"
+                ],
+                [
+                    "Eastern Railway",
+                    "1320"
+                ],
+                [
+                    "Western Railway",
+                    "1475"
+                ],
+                [
+                    "Central Railway",
+                    "1680"
+                ],
+                [
+                    "Other Zones",
+                    "5132"
+                ]
+            ],
+            "note": [
+                "Detailed category-wise vacancy breakup will be available in official notification."
+            ]
         },
         {
-            "key": "official_notification",
-            "label": "Official Notification",
-            "url": "https://rrbajmer.gov.in/Upload_PDF/CEN%2001-2026%20Eng-639143539720035538.pdf"
+            "type": "table",
+            "variant": "default",
+            "title": "Educational Qualification",
+            "columns": [
+                "Qualification",
+                "Details"
+            ],
+            "rows": [
+                [
+                    "Minimum Qualification",
+                    "10th Pass with ITI in Related Trade"
+                ],
+                [
+                    "Alternative Qualification",
+                    "Engineering Diploma / Degree in Relevant Stream"
+                ]
+            ],
+            "note": [
+                "Candidates must check trade-wise eligibility details before applying online."
+            ]
         },
         {
-            "key": "official_website",
-            "label": "RRB Official Website",
-            "url": "https://indianrailways.gov.in/"
+            "type": "list",
+            "variant": "default",
+            "title": "Selection Process",
+            "items": [
+                {
+                    "label": "Stage 1",
+                    "value": "CBT Examination"
+                },
+                {
+                    "label": "Stage 2",
+                    "value": "CBAT / Aptitude Test"
+                },
+                {
+                    "label": "Stage 3",
+                    "value": "Document Verification"
+                },
+                {
+                    "label": "Stage 4",
+                    "value": "Medical Examination"
+                }
+            ]
+        },
+        {
+            "type": "steps",
+            "variant": "default",
+            "title": "How To Apply",
+            "steps": [
+                "Interested candidates who wish to apply for the UPSC CDS II Examination 2026 can submit their application online before 09 June 2026.",
+                "Use the Apply Online link provided below under the Important Link section to complete the registration process directly.",
+                "Candidates should carefully fill all required personal, educational and communication details in the online application form.",
+                "Upload scanned copies of photograph, signature and required documents in the prescribed format.",
+                "Pay the application fee through online payment modes such as Debit Card, Credit Card, UPI or Internet Banking.",
+                "Before final submission, verify all details carefully to avoid mistakes in the application form.",
+                "Download and print the final submitted application form for future reference.",
+                "Make sure to complete the application process before the deadline 09 June 2026.",
+                "छात्रों से अनुरोध है कि आवेदन करने से पहले Official Notification को ध्यानपूर्वक पढ़ें तथा Age Limit, Eligibility, Physical Standards और Educational Qualification की पूरी जानकारी अवश्य जांच लें।"
+            ]
+        },
+        {
+            "type": "faq",
+            "variant": "accordion",
+            "title": "Frequently Asked Questions",
+            "items": [
+                {
+                    "question": "What is the last date to apply for RRB ALP Recruitment 2026?",
+                    "answer": "The last date to apply online is 14 June 2026."
+                },
+                {
+                    "question": "What is the qualification required for RRB ALP Recruitment 2026?",
+                    "answer": "Candidates must have passed 10th with ITI or possess Engineering Diploma/Degree in related discipline."
+                },
+                {
+                    "question": "How many vacancies are available in RRB ALP Recruitment 2026?",
+                    "answer": "A total of 11,127 vacancies have been announced."
+                },
+                {
+                    "question": "What is the exam date for UPSC CDS II 2026?",
+                    "answer": "The UPSC CDS II 2026 written examination will be conducted on 13 September 2026."
+                },
+                {
+                    "question": "What is the qualification required for UPSC CDS II Vacancy 2026?",
+                    "answer": "Candidates must possess Graduation or Engineering Degree according to the academy-wise eligibility criteria mentioned in the notification."
+                }
+            ]
         }
     ],
-    "faq": [
-        {
-            "question": "When will the online application for Railway RRB ALP Recruitment 2026 start?",
-            "answer": "The online application process for Railway RRB ALP Recruitment 2026 started on 15 May 2026."
-        },
-        {
-            "question": "What is the last date to apply online for Railway RRB ALP Recruitment 2026?",
-            "answer": "The last date to submit the online application form is 14 June 2026."
-        },
-        {
-            "question": "How many vacancies are available in Railway RRB ALP Recruitment 2026?",
-            "answer": "A total of 11,127 Assistant Loco Pilot vacancies have been announced under Railway RRB ALP Recruitment 2026."
-        },
-        {
-            "question": "What is the age limit for Railway RRB ALP Bharti 2026?",
-            "answer": "Candidates must be between 18 to 30 years as on 01 July 2026."
-        },
-        {
-            "question": "What is the educational qualification required for Railway RRB ALP Recruitment 2026?",
-            "answer": "Candidates must have passed 10th with ITI certificate in relevant trade or possess Diploma / Degree in Engineering."
-        },
-        {
-            "question": "What is the selection process for Railway RRB ALP Recruitment 2026?",
-            "answer": "The selection process includes CBT Stage-I, CBT Stage-II, CBAT Aptitude Test, Document Verification, and Medical Examination."
-        },
-        {
-            "question": "What is the application fee for Railway RRB ALP Recruitment 2026?",
-            "answer": "The application fee is ₹500 for General/OBC candidates and ₹250 for SC/ST/PwBD/Ex-Serviceman candidates."
-        },
-        {
-            "question": "What is the official website of Railway Recruitment Board?",
-            "answer": "The official website of Railway Recruitment Board is https://indianrailways.gov.in/."
-        }
-    ]
+    "important_links": {
+        "type": "table",
+        "variant": "links_table",
+        "title": "Important Links",
+        "columns": [
+            "Link Name",
+            "Action"
+        ],
+        "rows": [
+            [
+                "Apply Online",
+                "https://www.rrbapply.gov.in/"
+            ],
+            [
+                "Official Notification",
+                "https://www.rrbapply.gov.in/"
+            ],
+            [
+                "Official Website",
+                "https://www.indianrailways.gov.in/"
+            ]
+        ]
+    }
 }

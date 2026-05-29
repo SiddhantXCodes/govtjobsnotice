@@ -1,20 +1,34 @@
+
 import { supabase } from "../supabase";
 
-/* ALL POSTS */
+/* =========================================
+   BASE QUERY
+========================================= */
+
+const baseQuery = () =>
+  supabase
+    .from("posts")
+    .select("*")
+    .eq("status", "published");
+
+/* =========================================
+   ALL POSTS
+========================================= */
 
 export async function getAllPosts() {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
-    .order("latest_status_date", {
-      ascending: false
+  const { data, error } = await baseQuery()
+    .order("published_at", {
+      ascending: false,
     });
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getAllPosts Error:",
+      error
+    );
+
     return [];
 
   }
@@ -23,22 +37,25 @@ export async function getAllPosts() {
 
 }
 
-/* SINGLE POST */
+/* =========================================
+   SINGLE POST
+========================================= */
 
 export async function getPostBySlug(
   slug: string
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
+  const { data, error } = await baseQuery()
     .eq("slug", slug)
-    .eq("status", "published")
     .single();
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getPostBySlug Error:",
+      error
+    );
+
     return null;
 
   }
@@ -47,24 +64,27 @@ export async function getPostBySlug(
 
 }
 
-/* LATEST POSTS */
+/* =========================================
+   LATEST POSTS
+========================================= */
 
 export async function getLatestPosts(
   limit = 10
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
-    .order("latest_status_date", {
-      ascending: false
+  const { data, error } = await baseQuery()
+    .order("published_at", {
+      ascending: false,
     })
     .limit(limit);
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getLatestPosts Error:",
+      error
+    );
+
     return [];
 
   }
@@ -73,25 +93,28 @@ export async function getLatestPosts(
 
 }
 
-/* FEATURED POSTS */
+/* =========================================
+   FEATURED POSTS
+========================================= */
 
 export async function getFeaturedPosts(
   limit = 8
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
+  const { data, error } = await baseQuery()
     .eq("is_featured", true)
-    .order("latest_status_date", {
-      ascending: false
+    .order("published_at", {
+      ascending: false,
     })
     .limit(limit);
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getFeaturedPosts Error:",
+      error
+    );
+
     return [];
 
   }
@@ -100,26 +123,29 @@ export async function getFeaturedPosts(
 
 }
 
-/* POSTS BY CATEGORY */
+/* =========================================
+   POSTS BY CATEGORY
+========================================= */
 
 export async function getPostsByCategory(
   category: string,
   limit = 10
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
+  const { data, error } = await baseQuery()
     .eq("category", category)
-    .order("latest_status_date", {
-      ascending: false
+    .order("published_at", {
+      ascending: false,
     })
     .limit(limit);
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getPostsByCategory Error:",
+      error
+    );
+
     return [];
 
   }
@@ -128,26 +154,29 @@ export async function getPostsByCategory(
 
 }
 
-/* POSTS BY TYPE */
+/* =========================================
+   POSTS BY TYPE
+========================================= */
 
 export async function getPostsByType(
   type: string,
   limit = 10
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
+  const { data, error } = await baseQuery()
     .eq("post_type", type)
-    .order("latest_status_date", {
-      ascending: false
+    .order("published_at", {
+      ascending: false,
     })
     .limit(limit);
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getPostsByType Error:",
+      error
+    );
+
     return [];
 
   }
@@ -156,26 +185,38 @@ export async function getPostsByType(
 
 }
 
-/* SEARCH POSTS */
+/* =========================================
+   SEARCH POSTS
+========================================= */
 
 export async function searchPosts(
   query: string,
   limit = 20
 ) {
 
-  const { data, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("status", "published")
-    .ilike("title", `%${query}%`)
-    .order("latest_status_date", {
-      ascending: false
+  const cleanQuery = query.trim();
+
+  if (!cleanQuery) {
+    return [];
+  }
+
+  const { data, error } = await baseQuery()
+    .ilike(
+      "title",
+      `%${cleanQuery}%`
+    )
+    .order("published_at", {
+      ascending: false,
     })
     .limit(limit);
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "searchPosts Error:",
+      error
+    );
+
     return [];
 
   }
@@ -184,62 +225,64 @@ export async function searchPosts(
 
 }
 
+/* =========================================
+   POSTS BY TAG
+========================================= */
+
 export async function getPostsByTag(
   tag: string,
   limit = 10
 ) {
 
-  const { data, error } =
-    await supabase
-      .from("posts")
-      .select("*")
-      .eq("status", "published")
-      .order(
-        "latest_status_date",
-        {
-          ascending: false
-        }
-      );
+  const normalizedTag =
+    tag
+      .trim()
+      .toLowerCase();
+
+  const { data, error } = await baseQuery()
+    .order("published_at", {
+      ascending: false,
+    });
 
   if (error) {
 
-    console.error(error);
+    console.error(
+      "getPostsByTag Error:",
+      error
+    );
 
     return [];
 
   }
 
-  if (!data) {
+  if (!data?.length) {
     return [];
   }
 
-  /* FILTER TAGS MANUALLY */
+  const filtered = data.filter(
+    (post: any) => {
 
-  const filtered = data.filter((post: any) => {
+      if (
+        !post?.tags ||
+        !Array.isArray(post.tags)
+      ) {
 
-    if (!post.tags) {
-      return false;
-    }
+        return false;
 
-    /* ARRAY */
-
-    if (Array.isArray(post.tags)) {
+      }
 
       return post.tags.some(
         (item: string) =>
 
           item
-            .trim()
-            .toLowerCase()
-          === tag.toLowerCase()
+            ?.trim()
+            ?.toLowerCase()
+          === normalizedTag
 
       );
 
     }
-
-    return false;
-
-  });
+  );
 
   return filtered.slice(0, limit);
 
