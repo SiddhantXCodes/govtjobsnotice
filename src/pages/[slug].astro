@@ -201,22 +201,12 @@ const normalSections = post?.sections || [];
     </div>
 
     <!-- NORMAL SECTIONS -->
-{
-  normalSections.map(
-    (section: any) => (
-      <SectionRenderer
-        section={section}
-      />
-    )
-  )
-}
-{
-  importantLinks && (
-    <SectionRenderer
-      section={importantLinks}
-    />
-  )
-}
+    {
+      normalSections.map((section: any) => (
+        <SectionRenderer section={section} />
+      ))
+    }
+    {importantLinks && <SectionRenderer section={importantLinks} />}
     <!-- POST SUGGESTIONS -->
 
     <PostSuggestions currentSlug={post?.slug} category={post?.category} />

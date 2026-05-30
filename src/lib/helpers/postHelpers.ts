@@ -17,20 +17,20 @@ export function getFeedTitle(post: any) {
 
   let title = shortName;
 
-  if (
-    totalPosts &&
-    totalPosts !== "Not Applicable"
-  ) {
+  // if (
+  //   totalPosts &&
+  //   totalPosts !== "Not Applicable"
+  // ) {
 
-    title += ` (${totalPosts} Posts)`;
+  //   title += ` (${totalPosts} Posts)`;
 
-  }
+  // }
 
-  if (post?.current_stage) {
+  // if (post?.current_stage) {
 
-    title += ` - ${post.current_stage}`;
+  //   title += ` - ${post.current_stage}`;
 
-  }
+  // }
 
   return title.trim();
 
