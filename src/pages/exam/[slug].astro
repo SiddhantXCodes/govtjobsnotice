@@ -10,7 +10,7 @@ import SocialLinks from "../../components/SocialLinks.astro";
 import { EXAM_LIFECYCLE_TEMPLATES } from "../../lib/examLifecycleTemplates";
 
 import { EXAM_PAGE_SECTIONS } from "../../lib/examPageSections";
-
+import SectionRenderer from "../../components/post/SectionRenderer.astro";
 import {
     getAllExams,
     getExamBySlug,
@@ -60,30 +60,93 @@ if (!exam) {
 const latestUpdates = await getExamPosts(exam.id, 12);
 
 const lifecycle = buildExamLifecycle(latestUpdates);
+/* =========================================
+   ACTIVE RECRUITMENT
+========================================= */
 
+const activeRecruitment = latestUpdates.length > 0 ? latestUpdates[0] : null;
+
+/* =========================================
+   RESOLVE FIELD
+========================================= */
+function getRecruitmentSection(sectionId: string) {
+    const sections = activeRecruitment?.sections;
+
+    if (!Array.isArray(sections)) {
+        return null;
+    }
+
+    return sections.find((item: any) => item?.id === sectionId);
+}
+
+function resolveField(section: any) {
+    const field = section.field;
+
+    if (activeRecruitment) {
+        if (field === "important_dates") {
+            return activeRecruitment?.important_dates;
+        }
+
+        if (field === "important_links") {
+            return activeRecruitment?.important_links;
+        }
+
+        const sectionData = getRecruitmentSection(field);
+
+        if (sectionData) {
+            return sectionData;
+        }
+    }
+
+    return exam?.[field];
+}
 /* =========================================
    SEO
 ========================================= */
 
 const meta = buildExamMeta(exam);
 
-const schema = buildExamSchema(exam);
 
 /* =========================================
    SECTIONS
 ========================================= */
 
 const sections = EXAM_PAGE_SECTIONS.filter((section) => {
-    /* LIFECYCLE */
-
     if (section.type === "lifecycle") {
         return true;
     }
 
-    /* CONTENT */
-
-    return !!exam[section.field];
+    return !!resolveField(section);
 });
+
+const schema = {
+
+  "@context":
+    "https://schema.org",
+
+  "@type":
+    "CollectionPage",
+
+  name:
+    exam.title,
+
+  description:
+    meta.description,
+
+  url:
+    `https://govtjobsnotice.com/exam/${exam.slug}/`,
+
+  publisher: {
+
+    "@type":
+      "Organization",
+
+    name:
+      "GovtJobsNotice"
+
+  }
+
+};
 ---
 
 <BaseLayout
@@ -111,6 +174,7 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
 
             <h1 class="exam-title">
                 {exam.title}
+                {exam.year ? `${exam.year}` : ""}
             </h1>
 
             <div class="exam-meta-line">
@@ -135,15 +199,15 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                 Last Updated :
 
                 {
-                    exam.last_updated
-                        ? new Date(exam.last_updated).toLocaleDateString(
-                              "en-IN",
-                              {
-                                  day: "numeric",
-                                  month: "long",
-                                  year: "numeric",
-                              },
-                          )
+                    latestUpdates?.[0]?.published_at || exam.last_updated
+                        ? new Date(
+                              latestUpdates?.[0]?.published_at ||
+                                  exam.last_updated,
+                          ).toLocaleDateString("en-IN", {
+                              day: "numeric",
+                              month: "long",
+                              year: "numeric",
+                          })
                         : "-"
                 }
             </div>
@@ -181,14 +245,16 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                     latestUpdates.length > 0 && (
                         <section class="exam-box">
                             <h2 class="exam-box-heading">
-                                {exam.short_name} {exam.year} Latest Updates
+                                <h2 class="exam-box-heading">
+                                    Latest {exam.short_name} Updates
+                                </h2>
                             </h2>
 
                             <ul class="exam-update-list">
                                 {latestUpdates.map((post) => (
                                     <li>
                                         <a href={`/${post.slug}/`}>
-                                            {post.title}
+                                            {post.feed_title || post.title}
                                         </a>
                                     </li>
                                 ))}
@@ -205,7 +271,8 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                          LIFECYCLE
                         ===================================== */
                         if (section.type === "lifecycle") {
-                            const lifecycleItem = lifecycle[section.statusType];
+                            const lifecycleItem =
+                                lifecycle[(section as any).statusType];
 
                             if (!lifecycleItem) {
                                 return null;
@@ -216,29 +283,22 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                             let template = null;
 
                             /* =====================================
-       ACTIVE
-    ===================================== */
+                                ACTIVE
+                            ===================================== */
+                            const statusType = (section as any).statusType;
 
+                            const lifecycleTemplate = (
+                                EXAM_LIFECYCLE_TEMPLATES as any
+                            )[statusType];
                             if (lifecycleItem.status === "active") {
-                                template = EXAM_LIFECYCLE_TEMPLATES[
-                                    section.statusType
-                                ]?.active?.(exam, lifecycleItem.post);
+                                template = lifecycleTemplate?.active?.(
+                                    exam,
+                                    lifecycleItem.post,
+                                );
                             } else if (lifecycleItem.status === "released") {
-                                /* =====================================
-       RELEASED
-    ===================================== */
-                                template =
-                                    EXAM_LIFECYCLE_TEMPLATES[
-                                        section.statusType
-                                    ]?.released?.(exam);
+                                template = lifecycleTemplate?.released?.(exam);
                             } else {
-                                /* =====================================
-       UPCOMING
-    ===================================== */
-                                template =
-                                    EXAM_LIFECYCLE_TEMPLATES[
-                                        section.statusType
-                                    ]?.upcoming?.(exam);
+                                template = lifecycleTemplate?.upcoming?.(exam);
                             }
 
                             if (!template) {
@@ -262,7 +322,7 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                                                     class="status-btn"
                                                 >
                                                     {lifecycleItem.post
-                                                        ?.title ||
+                                                        ?.feed_title ||
                                                         template.buttonLabel}
                                                 </a>
                                             )}
@@ -273,9 +333,9 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
 
                         /* =====================================
                                 CONTENT
-                                            ===================================== */
+                        ===================================== */
 
-                        const content = exam[section.field];
+                        const content = resolveField(section);
 
                         if (!content) {
                             return null;
@@ -283,7 +343,11 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
 
                         /* IMPORTANT DATES */
 
-                        if (section.field === "important_dates") {
+                        if ((section as any).field === "important_dates") {
+                            const dates = Array.isArray(content)
+                                ? content
+                                : Object.values(content || {});
+
                             return (
                                 <section id={section.id} class="exam-box">
                                     <h2 class="exam-box-heading">
@@ -296,51 +360,33 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                                             <thead>
                                                 <tr>
                                                     <th>Event</th>
-
                                                     <th>Date</th>
                                                 </tr>
                                             </thead>
 
                                             <tbody>
-                                                {content.map((item) => (
+                                                {dates.map((item: any) => (
                                                     <tr>
-                                                        <td>{item.event}</td>
-
-                                                        <td>{item.date}</td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </section>
-                            );
-                        }
-
-                        /* IMPORTANT LINKS */
-
-                        if (section.field === "important_links") {
-                            return (
-                                <section id={section.id} class="exam-box">
-                                    <h2 class="exam-box-heading">
-                                        {exam.short_name} {exam.year}{" "}
-                                        {section.label}
-                                    </h2>
-
-                                    <div class="exam-table-wrap">
-                                        <table class="exam-table">
-                                            <tbody>
-                                                {content.map((item) => (
-                                                    <tr>
-                                                        <td>{item.label}</td>
+                                                        <td>
+                                                            {item.event ||
+                                                                item.label ||
+                                                                "-"}
+                                                        </td>
 
                                                         <td>
-                                                            <a
-                                                                href={item.url}
-                                                                target="_blank"
-                                                                rel="noopener noreferrer"
-                                                            >
-                                                                Click Here
-                                                            </a>
+                                                            {item.display_text ||
+                                                                (item.date
+                                                                    ? new Date(
+                                                                          item.date,
+                                                                      ).toLocaleDateString(
+                                                                          "en-IN",
+                                                                          {
+                                                                              day: "numeric",
+                                                                              month: "long",
+                                                                              year: "numeric",
+                                                                          },
+                                                                      )
+                                                                    : "-")}
                                                         </td>
                                                     </tr>
                                                 ))}
@@ -351,7 +397,43 @@ const sections = EXAM_PAGE_SECTIONS.filter((section) => {
                             );
                         }
 
-                        /* NORMAL HTML */
+                        /* IMPORTANT LINKS */
+                        if (
+                            (section as any).field === "important_links" &&
+                            typeof content === "object"
+                        ) {
+                            const normalizedSection = {
+                                ...content,
+                                title: section.label,
+                            };
+
+                            return (
+                                <section id={section.id} class="exam-box">
+                                    <SectionRenderer
+                                        section={normalizedSection}
+                                    />
+                                </section>
+                            );
+                        }
+
+                        /* POST SECTION */
+
+                        if (typeof content === "object" && content?.type) {
+                            const normalizedSection = {
+                                ...content,
+                                title: section.label,
+                            };
+
+                            return (
+                                <section id={section.id} class="exam-box">
+                                    <SectionRenderer
+                                        section={normalizedSection}
+                                    />
+                                </section>
+                            );
+                        }
+
+                        /* EXAM HTML */
 
                         return (
                             <section id={section.id} class="exam-box">

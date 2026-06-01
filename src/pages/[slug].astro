@@ -82,12 +82,44 @@ const ageLimit = post?.age_limit || null;
 const importantLinks = post?.important_links || null;
 
 const normalSections = post?.sections || [];
+const schema = {
+  "@context": "https://schema.org",
+
+  "@type": "NewsArticle",
+
+  headline: seoTitle,
+
+  description: seoDescription,
+
+  datePublished: post?.published_at,
+
+  dateModified: post?.date_updated || post?.published_at,
+
+  author: {
+    "@type": "Organization",
+
+    name: "GovtJobsNotice",
+  },
+
+  publisher: {
+    "@type": "Organization",
+
+    name: "GovtJobsNotice",
+  },
+
+  mainEntityOfPage: {
+    "@type": "WebPage",
+
+    "@id": `https://govtjobsnotice.com/${post?.slug}/`,
+  },
+};
 ---
 
 <BaseLayout
   title={`${seoTitle} | GovtJobsNotice`}
   description={seoDescription}
-  canonical={`https://govtjobsnotice.com/${post?.slug}/`}
+  canonical={`/${post?.slug}/`}
+  schema={schema}
   ogImage={post?.featured_image_url?.replace(
     "/upload/",
     "/upload/f_auto,q_auto/",
@@ -142,7 +174,7 @@ const normalSections = post?.sections || [];
 
     <section class="main-title-box">
       <h2 class="main-title">
-        {shortName}
+        {postTitle}
       </h2>
 
       <div class="site-name">www.govtjobsnotice.com</div>
@@ -221,7 +253,7 @@ const normalSections = post?.sections || [];
               "/upload/",
               "/upload/f_auto,q_auto/",
             )}
-            alt={post.title}
+            alt={`${post.title} - GovtJobsNotice`}
             class="bottom-featured-image"
             loading="lazy"
             decoding="async"

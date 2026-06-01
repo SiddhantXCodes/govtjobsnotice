@@ -10,18 +10,22 @@ export function buildEventSchema(
       "https://schema.org",
 
     "@type":
-      "Article",
+      "NewsArticle",
 
     headline:
+      event.seo_title ||
       event.title,
 
     description:
+      event.seo_description ||
       event.summary,
 
     datePublished:
+      event.published_at ||
       event.created_at,
 
     dateModified:
+      event.updated_at ||
       event.created_at,
 
     author: {
@@ -40,9 +44,25 @@ export function buildEventSchema(
         "Organization",
 
       name:
-        "GovtJobsNotice"
+        "GovtJobsNotice",
+
+      logo: {
+
+        "@type":
+          "ImageObject",
+
+        url:
+          "https://govtjobsnotice.com/logo.png"
+
+      }
 
     },
+
+    image:
+      event.featured_image_url,
+
+    url:
+      `https://govtjobsnotice.com/exam/${exam.slug}/${cycle.year}/${event.event_type}/`,
 
     mainEntityOfPage: {
 
@@ -50,7 +70,7 @@ export function buildEventSchema(
         "WebPage",
 
       "@id":
-        `/exam/${exam.slug}/${cycle.year}/${event.event_type}`
+        `https://govtjobsnotice.com/exam/${exam.slug}/${cycle.year}/${event.event_type}/`
 
     }
 

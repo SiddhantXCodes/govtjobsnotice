@@ -131,6 +131,7 @@
     },
     "sections": [
         {
+            "id": "vacancy_details",
             "type": "table",
             "variant": "default",
             "title": "Zone Wise Vacancy Details",
@@ -165,6 +166,7 @@
             ]
         },
         {
+            "id": "eligibility",
             "type": "table",
             "variant": "default",
             "title": "Educational Qualification",
@@ -187,6 +189,7 @@
             ]
         },
         {
+            "id": "selection_process",
             "type": "list",
             "variant": "default",
             "title": "Selection Process",
@@ -210,6 +213,7 @@
             ]
         },
         {
+            "id": "application_process",
             "type": "steps",
             "variant": "default",
             "title": "How To Apply",
@@ -226,6 +230,7 @@
             ]
         },
         {
+            "id": "faq",
             "type": "faq",
             "variant": "accordion",
             "title": "Frequently Asked Questions",
