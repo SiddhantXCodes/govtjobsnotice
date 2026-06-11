@@ -1,6 +1,23 @@
 ---
-import { FOOTER_EXAMS }
-from "../constants/footerExams";
+import {
+  FOOTER_STRUCTURE
+}
+from "../constants/footerStructure";
+
+import {
+  getFooterExams
+}
+from "../lib/repositories/footerRepository";
+
+const exams =
+  await getFooterExams();
+
+const examMap =
+  new Map(
+    exams.map(
+      exam => [exam.slug, exam]
+    )
+  );
 ---
 
 <footer class="site-footer">
@@ -17,44 +34,64 @@ from "../constants/footerExams";
 
       </h2>
 
-      <div class="footer-exams-grid">
 
-        {
-          FOOTER_EXAMS.map((group) => (
+<div class="footer-exams-grid">
 
-            <div class="footer-exam-category">
+  {
+    FOOTER_STRUCTURE.map((group) => (
 
-              <h3 class="footer-category-title">
+      <div class="footer-exam-category">
 
-                {group.category}
+        <h3 class="footer-category-title">
+          {group.category}
+        </h3>
 
-              </h3>
+        <div class="footer-exams-links">
 
-              <div class="footer-exams-links">
+          {
+            group.slugs.map((slug) => {
 
-                {
-                  group.exams.map((exam) => (
+              const exam =
+                examMap.get(slug);
 
-                    <a
-                      href={`/exam/${exam.slug}/`}
-                      class="footer-exam-item"
-                    >
+              if (!exam)
+                return null;
 
-                      {exam.name}
+              return (
 
-                    </a>
+                <a
+                  href={`/exam/${exam.slug}/`}
+                  class="footer-exam-item"
+                >
 
-                  ))
-                }
+                  {
+                    exam.short_name ||
+                    exam.title
+                  }
 
-              </div>
+                  {
+                    exam.current_year
+                      ? ` ${exam.current_year}`
+                      : ""
+                  }
 
-            </div>
+                </a>
 
-          ))
-        }
+              );
+
+            })
+          }
+
+        </div>
 
       </div>
+
+    ))
+  }
+
+</div>
+
+
 
     </div>
 

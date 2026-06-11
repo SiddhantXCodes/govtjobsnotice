@@ -3,11 +3,9 @@
 ========================================= */
 
 .exam-page {
-  max-width: 1050px;
-
+  max-width: var(--container-width);
   margin: auto;
-
-  padding: 14px 8px 30px;
+  padding: 16px 10px 32px;
 }
 
 /* =========================================
@@ -16,40 +14,36 @@
 
 .exam-hero {
   background: #fff;
-
-  border: 1px solid #555;
-
-  padding: 18px 20px;
-
-  margin-bottom: 14px;
+  border: 1px solid #ddd;
+  padding: 24px;
+  margin-bottom: 16px;
 }
 
 .exam-title {
-  margin: 12px 0 0;
-
-  color: #000066;
-
-  font-size: 38px;
-
+  margin: 12px 0;
+  color: #111;
+  font-size: 42px;
   font-weight: 800;
-
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 .exam-meta-line {
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 10px;
-
-  margin-top: 14px;
-
-  color: #444;
-
+  margin-top: 10px;
+  color: #555;
   font-size: 15px;
-
   font-weight: 600;
+}
+
+.exam-meta-line a {
+  color: #0000cc;
+  text-decoration: none;
+}
+
+.exam-meta-line a:hover {
+  color: #d40000;
 }
 
 .exam-dot {
@@ -57,16 +51,11 @@
 }
 
 .exam-updated-line {
-  margin-top: 14px;
-
-  padding-top: 12px;
-
-  border-top: 1px solid #ddd;
-
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid #e5e5e5;
   color: #c00000;
-
   font-size: 14px;
-
   font-weight: 700;
 }
 
@@ -76,12 +65,8 @@
 
 .exam-layout {
   display: grid;
-
-  grid-template-columns:
-    240px 1fr;
-
-  gap: 14px;
-
+  grid-template-columns: 280px 1fr;
+  gap: 16px;
   align-items: start;
 }
 
@@ -91,68 +76,68 @@
 
 .exam-sidebar {
   position: sticky;
-
-  top: 14px;
+  top: 10px;
 }
 
 .exam-toc {
   background: #fff;
-
-  border: 1px solid #555;
+  border: 1px solid #ddd;
+  overflow: hidden;
 }
 
 .exam-toc-title {
   background: #000066;
-
   color: #fff;
-
-  font-size: 18px;
-
+  font-size: 17px;
   font-weight: 700;
-
   padding: 12px 14px;
-
-  border-bottom: 1px solid #555;
 }
 
 .exam-toc-list {
   margin: 0;
-
   padding: 0;
-
   list-style: none;
 }
 
 .exam-toc-list li {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eee;
 }
 
 .exam-toc-list li:last-child {
   border-bottom: none;
 }
 
-.exam-toc-list a{
-  display:block;
-
-  padding:7px 12px;
-
-  color:#0000cc;
-
-  font-size:14px;
-
-  font-weight:700;
-
-  line-height:1.35;
-
-  text-decoration:none;
-
-  transition:0.2s ease;
+.exam-toc-list a {
+  display: block;
+  padding: 7px 12px;
+  color: #222;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  text-decoration: none;
+  transition: .2s;
 }
 
 .exam-toc-list a:hover {
-  background: #fafafa;
-
+  background: #f7f7f7;
   color: #d40000;
+}
+
+.exam-toc-list span {
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #333;
+  font-weight: 600;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.editor-content h2 {
+  scroll-margin-top: 10px;
 }
 
 /* =========================================
@@ -170,34 +155,120 @@
 .exam-box {
   background: #fff;
 
-  border: 1px solid #555;
-
-  margin-bottom: 14px;
+  overflow: hidden;
+  margin-bottom: 16px;
 }
 
 /* =========================================
-   SECTION HEADING
+   SECTION HEADINGS
 ========================================= */
 
 .exam-box-heading {
   margin: 0;
-
   background: #000066;
-
   color: #fff;
-
-  font-size: 21px;
-
+  font-size: 20px;
   font-weight: 700;
-
-  padding: 10px 14px;
-
+  padding: 12px 16px;
   line-height: 1.5;
 }
 
 /* =========================================
-   TABLE
+   FEATURED IMAGE
 ========================================= */
+
+.exam-featured-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* =========================================
+   LATEST UPDATES
+========================================= */
+
+.exam-update-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.exam-update-list li {
+  border-bottom: 1px solid #eee;
+}
+
+.exam-update-list li:last-child {
+  border-bottom: none;
+}
+
+.exam-update-list a {
+  display: block;
+  padding: 14px 16px;
+  font-size: 15px;
+  line-height: 1.6;
+  text-decoration: none;
+  transition: .2s;
+}
+
+.exam-update-list a:hover {
+  background: #f7f7f7;
+}
+
+.editor-content img,
+.exam-featured-image {
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, .08);
+}
+
+.exam-box {
+  transition: .2s ease;
+}
+
+.exam-box:hover {
+  border-color: #cfd6e4;
+}
+
+.breadcrumbs {
+  margin-bottom: 10px;
+}
+
+/* =========================================
+   CONTENT H2
+========================================= */
+
+.exam-content-heading {
+  margin: 40px -22px 20px;
+
+  background: #000066;
+
+  color: #fff !important;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+  line-height: 1.2;
+
+  padding: 8px 12px;
+
+  scroll-margin-top: 50px;
+}
+
+.exam-content-heading:first-child {
+  margin-top: -22px;
+}
+
+/* =========================================
+   TABLES
+========================================= */
+.editor-content table {
+  overflow: hidden;
+}
+
+.editor-content table th {
+  background: #f5f7ff;
+  font-weight: 700;
+}
 
 .exam-table-wrap {
   overflow-x: auto;
@@ -205,60 +276,32 @@
 
 .exam-table {
   width: 100%;
-
   border-collapse: collapse;
-
   min-width: 700px;
 }
 
 .exam-table th {
   width: 32%;
-
   background: #f5f5f5;
-
   color: #111;
-
   font-size: 15px;
-
   font-weight: 700;
-
   text-align: left;
-
   padding: 10px;
-
-  border: 1px solid #555;
-
+  border: 1px solid #ddd;
   vertical-align: top;
-
-  line-height: 1.6;
 }
 
 .exam-table td {
-  border: 1px solid #555;
-
+  border: 1px solid #ddd;
   padding: 10px;
-
   font-size: 15px;
-
   line-height: 1.7;
-
   vertical-align: top;
-
-  color: #111;
 }
 
 .exam-table tr:nth-child(even) {
   background: #fafafa;
-}
-
-/* =========================================
-   STATUS
-========================================= */
-
-.exam-status {
-  color: #008000;
-
-  font-weight: 700;
 }
 
 /* =========================================
@@ -270,9 +313,7 @@
 .exam-update-list a,
 .important-link-card {
   color: #0000cc;
-
   font-weight: 700;
-
   text-decoration: none;
 }
 
@@ -281,99 +322,42 @@
 .exam-update-list a:hover,
 .important-link-card:hover {
   color: #d40000;
-
-  text-decoration: underline;
 }
 
 /* =========================================
-   LATEST UPDATES
+   FORCE TABLE LEFT ALIGN
 ========================================= */
 
-.exam-update-list {
-  margin: 0;
-
-  padding: 0;
-
-  list-style: none;
+.editor-content table,
+.editor-content table tbody,
+.editor-content table thead,
+.editor-content table tr,
+.editor-content table th,
+.editor-content table td {
+  text-align: left !important;
+  vertical-align: top;
 }
 
-.exam-update-list li {
-  border-bottom: 1px solid #ddd;
+/* TinyMCE generated content */
+
+.editor-content table p,
+.editor-content table span,
+.editor-content table div {
+  text-align: left !important;
 }
 
-.exam-update-list li:last-child {
-  border-bottom: none;
+/* Links inside table */
+
+.editor-content table a {
+  text-align: left !important;
 }
 
-.exam-update-list a {
-  display: block;
+/* Lists inside table */
 
-  padding: 12px 14px;
-
-  font-size: 15px;
-
-  line-height: 1.7;
-}
-
-.exam-update-list a:hover {
-  background: #fafafa;
-}
-
-
-.status-btn {
-  display:inline-flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  margin-top:16px;
-
-  padding:6px 10px;
-
-  background:#f9f9f9;
-
-  border:2px solid #c20e0e;
-
-  color:#f7f7f7;
-
-  font-size:14px;
-
-  font-weight:700;
-
-  text-decoration:none;
-
-  border-radius:4px;
-
-  transition:all .2s ease;
-}
-
-
-/* =========================================
-   IMPORTANT LINKS
-========================================= */
-
-.important-links-grid {
-  display: grid;
-
-  grid-template-columns:
-    repeat(auto-fit, minmax(220px, 1fr));
-
-  gap: 12px;
-
-  padding: 14px;
-}
-
-.important-link-card {
-  border: 1px solid #555;
-
-  background: #fafafa;
-
-  padding: 12px;
-
-  text-align: center;
-
-  line-height: 1.6;
+.editor-content table ul,
+.editor-content table ol,
+.editor-content table li {
+  text-align: left !important;
 }
 
 /* =========================================
@@ -381,7 +365,91 @@
 ========================================= */
 
 .editor-content {
-  padding: 14px;
+  padding: 22px;
+  color: #222;
+  font-size: 17px;
+  line-height: 1.85;
+}
+
+.editor-content h2 {
+  margin: 36px 0 18px;
+  color: #000066;
+  font-size: 25px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.editor-content h2:first-child {
+  margin-top: 0;
+}
+
+.editor-content h3 {
+  margin: 28px 0 14px;
+
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.editor-content p {
+  margin: 0 0 18px;
+}
+
+.editor-content ul,
+.editor-content ol {
+  margin: 0 0 20px 24px;
+}
+
+.editor-content li {
+  margin-bottom: 8px;
+}
+
+.editor-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1px 0;
+}
+
+.editor-content table th,
+.editor-content table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.editor-content img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 24px auto;
+  border-radius: 6px;
+}
+
+.editor-content blockquote {
+  margin: 20px 0;
+  padding: 14px 18px;
+  border-left: 4px solid #000066;
+  background: #f7f7f7;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.status-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+ margin-top: 4pxpx;
+  padding: 8px 12px;
+  background: #db1010;
+  color: #fff !important;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.status-btn:hover {
+  background: #751b1b;
 }
 
 /* =========================================
@@ -407,27 +475,29 @@
   }
 
   .exam-hero {
-    padding: 14px;
+    padding: 16px;
   }
 
   .exam-title {
-    font-size: 28px;
-
-    line-height: 1.5;
+    font-size: 30px;
   }
 
-  .exam-meta-line {
-    font-size: 14px;
+  .editor-content {
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .editor-content h2 {
+    font-size: 21px;
+    margin: 28px 0 14px;
+  }
+
+  .editor-content h3 {
+    font-size: 20px;
   }
 
   .exam-box-heading {
     font-size: 18px;
-
-    padding: 9px 12px;
-  }
-
-  .editor-content {
-    padding: 12px;
   }
 
   .exam-table {
@@ -436,25 +506,8 @@
 
   .exam-table th,
   .exam-table td {
-    padding: 8px;
-
     font-size: 13px;
+    padding: 8px;
   }
 
-  .exam-toc-title {
-    font-size: 16px;
-  }
-
- .exam-toc-list a{
-  padding:6px 10px;
-
-  font-size:13px;
-
-  line-height:1.3;
 }
-
-}
-
-/* =========================================
-   IMPORTANT LINKS BUTTON
-========================================= */

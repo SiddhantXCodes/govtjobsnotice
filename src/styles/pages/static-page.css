@@ -1,5 +1,5 @@
 .static-page{
-  max-width:1050px;
+  max-width:var(--container-width);
   margin:auto;
   padding:14px 8px 30px;
 }

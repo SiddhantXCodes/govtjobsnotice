@@ -9,7 +9,7 @@ export async function getAllExams() {
         await supabase
             .from("exams")
             .select("*")
-            .eq("is_active", true)
+            .eq("status", "published")
             .order("title", {
                 ascending: true
             });
@@ -37,7 +37,7 @@ export async function getExamBySlug(
             .from("exams")
             .select("*")
             .eq("slug", slug)
-            .eq("is_active", true)
+            .eq("status", "published")
             .single();
 
     if (error) {

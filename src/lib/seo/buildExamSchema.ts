@@ -1,63 +1,35 @@
 export function buildExamSchema(
-    post: any
+  exam: any
 ) {
 
-    const seo =
-        post.overview?.seo || {};
+  return {
 
-    return {
+    "@context":
+      "https://schema.org",
 
-        "@context":
-            "https://schema.org",
+    "@type":
+      "EducationalOccupationalProgram",
 
-        "@type":
-            "Article",
+    name:
+      exam.title,
 
-        headline:
-            seo.title ||
-            post.feed_title ||
-            post.title,
+    description:
+      exam.seo_description ||
+      exam.title,
 
-        description:
-            seo.description ||
-            "",
+    provider: {
 
-        datePublished:
-            post.published_at,
+      "@type":
+        "Organization",
 
-        dateModified:
-            post.date_updated ||
-            post.date_created,
+      name:
+        exam.organization
 
-        author: {
-            "@type": "Organization",
-            name: "GovtJobsNotice"
-        },
+    },
 
-        publisher: {
-            "@type": "Organization",
-            name: "GovtJobsNotice",
+    url:
+      `https://govtjobsnotice.com/exam/${exam.slug}/`
 
-            logo: {
-                "@type": "ImageObject",
-                url: "https://govtjobsnotice.com/logo.png"
-            }
-        },
-
-        mainEntityOfPage: {
-            "@type": "WebPage",
-
-            "@id":
-                `https://govtjobsnotice.com/exam/${post.slug}/`
-        },
-
-        url:
-            `https://govtjobsnotice.com/exam/${post.slug}/`,
-
-        image:
-            post.featured_image_url ||
-            "https://govtjobsnotice.com/default-featured-image.jpg"
-
-    };
+  };
 
 }

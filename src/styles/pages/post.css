@@ -3,7 +3,7 @@
 ========================================= */
 
 .post-page {
-  max-width: 1050px;
+  max-width: var(--container-width);
 
   margin: auto;
 
@@ -697,19 +697,30 @@ padding:0
 .editor-content h3{
 margin:0;
 padding:10px 12px;
-background:#f7f7f7;
+background:#becff3;
 border-top:1px solid #dcdcdc;
 border-bottom:1px solid #dcdcdc;
 color:#111827;
 font-size:18px;
 font-weight:700;
-line-height:1.6
+line-height:1.2;
 }
 
 .editor-content h3:first-child{
 border-top:none
 }
 
+.editor-content h4{
+margin-top:4px;
+padding:10px 12px;
+background:#cdd9f3;
+border-top:1px solid #dcdcdc;
+border-bottom:1px solid #dcdcdc;
+color:#111827;
+font-size:18px;
+font-weight:700;
+line-height:1.2;
+}
 /* =========================================
    TABLES
 ========================================= */

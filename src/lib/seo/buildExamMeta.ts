@@ -1,52 +1,40 @@
-export function buildExamMeta(
-    post: any
-) {
+export function buildExamMeta(exam: any) {
 
-    const seo =
-        post.overview?.seo || {};
+  const title =
+    exam.seo_title ||
+    exam.title;
 
-    const title =
-        seo.title ||
-        post.feed_title ||
-        post.title ||
-        "";
+  const description =
+    exam.seo_description ||
+    `${exam.short_name || exam.title} exam details including eligibility, syllabus, exam pattern, selection process, important dates, salary, latest updates and official notification information.`;
 
-    const description =
-        seo.description ||
-        post.intro_content?.replace(/<[^>]*>/g, "")
-            ?.substring(0, 160) ||
-        "";
+  const keywords = [
 
-    const keywords = [
+    exam.title,
+    exam.short_name,
+    exam.category,
+    exam.organization,
 
-        post.title,
+    "government exam",
+    "government jobs",
+    "sarkari exam",
+    "exam notification"
 
-        post.feed_title,
+  ]
+    .filter(Boolean)
+    .join(", ");
 
-        ...(post.tags || []),
+  return {
 
-        "government jobs",
-        "latest govt jobs",
-        "sarkari result",
-        "govt jobs 2026",
-        "online form",
-        "recruitment"
+    title,
 
-    ]
-        .filter(Boolean)
-        .join(", ");
+    description,
 
-    return {
+    canonical:
+      `/exam/${exam.slug}/`,
 
-        title,
+    keywords
 
-        description,
-
-        canonical:
-            `/exam/${post.slug}/`,
-
-        keywords
-
-    };
+  };
 
 }

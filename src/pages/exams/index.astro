@@ -150,9 +150,9 @@ const schema = {
             Exam
           </th>
 
-          <th>
+          <!-- <th>
             Latest Update
-          </th>
+          </th> -->
 
           <th>
             Last Updated
@@ -179,8 +179,7 @@ const schema = {
                 >
 
                   {
-                    exam.short_name ||
-                    exam.title
+                    exam.short_name + " " + exam.current_year || exam.title + " " + exam.current_year
                   }
 
                 </a>
@@ -189,7 +188,7 @@ const schema = {
 
               <!-- UPDATE -->
 
-              <td>
+              {/* <td>
 
                 {
                   exam.latest_update_title ? (
@@ -214,16 +213,16 @@ const schema = {
                   )
                 }
 
-              </td>
+              </td> */}
 
               <!-- DATE -->
 
               <td>
 
                 {
-                  exam.last_updated
+                  exam.published_at
                     ? new Date(
-                        exam.last_updated
+                        exam.published_at,
                       ).toLocaleDateString(
                         "en-IN",
                         {

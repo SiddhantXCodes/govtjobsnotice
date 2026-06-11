@@ -7,17 +7,11 @@ import PostSuggestions from "../../components/PostSuggestions.astro";
 
 import SocialLinks from "../../components/SocialLinks.astro";
 
-import { EXAM_LIFECYCLE_TEMPLATES } from "../../lib/examLifecycleTemplates";
-
-import { EXAM_PAGE_SECTIONS } from "../../lib/examPageSections";
-import SectionRenderer from "../../components/post/SectionRenderer.astro";
 import {
     getAllExams,
     getExamBySlug,
     getExamPosts,
 } from "../../lib/repositories/examRepository";
-
-import { buildExamLifecycle } from "../../lib/repositories/examLifecycle";
 
 import { buildExamMeta } from "../../lib/seo/buildExamMeta";
 
@@ -59,94 +53,43 @@ if (!exam) {
 
 const latestUpdates = await getExamPosts(exam.id, 12);
 
-const lifecycle = buildExamLifecycle(latestUpdates);
 /* =========================================
-   ACTIVE RECRUITMENT
+   TOC FROM H2
 ========================================= */
 
-const activeRecruitment = latestUpdates.length > 0 ? latestUpdates[0] : null;
+const toc: {
+    id: string;
+    text: string;
+}[] = [];
 
-/* =========================================
-   RESOLVE FIELD
-========================================= */
-function getRecruitmentSection(sectionId: string) {
-    const sections = activeRecruitment?.sections;
+let contentHtml = exam.content || "";
 
-    if (!Array.isArray(sections)) {
-        return null;
-    }
+contentHtml = contentHtml.replace(
+    /<h2[^>]*>(.*?)<\/h2>/gi,
+    (_match: string, title: string) => {
+        const cleanTitle = title.replace(/<[^>]*>/g, "").trim();
 
-    return sections.find((item: any) => item?.id === sectionId);
-}
+        const id = cleanTitle
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-|-$/g, "");
 
-function resolveField(section: any) {
-    const field = section.field;
+        toc.push({
+            id,
+            text: cleanTitle,
+        });
 
-    if (activeRecruitment) {
-        if (field === "important_dates") {
-            return activeRecruitment?.important_dates;
-        }
+        return `<h2 id="${id}" class="exam-content-heading">${title}</h2>`;
+    },
+);
 
-        if (field === "important_links") {
-            return activeRecruitment?.important_links;
-        }
-
-        const sectionData = getRecruitmentSection(field);
-
-        if (sectionData) {
-            return sectionData;
-        }
-    }
-
-    return exam?.[field];
-}
 /* =========================================
    SEO
 ========================================= */
 
 const meta = buildExamMeta(exam);
 
-
-/* =========================================
-   SECTIONS
-========================================= */
-
-const sections = EXAM_PAGE_SECTIONS.filter((section) => {
-    if (section.type === "lifecycle") {
-        return true;
-    }
-
-    return !!resolveField(section);
-});
-
-const schema = {
-
-  "@context":
-    "https://schema.org",
-
-  "@type":
-    "CollectionPage",
-
-  name:
-    exam.title,
-
-  description:
-    meta.description,
-
-  url:
-    `https://govtjobsnotice.com/exam/${exam.slug}/`,
-
-  publisher: {
-
-    "@type":
-      "Organization",
-
-    name:
-      "GovtJobsNotice"
-
-  }
-
-};
+const schema = buildExamSchema(exam);
 ---
 
 <BaseLayout
@@ -167,14 +110,13 @@ const schema = {
                         href: "/exams",
                     },
                     {
-                        label: exam.short_name || exam.title,
+                        label: exam.short_name + " " + exam.current_year || exam.title,
                     },
                 ]}
             />
 
             <h1 class="exam-title">
-                {exam.title}
-                {exam.year ? `${exam.year}` : ""}
+                {exam.short_name} {exam.current_year}
             </h1>
 
             <div class="exam-meta-line">
@@ -185,30 +127,54 @@ const schema = {
                 <span class="exam-dot"> • </span>
 
                 <span>
-                    {exam.category || "Government Exam"}
+                    {(exam.category || "Government Exam").toUpperCase()}
                 </span>
 
                 <span class="exam-dot"> • </span>
 
                 <span>
-                    {exam.level || "National Level"}
+                    {exam.exam_level || "National"}
                 </span>
+
+                {
+                    exam.official_website && (
+                        <>
+                            <span class="exam-dot"> • </span>
+
+                            <a
+                                href={exam.official_website}
+                                target="_blank"
+                                rel="nofollow noopener"
+                            >
+                                Official Website
+                            </a>
+                        </>
+                    )
+                }
             </div>
 
             <div class="exam-updated-line">
                 Last Updated :
 
                 {
-                    latestUpdates?.[0]?.published_at || exam.last_updated
+                    latestUpdates?.[0]?.published_at
                         ? new Date(
-                              latestUpdates?.[0]?.published_at ||
-                                  exam.last_updated,
+                              latestUpdates[0].published_at,
                           ).toLocaleDateString("en-IN", {
                               day: "numeric",
                               month: "long",
                               year: "numeric",
                           })
-                        : "-"
+                        : exam.date_updated
+                          ? new Date(exam.date_updated).toLocaleDateString(
+                                "en-IN",
+                                {
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                },
+                            )
+                          : "-"
                 }
             </div>
         </section>
@@ -219,243 +185,56 @@ const schema = {
             <!-- SIDEBAR -->
 
             <aside class="exam-sidebar">
-                <div class="exam-toc">
-                    <div class="exam-toc-title">Table of Contents</div>
+                {
+                    toc.length > 0 && (
+                        <div class="exam-toc">
+                            <div class="exam-toc-title">Table of Contents</div>
 
-                    <ul class="exam-toc-list">
-                        {
-                            sections.map((section) => (
-                                <li>
-                                    <a href={`#${section.id}`}>
-                                        {section.label}
-                                    </a>
-                                </li>
-                            ))
-                        }
-                    </ul>
-                </div>
+                            <ul class="exam-toc-list">
+                                {toc.map((item) => (
+                                    <li>
+                                        <a href={`#${item.id}`}>{item.text}</a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )
+                }
             </aside>
 
             <!-- CONTENT -->
 
             <div class="exam-content">
-                <!-- LATEST UPDATES -->
-
                 {
                     latestUpdates.length > 0 && (
-                        <section class="exam-box">
-                            <h2 class="exam-box-heading">
-                                <h2 class="exam-box-heading">
-                                    Latest {exam.short_name} Updates
-                                </h2>
-                            </h2>
-
-                            <ul class="exam-update-list">
-                                {latestUpdates.map((post) => (
-                                    <li>
-                                        <a href={`/${post.slug}/`}>
-                                            {post.feed_title || post.title}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
-                        </section>
+                        <section class="exam-box">...</section>
                     )
                 }
 
-                <!-- ALL SECTIONS -->
+                <section class="exam-box">
+                    <div class="editor-content" set:html={contentHtml} />
+                </section>
 
                 {
-                    sections.map((section) => {
-                        /* =====================================
-                         LIFECYCLE
-                        ===================================== */
-                        if (section.type === "lifecycle") {
-                            const lifecycleItem =
-                                lifecycle[(section as any).statusType];
-
-                            if (!lifecycleItem) {
-                                return null;
-                            }
-
-                            /* TEMPLATE */
-
-                            let template = null;
-
-                            /* =====================================
-                                ACTIVE
-                            ===================================== */
-                            const statusType = (section as any).statusType;
-
-                            const lifecycleTemplate = (
-                                EXAM_LIFECYCLE_TEMPLATES as any
-                            )[statusType];
-                            if (lifecycleItem.status === "active") {
-                                template = lifecycleTemplate?.active?.(
-                                    exam,
-                                    lifecycleItem.post,
-                                );
-                            } else if (lifecycleItem.status === "released") {
-                                template = lifecycleTemplate?.released?.(exam);
-                            } else {
-                                template = lifecycleTemplate?.upcoming?.(exam);
-                            }
-
-                            if (!template) {
-                                return null;
-                            }
-
-                            return (
-                                <section id={section.id} class="exam-box">
-                                    <h2 class="exam-box-heading">
-                                        {template.title}
-                                    </h2>
-
-                                    <div class="editor-content">
-                                        <div set:html={template.content} />
-
-                                        {lifecycleItem.status === "active" &&
-                                            lifecycleItem.post &&
-                                            template.buttonLabel && (
-                                                <a
-                                                    href={`/${lifecycleItem.post.slug}/`}
-                                                    class="status-btn"
-                                                >
-                                                    {lifecycleItem.post
-                                                        ?.feed_title ||
-                                                        template.buttonLabel}
-                                                </a>
-                                            )}
-                                    </div>
-                                </section>
-                            );
-                        }
-
-                        /* =====================================
-                                CONTENT
-                        ===================================== */
-
-                        const content = resolveField(section);
-
-                        if (!content) {
-                            return null;
-                        }
-
-                        /* IMPORTANT DATES */
-
-                        if ((section as any).field === "important_dates") {
-                            const dates = Array.isArray(content)
-                                ? content
-                                : Object.values(content || {});
-
-                            return (
-                                <section id={section.id} class="exam-box">
-                                    <h2 class="exam-box-heading">
-                                        {exam.short_name} {exam.year}{" "}
-                                        {section.label}
-                                    </h2>
-
-                                    <div class="exam-table-wrap">
-                                        <table class="exam-table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Event</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-
-                                            <tbody>
-                                                {dates.map((item: any) => (
-                                                    <tr>
-                                                        <td>
-                                                            {item.event ||
-                                                                item.label ||
-                                                                "-"}
-                                                        </td>
-
-                                                        <td>
-                                                            {item.display_text ||
-                                                                (item.date
-                                                                    ? new Date(
-                                                                          item.date,
-                                                                      ).toLocaleDateString(
-                                                                          "en-IN",
-                                                                          {
-                                                                              day: "numeric",
-                                                                              month: "long",
-                                                                              year: "numeric",
-                                                                          },
-                                                                      )
-                                                                    : "-")}
-                                                        </td>
-                                                    </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </section>
-                            );
-                        }
-
-                        /* IMPORTANT LINKS */
-                        if (
-                            (section as any).field === "important_links" &&
-                            typeof content === "object"
-                        ) {
-                            const normalizedSection = {
-                                ...content,
-                                title: section.label,
-                            };
-
-                            return (
-                                <section id={section.id} class="exam-box">
-                                    <SectionRenderer
-                                        section={normalizedSection}
-                                    />
-                                </section>
-                            );
-                        }
-
-                        /* POST SECTION */
-
-                        if (typeof content === "object" && content?.type) {
-                            const normalizedSection = {
-                                ...content,
-                                title: section.label,
-                            };
-
-                            return (
-                                <section id={section.id} class="exam-box">
-                                    <SectionRenderer
-                                        section={normalizedSection}
-                                    />
-                                </section>
-                            );
-                        }
-
-                        /* EXAM HTML */
-
-                        return (
-                            <section id={section.id} class="exam-box">
-                                <h2 class="exam-box-heading">
-                                    {exam.short_name} {exam.year}{" "}
-                                    {section.label}
-                                </h2>
-
-                                <div
-                                    class="editor-content"
-                                    set:html={content}
-                                />
-                            </section>
-                        );
-                    })
+                    exam.featured_image && (
+                        <section class="exam-box">
+                            <img
+                                src={exam.featured_image}
+                                alt={exam.title}
+                                class="exam-featured-image"
+                                loading="lazy"
+                            />
+                        </section>
+                    )
                 }
             </div>
         </div>
 
-        <!-- RELATED -->
+        <!-- RELATED POSTS -->
 
-        <PostSuggestions currentSlug="" category="" />
+        <PostSuggestions currentSlug="" category={exam.category} />
+
+        <!-- SOCIAL LINKS -->
 
         <SocialLinks />
     </article>

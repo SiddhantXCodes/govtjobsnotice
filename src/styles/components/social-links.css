@@ -2,188 +2,155 @@
    SOCIAL LINKS SECTION
 ========================================= */
 
-.social-links-section{
-
-  padding:16px 18px;
-
-  background:#fff;
-
-  border:1px solid #dbe3f0;
-
-  border-radius:6px;
-
-  text-align:center;
+.social-links-section {
+  padding: 16px 18px;
+  background: #fff;
+  border: 1px solid #dbe3f0;
+  border-radius: 6px;
+  text-align: center;
 }
 
 /* =========================================
    HEADING
 ========================================= */
 
-.social-heading{
-
-  margin:0 0 6px;
-
-  color:var(--text);
-
-  font-size:20px;
-
-  font-weight:800;
-
-  line-height:1.2;
+.social-heading {
+  margin: 0 0 6px;
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.2;
 }
 
 /* =========================================
    DESCRIPTION
 ========================================= */
 
-.social-description{
-
-  margin:0 auto 14px;
-
-  color:#4b5563;
-
-  font-size:14px;
-
-  line-height:1.5;
-
-  max-width:800px;
+.social-description {
+  margin: 0 auto 14px;
+  color: #4b5563;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 800px;
 }
 
 /* =========================================
    SOCIAL BUTTONS WRAP
 ========================================= */
 
-.social-links{
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  flex-wrap:wrap;
-
-  gap:10px;
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 /* =========================================
    BUTTONS
 ========================================= */
 
-.social-links a{
+.social-links a {
 
-  min-width:120px;
+  min-width: 120px;
 
-  height:40px;
+  height: 40px;
 
-  display:inline-flex;
+  display: inline-flex;
 
-  align-items:center;
+  align-items: center;
 
-  justify-content:center;
+  justify-content: center;
 
-  padding:0 16px;
+  padding: 0 16px;
 
-  border-radius:6px;
+  border-radius: 6px;
 
-  color:#fff;
+  color: #fff;
 
-  font-size:14px;
+  font-size: 14px;
 
-  font-weight:700;
+  font-weight: 700;
 
-  text-decoration:none;
+  text-decoration: none;
 
-  transition:all .2s ease;
+  transition: all .2s ease;
 }
 
-.social-links a:hover{
+.social-links a:hover {
 
-  opacity:.95;
+  opacity: .95;
 }
 
 /* =========================================
    BRAND COLORS
 ========================================= */
 
-.whatsapp-btn{
-  background:var(--whatsapp);
+.whatsapp-btn {
+  background: var(--whatsapp);
 }
 
-.telegram-btn{
-  background:var(--telegram);
+.telegram-btn {
+  background: var(--telegram);
 }
 
-.youtube-btn{
-  background:var(--youtube);
+.youtube-btn {
+  background: var(--youtube);
 }
 
-.instagram-btn{
-  background:linear-gradient(
-    135deg,
-    #fd5949,
-    #d6249f
-  );
+.instagram-btn {
+  background: linear-gradient(135deg,
+      #fd5949,
+      #d6249f);
 }
 
-.linkedin-btn{
-  background:var(--linkedin);
+.linkedin-btn {
+  background: var(--linkedin);
 }
 
 /* =========================================
    MOBILE
 ========================================= */
 
-@media(max-width:768px){
+@media(max-width:768px) {
 
-  .social-links-section{
-    padding:14px;
+  .social-links-section {
+    padding: 14px;
   }
 
-  .social-heading{
-    font-size:18px;
+  .social-heading {
+    font-size: 18px;
   }
 
-  .social-description{
-    font-size:13px;
+  .social-description {
+    font-size: 13px;
 
-    margin-bottom:12px;
+    margin-bottom: 12px;
   }
 
-  .social-links{
-    gap:8px;
+  .social-links {
+    gap: 8px;
   }
 
-  .social-links a{
-
-    min-width:100px;
-
-    height:38px;
-
-    font-size:13px;
-
-    padding:0 12px;
+  .social-links a {
+    min-width: 100px;
+    height: 38px;
+    font-size: 13px;
+    padding: 0 12px;
   }
-
 }
 
-@media(max-width:480px){
+@media(max-width:480px) {
 
-  .social-links{
-
-    display:grid;
-
+  .social-links {
+    display: grid;
     grid-template-columns:
-      repeat(2,1fr);
-
-    gap:8px;
+      repeat(2, 1fr);
+    gap: 8px;
   }
 
-  .social-links a{
-
-    width:100%;
-
-    min-width:auto;
+  .social-links a {
+    width: 100%;
+    min-width: auto;
   }
-
 }
