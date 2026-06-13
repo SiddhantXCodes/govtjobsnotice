@@ -3,63 +3,54 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 
-import { getAllPosts,  getPostsByTag } from "../../lib/repositories/postRepository";
+import {
+  getAllPosts,
+  getPostsByTag,
+} from "../../lib/repositories/postRepository";
+import { buildArchiveSeo } from "../../lib/seo/buildArchiveSeo";
 
 export async function getStaticPaths() {
-
-  const posts =
-    await getAllPosts();
+  const posts = await getAllPosts();
 
   const tags = [
     ...new Set(
       posts.flatMap((post: any) => {
-
-        if (
-          !post.tags ||
-          !Array.isArray(post.tags)
-        ) {
+        if (!post.tags || !Array.isArray(post.tags)) {
           return [];
         }
 
-        return post.tags.map(
-          (tag: string) =>
-            tag
-              .trim()
-              .toLowerCase()
-              .replace(/\s+/g, "-")
+        return post.tags.map((tag: string) =>
+          tag.trim().toLowerCase().replace(/\s+/g, "-"),
         );
-
-      })
-    )
+      }),
+    ),
   ];
 
-
-
-  return tags.map(
-    (tag) => ({
-      params: { tag }
-    })
-  );
-
+  return tags.map((tag) => ({
+    params: { tag },
+  }));
 }
 const { tag } = Astro.params;
 
-const posts =
-  await getPostsByTag(
-    tag || "",
-    100
-  );
+const posts = await getPostsByTag(tag || "", 100);
 
 const tagTitle = tag
   ?.replaceAll("-", " ")
   .replace(/\b\w/g, (c: string) => c.toUpperCase());
+
+  const seo = buildArchiveSeo({
+  title:
+    `${tagTitle} Jobs | GovtJobsNotice`,
+
+  description:
+    `${tagTitle} government jobs, admit cards, results, answer keys and latest recruitment updates`,
+
+  canonical:
+    `/tag/${tag}/`,
+});
 ---
 
-<BaseLayout
-  title={`${tagTitle} Jobs | GovtJobsNotice`}
-  description={`${tagTitle} government jobs, admit cards, results, answer keys and latest recruitment updates`}
-  canonical={`/tag/${tag}/`}
->
+<BaseLayout {...seo}>
   <main class="page-container">
     <!-- HEADER -->
 

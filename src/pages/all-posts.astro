@@ -8,7 +8,7 @@ import Breadcrumbs
 import {
   getLatestPosts
 } from "../lib/repositories/postRepository";
-
+import { buildStaticSeo } from "../lib/seo/buildStaticSeo";
 /* POSTS */
 
 const posts =
@@ -16,47 +16,22 @@ const posts =
 
 /* SEO */
 
-const schema = {
-
-  "@context":
-    "https://schema.org",
-
-  "@type":
-    "CollectionPage",
-
-  name:
-    "Latest Government Job Updates",
+const seo = buildStaticSeo({
+  title:
+    "All Latest Government Job Updates | GovtJobsNotice",
 
   description:
-    "Latest government jobs, Sarkari Result, admit cards, answer keys, syllabus and recruitment updates.",
+    "Check all latest government jobs, Sarkari Result updates, admit cards, answer keys, syllabus, admissions and recruitment notifications.",
 
-  url:
-    "https://govtjobsnotice.com/all-posts/",
+  slug:
+    "all-posts",
 
-  publisher:{
-    "@type":"Organization",
-    name:"GovtJobsNotice"
-  }
-
-};
+  type:
+    "CollectionPage",
+});
 ---
 
-<BaseLayout
-  title="All Latest Government Job Updates | GovtJobsNotice"
-  description="Check all latest government jobs, Sarkari Result updates, admit cards, answer keys, syllabus, admissions and recruitment notifications."
-  canonical="/all-posts/"
-  keywords="
-    latest govt jobs,
-    sarkari result,
-    admit card,
-    answer key,
-    government jobs,
-    recruitment updates,
-    latest updates,
-    govtjobsnotice
-  "
-  schema={schema}
->
+<BaseLayout {...seo}>
 
 <main class="page-container">
 

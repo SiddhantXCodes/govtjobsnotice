@@ -8,6 +8,8 @@ import Breadcrumbs
 import {
   getPostsByCategory
 } from "../../lib/repositories/postRepository";
+import { buildArchiveSeo }
+from "../../lib/seo/buildArchiveSeo";
 const getDate = (
   post: any,
   key: string
@@ -59,7 +61,18 @@ const categoryTitle =
       /\b\w/g,
       (c)=>c.toUpperCase()
     );
+const seo = buildArchiveSeo({
 
+  title:
+    `${categoryTitle} | GovtJobsNotice`,
+
+  description:
+    `Latest ${categoryTitle.toLowerCase()} updates, government job notifications, admit cards, results, answer keys, syllabus and recruitment information.`,
+
+  canonical:
+    `/category/${category}/`,
+
+});
 /* COLUMN LOGIC */
 
 const getColumns = ()=>{
@@ -131,11 +144,7 @@ const columns =
 
 ---
 
-<BaseLayout
-  title={`${categoryTitle} | GovtJobsNotice`}
-  description={`${categoryTitle} updates, notifications, admit cards, results and latest information`}
->
-
+<BaseLayout {...seo}>
 <main class="page-container">
 
   <!-- HEADER -->

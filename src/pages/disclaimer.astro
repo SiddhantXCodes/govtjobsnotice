@@ -1,32 +1,26 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import BaseLayout
+  from "../layouts/BaseLayout.astro";
 
+import {
+  buildStaticSeo
+} from "../lib/seo/buildStaticSeo";
 
-const schema = {
-  "@context": "https://schema.org",
-
-  "@type": "WebPage",
-
-  name: "Disclaimer - GovtJobsNotice",
-
-  url: "https://govtjobsnotice.com/disclaimer",
+const seo = buildStaticSeo({
+  title:
+    "Disclaimer | GovtJobsNotice",
 
   description:
-    "Official disclaimer page of GovtJobsNotice regarding information accuracy, external links and website usage.",
-};
+    "Read the official disclaimer of GovtJobsNotice regarding government job notifications, Sarkari Result updates, recruitment information and external website references.",
+
+  slug:
+    "disclaimer",
+
+  type:
+    "WebPage",
+});
 ---
-
-<BaseLayout
-  title="Disclaimer | GovtJobsNotice"
-
-  description="Read the official disclaimer of GovtJobsNotice regarding government job notifications, Sarkari Result updates, recruitment information and external website references."
-
-  canonical="https://govtjobsnotice.com/disclaimer"
-
-  keywords="govtjobsnotice disclaimer, govt jobs notice disclaimer, government jobs website disclaimer, sarkari result disclaimer, recruitment information disclaimer"
-
-  schema={schema}
->
+<BaseLayout {...seo}>
 
 <main class="static-page">
 
@@ -47,7 +41,11 @@ const schema = {
         answer keys, syllabus and recruitment information.
 
       </p>
+<p>
 
+The information published on GovtJobsNotice is collected from official notifications, recruitment advertisements and publicly available sources. While we strive to keep information accurate and up to date, candidates should always verify details from the official website before making any application or examination-related decisions.
+
+</p>
       <p>
 
         GovtJobsNotice is not a government website

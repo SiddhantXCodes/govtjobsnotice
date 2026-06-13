@@ -8,7 +8,7 @@ import PostSuggestions from "../components/PostSuggestions.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 
 import SectionRenderer from "../components/post/SectionRenderer.astro";
-
+import { buildPostSeo } from "../lib/seo/buildPostSeo";
 /* =========================================
    STATIC PATHS
 ========================================= */
@@ -35,6 +35,7 @@ if (!post) {
   return Astro.redirect("/404");
 }
 
+const seo = buildPostSeo(post);
 /* =========================================
    DATE FORMAT
 ========================================= */
@@ -58,10 +59,6 @@ const formatDate = (date: string) => {
    SEO
 ========================================= */
 
-const seoTitle = post?.overview?.seo?.title || post?.title;
-
-const seoDescription = post?.overview?.seo?.description || "";
-
 const postTitle = post?.title || "GovtJobsNotice";
 
 const shortName = post?.feed_title || "GovtJobsNotice";
@@ -82,49 +79,9 @@ const ageLimit = post?.age_limit || null;
 const importantLinks = post?.important_links || null;
 
 const normalSections = post?.sections || [];
-const schema = {
-  "@context": "https://schema.org",
-
-  "@type": "NewsArticle",
-
-  headline: seoTitle,
-
-  description: seoDescription,
-
-  datePublished: post?.published_at,
-
-  dateModified: post?.date_updated || post?.published_at,
-
-  author: {
-    "@type": "Organization",
-
-    name: "GovtJobsNotice",
-  },
-
-  publisher: {
-    "@type": "Organization",
-
-    name: "GovtJobsNotice",
-  },
-
-  mainEntityOfPage: {
-    "@type": "WebPage",
-
-    "@id": `https://govtjobsnotice.com/${post?.slug}/`,
-  },
-};
 ---
 
-<BaseLayout
-  title={`${seoTitle} | GovtJobsNotice`}
-  description={seoDescription}
-  canonical={`/${post?.slug}/`}
-  schema={schema}
-  ogImage={post?.featured_image_url?.replace(
-    "/upload/",
-    "/upload/f_auto,q_auto/",
-  )}
->
+<BaseLayout {...seo}>
   <main class="post-page">
     <!-- PAGE INTRO -->
 

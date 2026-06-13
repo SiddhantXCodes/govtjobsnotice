@@ -16,7 +16,22 @@ import {
 
 import "../styles/pages/last-date.css";
 /* FETCH POSTS */
+import { buildStaticSeo }
+from "../lib/seo/buildStaticSeo";
 
+const seo = buildStaticSeo({
+  title:
+    "Application Closing Soon | GovtJobsNotice",
+
+  description:
+    "Check latest government jobs and application forms closing soon with application last dates.",
+
+  slug:
+    "last-date",
+
+  type:
+    "CollectionPage",
+});
 const latestJobs =
   await getPostsByCategory(
     "latest-jobs",
@@ -58,11 +73,8 @@ const validPosts =
     }
   );
 ---
-
-<BaseLayout
-  title="Application Closing Soon | GovtJobsNotice"
-  description="Check latest government jobs and application forms closing soon with application last dates."
->
+<BaseLayout {...seo}
+ modifiedTime={new Date().toISOString()}>
 
 <main class="page-container">
 

@@ -1,32 +1,24 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
+import { buildStaticSeo }
+from "../lib/seo/buildStaticSeo";
 
-const schema = {
-  "@context": "https://schema.org",
-
-  "@type": "ContactPage",
-
-  name: "Contact GovtJobsNotice",
-
-  url: "https://govtjobsnotice.com/contact",
+const seo = buildStaticSeo({
+  title:
+    "Contact Us | GovtJobsNotice",
 
   description:
-    "Contact GovtJobsNotice for queries, corrections, feedback, copyright concerns and support.",
-};
+    "Contact GovtJobsNotice for support, corrections, feedback, copyright concerns and government job related queries.",
+
+  slug:
+    "contact",
+
+  type:
+    "ContactPage",
+});
 ---
-
-<BaseLayout
-  title="Contact Us | GovtJobsNotice"
-
-  description="Contact GovtJobsNotice for support, corrections, feedback, copyright concerns and government job related queries."
-
-  canonical="https://govtjobsnotice.com/contact"
-
-  keywords="contact govtjobsnotice, govt jobs notice contact, government jobs website contact, recruitment support, govt jobs support"
-
-  schema={schema}
->
+<BaseLayout {...seo}>
 
 <main class="static-page">
 
@@ -56,10 +48,11 @@ const schema = {
         admit cards and recruitment content.
 
       </p>
-
-      <h2>
-        Email Support
-      </h2>
+<p>
+For support, corrections, feedback, copyright concerns,
+advertising enquiries or business partnerships, contact us at:
+</p>
+   <h2>Contact Information</h2>
 
       <p>
 

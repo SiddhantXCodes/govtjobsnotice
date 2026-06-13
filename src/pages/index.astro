@@ -19,28 +19,39 @@ import {
    SEO SCHEMA
 ========================================= */
 
-const schema = {
-  "@context": "https://schema.org",
+const schema = [
+  {
+    "@context": "https://schema.org",
 
-  "@type": "WebSite",
+    "@type": "WebSite",
 
-  name: "GovtJobsNotice",
+    name: "GovtJobsNotice",
 
-  url: "https://govtjobsnotice.com",
+    url: "https://govtjobsnotice.com",
 
-  description:
-    "Latest Government Job Notifications, Sarkari Result, Admit Cards, Results, Answer Keys, Admissions and Recruitment Updates in India.",
-
-  potentialAction: {
-    "@type": "SearchAction",
-
-    target:
-      "https://govtjobsnotice.com/search?q={search_term_string}",
-
-    "query-input":
-      "required name=search_term_string",
+    description:
+      "Latest Government Job Notifications, Sarkari Result, Admit Cards, Results, Answer Keys, Admissions and Recruitment Updates in India.",
   },
-};
+
+  {
+    "@context": "https://schema.org",
+
+    "@type": "Organization",
+
+    name: "GovtJobsNotice",
+
+    url: "https://govtjobsnotice.com",
+
+    logo: "https://govtjobsnotice.com/logo.png",
+
+    sameAs: [
+      "https://t.me/GovtJobs_Notice",
+      "https://youtube.com/@govtjobsnotice",
+      "https://instagram.com/govtjobsnotice",
+      "https://linkedin.com/company/govtjobsnotice"
+    ]
+  }
+];
 
 /* =========================================
    FETCH POSTS
@@ -206,8 +217,8 @@ const colors = [
 <BaseLayout
   title="Latest Govt Jobs 2026, Sarkari Result, Admit Card, Results | GovtJobsNotice"
   description="GovtJobsNotice provides latest government jobs, Sarkari Result, admit cards, results, answer keys, syllabus, admissions and recruitment notifications for SSC, Railway, Banking, UPSC, Police, Defence and State Government Jobs in India."
-  canonical="https://govtjobsnotice.com"
-  keywords="govt jobs, government jobs, latest govt jobs, sarkari result, govtjobsnotice, govt jobs notice, admit card, results, answer key, recruitment, railway jobs, SSC jobs, banking jobs, UPSC jobs, police jobs, defence jobs, online form, govt vacancy"
+  canonical="/"
+  ogImage="https://govtjobsnotice.com/default-og.jpg"
   schema={schema}
 >
 

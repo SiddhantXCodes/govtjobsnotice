@@ -13,9 +13,7 @@ import {
     getExamPosts,
 } from "../../lib/repositories/examRepository";
 
-import { buildExamMeta } from "../../lib/seo/buildExamMeta";
-
-import { buildExamSchema } from "../../lib/seo/buildExamSchema";
+import { buildExamSeo } from "../../lib/seo/buildExamSeo";
 
 /* =========================================
    STATIC PATHS
@@ -109,18 +107,11 @@ contentHtml = contentHtml.replace(
    SEO
 ========================================= */
 
-const meta = buildExamMeta(exam);
+const seo = buildExamSeo(exam);
 
-const schema = buildExamSchema(exam);
 ---
 
-<BaseLayout
-    title={meta.title}
-    description={meta.description}
-    canonical={meta.canonical}
-    keywords={meta.keywords}
-    schema={schema}
->
+<BaseLayout {...seo}>
     <article class="exam-page">
         <!-- HERO -->
 

@@ -1,155 +1,88 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { buildStaticSeo } from "../lib/seo/buildStaticSeo";
+const seo = buildStaticSeo({
+  title: "About GovtJobsNotice",
 
+  description: "Know about GovtJobsNotice...",
 
-const schema = {
-  "@context": "https://schema.org",
+  slug: "about",
 
-  "@type": "AboutPage",
-
-  name: "About GovtJobsNotice",
-
-  url: "https://govtjobsnotice.com/about",
-
-  description:
-    "GovtJobsNotice provides latest government job notifications, Sarkari Result, admit cards, results, answer keys, syllabus, admissions and recruitment updates across India.",
-};
+  type: "AboutPage",
+});
 ---
 
-<BaseLayout
-  title="About GovtJobsNotice - Latest Govt Jobs, Sarkari Result & Recruitment Updates"
+<BaseLayout {...seo}>
+  <main class="static-page">
+    <section class="static-box">
+      <h1 class="static-title">About GovtJobsNotice</h1>
 
-  description="Know about GovtJobsNotice - a platform providing latest government jobs, Sarkari Result, admit cards, answer keys, syllabus, admissions and recruitment notifications across India."
+      <div class="static-content">
+        <p>
+          GovtJobsNotice is an educational and informational platform created to
+          provide latest government job notifications, Sarkari Result updates,
+          admit cards, answer keys, syllabus, admissions and recruitment
+          information for candidates across India.
+        </p>
 
-  canonical="https://govtjobsnotice.com/about"
+        <p>
+          Our mission is to simplify government job information and help
+          students and aspirants access important recruitment updates quickly,
+          accurately and easily.
+        </p>
 
-  keywords="about govtjobsnotice, govt jobs notice, government jobs portal, sarkari result updates, govt job notifications, admit card, results, recruitment updates, latest govt jobs"
+        <p>
+          We regularly publish updates related to SSC, Railway, UPSC, Banking,
+          Police, Defence, Teaching, State Government Jobs and other recruitment
+          exams across India.
+        </p>
 
-  schema={schema}
->
+        <h2>What We Provide</h2>
 
-<main class="static-page">
+        <ul>
+          <li>Latest Government Job Notifications</li>
 
-  <section class="static-box">
+          <li>Sarkari Result Updates</li>
 
-    <h1 class="static-title">
-      About GovtJobsNotice
-    </h1>
+          <li>Admit Cards</li>
 
-    <div class="static-content">
+          <li>Answer Keys</li>
 
-      <p>
+          <li>Recruitment News</li>
 
-        GovtJobsNotice is an educational and informational platform
-        created to provide latest government job notifications,
-        Sarkari Result updates, admit cards, answer keys,
-        syllabus, admissions and recruitment information
-        for candidates across India.
+          <li>Syllabus & Exam Pattern</li>
 
-      </p>
+          <li>Admission Updates</li>
 
-      <p>
+          <li>Important Dates & Eligibility Details</li>
+        </ul>
 
-        Our mission is to simplify government job information
-        and help students and aspirants access important
-        recruitment updates quickly, accurately and easily.
+        <h2>Why GovtJobsNotice</h2>
 
-      </p>
+        <p>
+          GovtJobsNotice focuses on providing clean, fast and easy-to-understand
+          recruitment information with better readability and organized updates
+          for government job aspirants.
+        </p>
 
-      <p>
+        <p>
+          Our goal is to make important job-related information accessible
+          through a simple, mobile-friendly and fast-loading platform.
+        </p>
 
-        We regularly publish updates related to SSC, Railway,
-        UPSC, Banking, Police, Defence, Teaching,
-        State Government Jobs and other recruitment exams
-        across India.
+        <h2>Important Disclaimer</h2>
 
-      </p>
+        <p>
+          GovtJobsNotice is not a government website and is not affiliated with
+          any government organization, department or authority.
+        </p>
 
-      <h2>
-        What We Provide
-      </h2>
-
-      <ul>
-
-        <li>
-          Latest Government Job Notifications
-        </li>
-
-        <li>
-          Sarkari Result Updates
-        </li>
-
-        <li>
-          Admit Cards
-        </li>
-
-        <li>
-          Answer Keys
-        </li>
-
-        <li>
-          Recruitment News
-        </li>
-
-        <li>
-          Syllabus & Exam Pattern
-        </li>
-
-        <li>
-          Admission Updates
-        </li>
-
-        <li>
-          Important Dates & Eligibility Details
-        </li>
-
-      </ul>
-
-      <h2>
-        Why GovtJobsNotice
-      </h2>
-
-      <p>
-
-        GovtJobsNotice focuses on providing clean,
-        fast and easy-to-understand recruitment information
-        with better readability and organized updates
-        for government job aspirants.
-
-      </p>
-
-      <p>
-
-        Our goal is to make important job-related
-        information accessible through a simple,
-        mobile-friendly and fast-loading platform.
-
-      </p>
-
-      <h2>
-        Important Disclaimer
-      </h2>
-
-      <p>
-
-        GovtJobsNotice is not a government website
-        and is not affiliated with any government organization,
-        department or authority.
-
-      </p>
-
-      <p>
-
-        Candidates are strongly advised to verify all details
-        from the official website and official notification
-        before applying for any recruitment or examination.
-
-      </p>
-
-    </div>
-
-  </section>
-
-</main>
-
+        <p>
+          Candidates are strongly advised to verify all details from the
+          official website and official notification before applying for any
+          recruitment or examination.
+        </p>
+      </div>
+    </section>
+  </main>
 </BaseLayout>
