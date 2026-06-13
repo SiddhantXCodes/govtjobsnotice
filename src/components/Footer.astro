@@ -1,224 +1,112 @@
 ---
-import {
-  FOOTER_STRUCTURE
-}
-from "../constants/footerStructure";
+import { FOOTER_STRUCTURE } from "../constants/footerStructure";
 
-import {
-  getFooterExams
-}
-from "../lib/repositories/footerRepository";
+import { getFooterExams } from "../lib/repositories/footerRepository";
 
-const exams =
-  await getFooterExams();
+const exams = await getFooterExams();
 
-const examMap =
-  new Map(
-    exams.map(
-      exam => [exam.slug, exam]
-    )
-  );
+const examMap = new Map(exams.map((exam) => [exam.slug, exam]));
 ---
 
 <footer class="site-footer">
-
   <!-- EXAMS STRIP -->
 
   <section class="footer-exams-strip">
-
     <div class="container">
+      <h2 class="footer-strip-heading">Popular Government Exams</h2>
 
-      <h2 class="footer-strip-heading">
+      <div class="footer-exams-grid">
+        {
+          FOOTER_STRUCTURE.map((group) => (
+            <div class="footer-exam-category">
+              <h3 class="footer-category-title">{group.category}</h3>
 
-        Popular Government Exams
+              <div class="footer-exams-links">
+                {group.slugs.map((slug) => {
+                  const exam = examMap.get(slug);
 
-      </h2>
+                  if (!exam) return null;
 
+                  return (
+                    <a href={`/exam/${exam.slug}/`} class="footer-exam-item">
+                      {exam.short_name || exam.title}
 
-<div class="footer-exams-grid">
-
-  {
-    FOOTER_STRUCTURE.map((group) => (
-
-      <div class="footer-exam-category">
-
-        <h3 class="footer-category-title">
-          {group.category}
-        </h3>
-
-        <div class="footer-exams-links">
-
-          {
-            group.slugs.map((slug) => {
-
-              const exam =
-                examMap.get(slug);
-
-              if (!exam)
-                return null;
-
-              return (
-
-                <a
-                  href={`/exam/${exam.slug}/`}
-                  class="footer-exam-item"
-                >
-
-                  {
-                    exam.short_name ||
-                    exam.title
-                  }
-
-                  {
-                    exam.current_year
-                      ? ` ${exam.current_year}`
-                      : ""
-                  }
-
-                </a>
-
-              );
-
-            })
-          }
-
-        </div>
-
+                      {exam.current_year ? ` ${exam.current_year}` : ""}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+          ))
+        }
       </div>
-
-    ))
-  }
-
-</div>
-
-
-
     </div>
-
   </section>
 
   <!-- MAIN FOOTER -->
 
   <div class="footer-main">
-
     <div class="container">
-
       <div class="footer-grid">
-
         <!-- BRAND -->
 
         <div class="footer-brand">
-
           <div class="footer-logo">
-
-            <a href="/">
-
-              GOVT JOBS NOTICE
-
-            </a>
-
+            <a href="/"> GOVT JOBS NOTICE </a>
           </div>
 
           <p class="footer-description">
-
-            Latest government jobs,
-            Sarkari Result,
-            admit cards,
-            answer keys,
+            Latest government jobs, Sarkari Result, admit cards, answer keys,
             syllabus and recruitment updates.
-
           </p>
-
         </div>
 
         <!-- QUICK LINKS -->
 
         <div class="footer-column">
-
-          <h3>
-
-            Quick Links
-
-          </h3>
+          <h3>Quick Links</h3>
 
           <div class="footer-links">
+            <a href="/"> Home </a>
 
-            <a href="/">
-              Home
-            </a>
+            <a href="/all-posts/"> All Posts </a>
 
-            <a href="/all-posts/">
-              All Posts
-            </a>
+            <a href="/exams/"> Exams </a>
 
-            <a href="/exams/">
-              Exams
-            </a>
+            <a href="/category/latest-jobs"> Latest Jobs </a>
 
-            <a href="/category/latest-jobs">
-              Latest Jobs
-            </a>
-
-            <a href="/category/results">
-              Results
-            </a>
-
+            <a href="/category/results"> Results </a>
           </div>
-
         </div>
 
         <!-- IMPORTANT -->
 
         <div class="footer-column">
-
-          <h3>
-
-            Important
-
-          </h3>
+          <h3>Important</h3>
 
           <div class="footer-links">
+            <a href="/about"> About Us </a>
 
-            <a href="/about">
-              About Us
-            </a>
+            <a href="/contact"> Contact </a>
 
-            <a href="/contact">
-              Contact
-            </a>
+            <a href="/privacy-policy"> Privacy Policy </a>
 
-            <a href="/privacy-policy">
-              Privacy Policy
-            </a>
-
-            <a href="/disclaimer">
-              Disclaimer
-            </a>
-
+            <a href="/disclaimer"> Disclaimer </a>
           </div>
-
         </div>
 
         <!-- SOCIAL -->
 
         <div class="footer-column">
-
-          <h3>
-
-            Follow Us
-
-          </h3>
+          <h3>Follow Us</h3>
 
           <div class="footer-links footer-social-links">
-
             <a
               href="https://t.me/GovtJobs_Notice"
               target="_blank"
               rel="noopener noreferrer"
             >
-
               Telegram
-
             </a>
 
             <a
@@ -226,9 +114,7 @@ const examMap =
               target="_blank"
               rel="noopener noreferrer"
             >
-
               WhatsApp
-
             </a>
 
             <a
@@ -236,9 +122,7 @@ const examMap =
               target="_blank"
               rel="noopener noreferrer"
             >
-
               YouTube
-
             </a>
 
             <a
@@ -246,9 +130,7 @@ const examMap =
               target="_blank"
               rel="noopener noreferrer"
             >
-
               Instagram
-
             </a>
 
             <a
@@ -256,37 +138,22 @@ const examMap =
               target="_blank"
               rel="noopener noreferrer"
             >
-
               LinkedIn
-
             </a>
-
           </div>
-
         </div>
-
       </div>
 
       <!-- DISCLAIMER -->
 
       <div class="footer-disclaimer">
-
-        GovtJobsNotice is not affiliated
-        with any government organization.
+        GovtJobsNotice is not affiliated with any government organization.
         Verify details from official websites.
-
       </div>
 
       <!-- COPYRIGHT -->
 
-      <div class="footer-bottom">
-
-        © 2026 GovtJobsNotice.com
-
-      </div>
-
+      <div class="footer-bottom">© 2026 GovtJobsNotice.com</div>
     </div>
-
   </div>
-
 </footer>

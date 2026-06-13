@@ -383,12 +383,46 @@ html {
   margin-top: 0;
 }
 
-.editor-content h3 {
-  margin: 28px 0 14px;
+/* H3 = subsection */
 
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.4;
+.editor-content h3{
+  margin:32px 0 14px;
+
+  padding-left:14px;
+
+  border-left:5px solid #000066;
+
+  color:#111;
+
+  font-size:22px;
+
+  font-weight:700;
+
+  line-height:1.4;
+}
+
+/* H4 = nested subsection */
+
+.editor-content h4{
+margin:10px 0 14px;
+
+  color:#333;
+
+  font-size:18px;
+
+  font-weight:700;
+
+  line-height:1.4;
+
+  position:relative;
+}
+
+.editor-content h4::before{
+  content:"▸";
+
+  color:#000066;
+
+  margin-right:8px;
 }
 
 .editor-content p {
@@ -404,18 +438,63 @@ html {
   margin-bottom: 8px;
 }
 
-.editor-content table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1px 0;
+/* =========================================
+   ALL CONTENT TABLES
+========================================= */
+
+.editor-content table{
+  width:100% !important;
+
+  max-width:100% !important;
+
+  border-collapse:collapse !important;
+
+  table-layout:auto !important;
+
+  margin:20px 0 !important;
+
+  background:#fff;
 }
 
-.editor-content table th,
-.editor-content table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+.editor-content table th{
+  background:#f5f7ff !important;
+
+  color:#111 !important;
+
+  font-weight:700 !important;
+
+  text-align:left !important;
+
+  padding:10px !important;
+
+  border:1px solid #ddd !important;
 }
 
+.editor-content table td{
+  padding:10px !important;
+
+  border:1px solid #ddd !important;
+
+  text-align:left !important;
+
+  vertical-align:top !important;
+}
+
+.editor-content table tr:nth-child(even){
+  background:#fafafa;
+}
+
+.editor-content table[style]{
+  width:100% !important;
+}
+.table-scroll{
+  overflow-x:auto;
+  margin:20px 0;
+}
+.editor-content td[width],
+.editor-content th[width]{
+  width:auto !important;
+}
 .editor-content img {
   max-width: 100%;
   height: auto;
@@ -439,7 +518,7 @@ html {
   display: inline-flex;
   align-items: center;
   justify-content: center;
- margin-top: 4pxpx;
+  margin-top: 4pxpx;
   padding: 8px 12px;
   background: #db1010;
   color: #fff !important;
@@ -510,4 +589,86 @@ html {
     padding: 8px;
   }
 
+}
+
+/* =========================================
+   TABLE WRAPPER
+========================================= */
+
+.table-scroll{
+  overflow-x:auto;
+  margin:20px 0;
+}
+
+/* =========================================
+   CONTENT TABLES
+========================================= */
+
+.editor-content table{
+  width:100% !important;
+  min-width:100% !important;
+  max-width:100% !important;
+
+  border-collapse:collapse !important;
+
+  table-layout:auto !important;
+
+  margin:0 !important;
+
+  background:#fff;
+}
+
+.editor-content table th{
+  background:#f5f7ff !important;
+
+  color:#111 !important;
+
+  font-size:15px !important;
+
+  font-weight:700 !important;
+
+  padding:10px !important;
+
+  border:1px solid #ddd !important;
+
+  text-align:left !important;
+}
+
+.editor-content table td{
+  padding:10px !important;
+
+  border:1px solid #ddd !important;
+
+  font-size:15px !important;
+
+  line-height:1.7 !important;
+
+  text-align:left !important;
+
+  vertical-align:top !important;
+}
+
+.editor-content table tr:nth-child(even){
+  background:#fafafa;
+}
+
+/* kill TinyMCE widths */
+
+.editor-content table[style],
+.editor-content table[width]{
+  width:100% !important;
+}
+
+.editor-content td[width],
+.editor-content th[width]{
+  width:auto !important;
+}
+.table-scroll{
+  width:100%;
+  overflow-x:auto;
+  margin:20px 0;
+}
+
+.editor-content table{
+  width:100% !important;
 }
