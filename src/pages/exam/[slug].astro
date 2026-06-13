@@ -66,37 +66,25 @@ let contentHtml = exam.content || "";
 
 /* remove CKEditor table wrapper */
 
-contentHtml = contentHtml.replace(
-  /<figure class="table">/gi,
-  ""
-);
+contentHtml = contentHtml.replace(/<figure class="table">/gi, "");
 
-contentHtml = contentHtml.replace(
-  /<\/figure>/gi,
-  ""
-);
+contentHtml = contentHtml.replace(/<\/figure>/gi, "");
 
 /* clean table attributes */
 
-contentHtml = contentHtml.replace(
-  /<table[^>]*>/gi,
-  "<table>"
-);
+contentHtml = contentHtml.replace(/<table[^>]*>/gi, "<table>");
 
 /* add single wrapper */
 
 contentHtml = contentHtml.replace(
-  /<table>/gi,
-  '<div class="table-scroll"><table>'
+    /<table>/gi,
+    '<div class="table-scroll"><table>',
 );
 
+contentHtml = contentHtml.replace(/<\/table>/gi, "</table></div>");
 contentHtml = contentHtml.replace(
-  /<\/table>/gi,
-  "</table></div>"
-);
-contentHtml = contentHtml.replace(
-  /<a([^>]*)>\[BUTTON\](.*?)<\/a>/gi,
-  '<a$1 class="status-btn">$2</a>'
+    /<a([^>]*)>\[BUTTON\](.*?)<\/a>/gi,
+    '<a$1 class="status-btn">$2</a>',
 );
 contentHtml = contentHtml.replace(
     /<h2[^>]*>(.*?)<\/h2>/gi,
@@ -116,7 +104,6 @@ contentHtml = contentHtml.replace(
         return `<h2 id="${id}" class="exam-content-heading">${title}</h2>`;
     },
 );
-
 
 /* =========================================
    SEO
@@ -145,13 +132,16 @@ const schema = buildExamSchema(exam);
                         href: "/exams",
                     },
                     {
-                        label: exam.short_name + " " + exam.current_year || exam.title,
+                        label:
+                            exam.short_name + " " + exam.current_year ||
+                            exam.title,
                     },
                 ]}
             />
 
             <h1 class="exam-title">
-                {exam.short_name} {exam.current_year}
+                {exam.short_name}
+                {exam.current_year}
             </h1>
 
             <div class="exam-meta-line">
