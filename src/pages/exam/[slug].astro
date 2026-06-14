@@ -102,13 +102,17 @@ contentHtml = contentHtml.replace(
         return `<h2 id="${id}" class="exam-content-heading">${title}</h2>`;
     },
 );
-
+if (exam?.faqs?.length > 0) {
+    toc.push({
+        id: "frequently-asked-questions",
+        text: "Frequently Asked Questions",
+    });
+}
 /* =========================================
    SEO
 ========================================= */
 
 const seo = buildExamSeo(exam);
-
 ---
 
 <BaseLayout {...seo}>
@@ -243,12 +247,44 @@ const seo = buildExamSeo(exam);
                         </section>
                     )
                 }
+                {
+                    exam?.faqs?.length > 0 && (
+                        <section class="exam-box">
+                            <h2
+                                id="frequently-asked-questions"
+                                class="exam-content-heading"
+                                style="margin:0 0 20px;"
+                            >
+                                Frequently Asked Questions
+                            </h2>
+
+                            <div class="faq-list">
+                                {exam.faqs.map((faq: any) => (
+                                    <details class="faq-item">
+                                        <summary class="faq-question">
+                                            {faq.question}
+                                        </summary>
+
+                                        <div class="faq-answer">
+                                            <p>{faq.answer}</p>
+                                        </div>
+                                    </details>
+                                ))}
+                            </div>
+                        </section>
+                    )
+                }
+                  <!-- RELATED POSTS -->
+
+        <PostSuggestions
+            currentSlug=""
+            category={exam.category}
+            showRelated={false}
+        />
             </div>
         </div>
 
-        <!-- RELATED POSTS -->
-
-        <PostSuggestions currentSlug="" category={exam.category} />
+      
 
         <!-- SOCIAL LINKS -->
 

@@ -3,7 +3,7 @@ import RelatedPosts from "./RelatedPosts.astro";
 
 import LatestPosts from "./LatestPosts.astro";
 
-const { currentSlug, category } = Astro.props;
+const { currentSlug, category,  showRelated = true } = Astro.props;
 
 /* SCHEMA */
 
@@ -27,18 +27,30 @@ const suggestionSchema = {
 
 <!-- POST SUGGESTIONS -->
 <section
-  class="post-suggestion-grid"
+  class={`post-suggestion-grid ${
+    showRelated ? "" : "single-column"
+  }`}
   aria-label="Related Government Job Updates"
 >
   <!-- RELATED POSTS -->
 
-  <section class="suggestion-column" aria-labelledby="related-posts-heading">
-    <h2 id="related-posts-heading" class="visually-hidden">
-      Related Government Job Posts
-    </h2>
+{
+  showRelated && (
+    <section
+      class="suggestion-column"
+      aria-labelledby="related-posts-heading"
+    >
+      <h2 id="related-posts-heading" class="visually-hidden">
+        Related Government Job Posts
+      </h2>
 
-    <RelatedPosts currentSlug={currentSlug} category={category} />
-  </section>
+      <RelatedPosts
+        currentSlug={currentSlug}
+        category={category}
+      />
+    </section>
+  )
+}
 
   <!-- LATEST POSTS -->
 

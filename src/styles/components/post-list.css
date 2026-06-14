@@ -13,6 +13,9 @@
   margin-top:20px;
 }
 
+.post-suggestion-grid.single-column{
+  grid-template-columns:1fr;
+}
 .suggestion-column{
   min-width:0;
 }

@@ -4,8 +4,10 @@
 
 .exam-page {
   max-width: var(--container-width);
+
   margin: auto;
-  padding: 16px 10px 32px;
+
+  padding: 20px 12px 5px;
 }
 
 /* =========================================
@@ -14,48 +16,62 @@
 
 .exam-hero {
   background: #fff;
-  border: 1px solid #ddd;
-  padding: 24px;
-  margin-bottom: 16px;
+
+  border-radius: 14px;
+
+  padding: 28px;
+
+  margin-bottom: 22px;
+
+  box-shadow:
+    0 2px 10px rgba(15, 23, 42, .06);
 }
 
 .exam-title {
   margin: 12px 0;
-  color: #111;
-  font-size: 42px;
+
+  color: #0f172a;
+
+  font-size: 38px;
+
   font-weight: 800;
-  line-height: 1.3;
+
+  line-height: 1.2;
+
+  letter-spacing: -0.5px;
 }
 
 .exam-meta-line {
   display: flex;
+
   flex-wrap: wrap;
+
   gap: 10px;
+
   margin-top: 10px;
-  color: #555;
-  font-size: 15px;
+
+  color: #475569;
+
+  font-size: 14px;
+
   font-weight: 600;
 }
 
-.exam-meta-line a {
-  color: #0000cc;
-  text-decoration: none;
-}
-
-.exam-meta-line a:hover {
-  color: #d40000;
-}
-
 .exam-dot {
-  color: #999;
+  color: #94a3b8;
 }
 
 .exam-updated-line {
-  margin-top: 16px;
-  padding-top: 14px;
-  border-top: 1px solid #e5e5e5;
-  color: #c00000;
+  margin-top: 18px;
+
+  padding-top: 16px;
+
+  border-top: 1px solid #e5e7eb;
+
+  color: #dc2626;
+
   font-size: 14px;
+
   font-weight: 700;
 }
 
@@ -65,42 +81,65 @@
 
 .exam-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 16px;
-  align-items: start;
-}
 
-/* =========================================
-   SIDEBAR
-========================================= */
+  grid-template-columns: 290px minmax(0, 1fr);
+
+  gap: 24px;
+
+  align-items: start;
+  margin-bottom: 22px;
+}
 
 .exam-sidebar {
   position: sticky;
-  top: 10px;
+
+  top: 14px;
+
+  align-self: start;
 }
+
+/* =========================================
+   TOC
+========================================= */
 
 .exam-toc {
   background: #fff;
-  border: 1px solid #ddd;
+
+  border-radius: 14px;
+
   overflow: hidden;
+
+  box-shadow:
+    0 3px 14px rgba(15, 23, 42, .08);
 }
 
 .exam-toc-title {
-  background: #000066;
+  background: #032467;
+
   color: #fff;
-  font-size: 17px;
-  font-weight: 700;
-  padding: 12px 14px;
+
+  padding: 16px 20px;
+
+  font-size: 15px;
+
+  font-weight: 800;
+
+  line-height: 1.2;
 }
 
 .exam-toc-list {
   margin: 0;
-  padding: 0;
+
+  padding: 10px;
+
   list-style: none;
+
+
+
 }
 
 .exam-toc-list li {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eef2f7;
 }
 
 .exam-toc-list li:last-child {
@@ -109,35 +148,26 @@
 
 .exam-toc-list a {
   display: block;
-  padding: 7px 12px;
-  color: #222;
-  font-size: 14px;
+
+  padding: 8px 10px;
+
+  color: #1e293b;
+
+  font-size: 12.5px;
+
   font-weight: 600;
+
   line-height: 1.45;
+
   text-decoration: none;
-  transition: .2s;
+
+  transition: .15s;
 }
 
 .exam-toc-list a:hover {
-  background: #f7f7f7;
-  color: #d40000;
-}
+  background: #edf4ff;
 
-.exam-toc-list span {
-  display: block;
-  padding: 10px 14px;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #333;
-  font-weight: 600;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.editor-content h2 {
-  scroll-margin-top: 10px;
+  color: #003399;
 }
 
 /* =========================================
@@ -148,53 +178,49 @@ html {
   min-width: 0;
 }
 
-/* =========================================
-   BOX
-========================================= */
-
 .exam-box {
   background: #fff;
 
-  overflow: hidden;
-  margin-bottom: 16px;
-}
+  border-radius: 14px;
+  padding: 32px 36px;
+  margin-bottom: 22px;
 
-/* =========================================
-   SECTION HEADINGS
-========================================= */
+  box-shadow:
+    0 2px 10px rgba(15, 23, 42, .05);
+}
 
 .exam-box-heading {
-  margin: 0;
-  background: #000066;
-  color: #fff;
-  font-size: 20px;
-  font-weight: 700;
-  padding: 12px 16px;
-  line-height: 1.5;
-}
+  background: #003399;
 
-/* =========================================
-   FEATURED IMAGE
-========================================= */
+  color: #fff;
+
+  margin: 0;
+
+  padding: 14px 20px;
+
+  font-size: 18px;
+
+  font-weight: 800;
+}
 
 .exam-featured-image {
   display: block;
+
   width: 100%;
+
   height: auto;
 }
 
-/* =========================================
-   LATEST UPDATES
-========================================= */
-
 .exam-update-list {
   margin: 0;
+
   padding: 0;
+
   list-style: none;
 }
 
 .exam-update-list li {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eef2f7;
 }
 
 .exam-update-list li:last-child {
@@ -203,472 +229,147 @@ html {
 
 .exam-update-list a {
   display: block;
-  padding: 14px 16px;
-  font-size: 15px;
-  line-height: 1.6;
+
+  padding: 15px 20px;
+
+  color: #1e293b;
+
   text-decoration: none;
-  transition: .2s;
+
+  font-weight: 600;
+
+  transition: .15s;
 }
 
 .exam-update-list a:hover {
-  background: #f7f7f7;
+  background: #f8fbff;
+
+  color: #003399;
 }
 
-.editor-content img,
-.exam-featured-image {
-  box-shadow:
-    0 4px 12px rgba(0, 0, 0, .08);
-}
-
-.exam-box {
-  transition: .2s ease;
-}
-
-.exam-box:hover {
-  border-color: #cfd6e4;
-}
-
-.breadcrumbs {
-  margin-bottom: 10px;
-}
 
 /* =========================================
-   CONTENT H2
+   TABLET
 ========================================= */
 
-.exam-content-heading {
-  margin: 40px -22px 20px;
+@media(max-width:900px){
+
+  .exam-layout{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+
+  .exam-sidebar{
+    position:static;
+    order:-1;
+  }
+
+  .exam-toc{
+    border-radius:12px;
+  }
+
+  .exam-toc-list{
+    max-height:260px;
+    overflow:auto;
+  }
 
-  background: #000066;
-
-  color: #fff !important;
-
-  font-size: 24px;
-
-  font-weight: 700;
-
-  line-height: 1.2;
-
-  padding: 8px 12px;
-
-  scroll-margin-top: 50px;
-}
-
-.exam-content-heading:first-child {
-  margin-top: -22px;
-}
-
-/* =========================================
-   TABLES
-========================================= */
-.editor-content table {
-  overflow: hidden;
-}
-
-.editor-content table th {
-  background: #f5f7ff;
-  font-weight: 700;
-}
-
-.exam-table-wrap {
-  overflow-x: auto;
-}
-
-.exam-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 700px;
-}
-
-.exam-table th {
-  width: 32%;
-  background: #f5f5f5;
-  color: #111;
-  font-size: 15px;
-  font-weight: 700;
-  text-align: left;
-  padding: 10px;
-  border: 1px solid #ddd;
-  vertical-align: top;
-}
-
-.exam-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  font-size: 15px;
-  line-height: 1.7;
-  vertical-align: top;
-}
-
-.exam-table tr:nth-child(even) {
-  background: #fafafa;
-}
-
-/* =========================================
-   LINKS
-========================================= */
-
-.exam-table a,
-.exam-content a,
-.exam-update-list a,
-.important-link-card {
-  color: #0000cc;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-.exam-table a:hover,
-.exam-content a:hover,
-.exam-update-list a:hover,
-.important-link-card:hover {
-  color: #d40000;
-}
-
-/* =========================================
-   FORCE TABLE LEFT ALIGN
-========================================= */
-
-.editor-content table,
-.editor-content table tbody,
-.editor-content table thead,
-.editor-content table tr,
-.editor-content table th,
-.editor-content table td {
-  text-align: left !important;
-  vertical-align: top;
-}
-
-/* TinyMCE generated content */
-
-.editor-content table p,
-.editor-content table span,
-.editor-content table div {
-  text-align: left !important;
-}
-
-/* Links inside table */
-
-.editor-content table a {
-  text-align: left !important;
-}
-
-/* Lists inside table */
-
-.editor-content table ul,
-.editor-content table ol,
-.editor-content table li {
-  text-align: left !important;
-}
-
-/* =========================================
-   EDITOR CONTENT
-========================================= */
-
-.editor-content {
-  padding: 22px;
-  color: #222;
-  font-size: 17px;
-  line-height: 1.85;
-}
-
-.editor-content h2 {
-  margin: 36px 0 18px;
-  color: #000066;
-  font-size: 25px;
-  font-weight: 800;
-  line-height: 1.35;
-}
-
-.editor-content h2:first-child {
-  margin-top: 0;
-}
-
-/* H3 = subsection */
-
-.editor-content h3{
-  margin:32px 0 14px;
-
-  padding-left:14px;
-
-  border-left:5px solid #000066;
-
-  color:#111;
-
-  font-size:22px;
-
-  font-weight:700;
-
-  line-height:1.4;
-}
-
-/* H4 = nested subsection */
-
-.editor-content h4{
-margin:10px 0 14px;
-
-  color:#333;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  line-height:1.4;
-
-  position:relative;
-}
-
-.editor-content h4::before{
-  content:"▸";
-
-  color:#000066;
-
-  margin-right:8px;
-}
-
-.editor-content p {
-  margin: 0 0 18px;
-}
-
-.editor-content ul,
-.editor-content ol {
-  margin: 0 0 20px 24px;
-}
-
-.editor-content li {
-  margin-bottom: 8px;
-}
-
-/* =========================================
-   ALL CONTENT TABLES
-========================================= */
-
-.editor-content table{
-  width:100% !important;
-
-  max-width:100% !important;
-
-  border-collapse:collapse !important;
-
-  table-layout:auto !important;
-
-  margin:20px 0 !important;
-
-  background:#fff;
-}
-
-.editor-content table th{
-  background:#f5f7ff !important;
-
-  color:#111 !important;
-
-  font-weight:700 !important;
-
-  text-align:left !important;
-
-  padding:10px !important;
-
-  border:1px solid #ddd !important;
-}
-
-.editor-content table td{
-  padding:10px !important;
-
-  border:1px solid #ddd !important;
-
-  text-align:left !important;
-
-  vertical-align:top !important;
-}
-
-.editor-content table tr:nth-child(even){
-  background:#fafafa;
-}
-
-.editor-content table[style]{
-  width:100% !important;
-}
-.table-scroll{
-  overflow-x:auto;
-  margin:20px 0;
-}
-.editor-content td[width],
-.editor-content th[width]{
-  width:auto !important;
-}
-.editor-content img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin: 24px auto;
-  border-radius: 6px;
-}
-
-.editor-content blockquote {
-  margin: 20px 0;
-  padding: 14px 18px;
-  border-left: 4px solid #000066;
-  background: #f7f7f7;
-}
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-.status-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 4pxpx;
-  padding: 8px 12px;
-  background: #db1010;
-  color: #fff !important;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 700;
-}
-
-.status-btn:hover {
-  background: #751b1b;
 }
 
 /* =========================================
    MOBILE
 ========================================= */
 
-@media(max-width:900px) {
+@media(max-width:768px){
 
-  .exam-layout {
-    grid-template-columns: 1fr;
+  .exam-page{
+    padding:8px 4px 20px;
   }
 
-  .exam-sidebar {
-    position: static;
+  .exam-hero{
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:14px;
   }
 
-}
-
-@media(max-width:768px) {
-
-  .exam-page {
-    padding: 10px 4px 24px;
+  .exam-title{
+    font-size:28px;
+    line-height:1.25;
+    margin:8px 0;
   }
 
-  .exam-hero {
-    padding: 16px;
+  .exam-meta-line{
+    gap:6px;
+    font-size:13px;
+    line-height:1.5;
   }
 
-  .exam-title {
-    font-size: 30px;
+  .exam-updated-line{
+    margin-top:12px;
+    padding-top:12px;
+    font-size:13px;
   }
 
-  .editor-content {
-    padding: 16px;
-    font-size: 16px;
+  .exam-layout{
+    gap:14px;
   }
 
-  .editor-content h2 {
-    font-size: 21px;
-    margin: 28px 0 14px;
+  .exam-box{
+    padding:18px;
+    border-radius:12px;
+    margin-bottom:14px;
   }
 
-  .editor-content h3 {
-    font-size: 20px;
+  .exam-toc-title{
+    padding:12px 16px;
+    font-size:17px;
   }
 
-  .exam-box-heading {
-    font-size: 18px;
+  .exam-toc-list{
+    padding:6px;
   }
 
-  .exam-table {
-    min-width: 620px;
+  .exam-toc-list a{
+    padding:9px 10px;
+    font-size:13px;
+    line-height:1.4;
   }
 
-  .exam-table th,
-  .exam-table td {
-    font-size: 13px;
-    padding: 8px;
-  }
-
-}
-
-/* =========================================
-   TABLE WRAPPER
-========================================= */
-
-.table-scroll{
-  overflow-x:auto;
-  margin:20px 0;
 }
 
 /* =========================================
-   CONTENT TABLES
+   SMALL MOBILE
 ========================================= */
 
-.editor-content table{
-  width:100% !important;
-  min-width:100% !important;
-  max-width:100% !important;
+@media(max-width:480px){
 
-  border-collapse:collapse !important;
+  .exam-page{
+    padding:6px 2px 16px;
+  }
 
-  table-layout:auto !important;
+  .exam-hero{
+    padding:16px;
+  }
 
-  margin:0 !important;
+  .exam-title{
+    font-size:24px;
+  }
 
-  background:#fff;
+  .exam-meta-line{
+    font-size:12px;
+  }
+
+  .exam-box{
+    padding:14px;
+  }
+
+  .exam-toc-title{
+    font-size:16px;
+  }
+
+  .exam-toc-list a{
+    font-size:12px;
+    padding:8px;
+  }
+
 }
 
-.editor-content table th{
-  background:#f5f7ff !important;
-
-  color:#111 !important;
-
-  font-size:15px !important;
-
-  font-weight:700 !important;
-
-  padding:10px !important;
-
-  border:1px solid #ddd !important;
-
-  text-align:left !important;
-}
-
-.editor-content table td{
-  padding:10px !important;
-
-  border:1px solid #ddd !important;
-
-  font-size:15px !important;
-
-  line-height:1.7 !important;
-
-  text-align:left !important;
-
-  vertical-align:top !important;
-}
-
-.editor-content table tr:nth-child(even){
-  background:#fafafa;
-}
-
-/* kill TinyMCE widths */
-
-.editor-content table[style],
-.editor-content table[width]{
-  width:100% !important;
-}
-
-.editor-content td[width],
-.editor-content th[width]{
-  width:auto !important;
-}
-.table-scroll{
-  width:100%;
-  overflow-x:auto;
-  margin:20px 0;
-}
-
-.editor-content table{
-  width:100% !important;
-}
