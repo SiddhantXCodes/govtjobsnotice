@@ -127,19 +127,6 @@ Automated job-notice collection is currently under development. The goal is to c
 
 > Automation should support—not replace—verification. Every notice should be checked against its official source before it is published.
 
-## Configuration
-
-The frontend needs the Directus API endpoint and any required access credentials configured through environment variables. Keep secrets out of version control and store production values in your hosting provider's environment settings.
-
-Example:
-
-```env
-PUBLIC_DIRECTUS_URL=https://your-directus-instance.example.com
-DIRECTUS_TOKEN=your-read-only-token
-```
-
-Use the variable names that match your implementation; never expose a privileged Directus token in client-side code.
-
 ## Content and accuracy
 
 Always verify vacancy dates, eligibility, application instructions, and other recruitment details against the relevant official government or recruiting-body website before taking action. GovtJobsNotice is an informational platform and is not affiliated with, endorsed by, or operated by any government agency.
