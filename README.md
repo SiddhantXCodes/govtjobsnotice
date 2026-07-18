@@ -32,7 +32,7 @@ The public-facing site is built with [Astro](https://astro.build/) and Node.js, 
 | --- | --- |
 | ![GovtJobsNotice home page](docs/images/govtjobsnotice-homepage.png) | ![Directus content management dashboard](docs/images/govtjobsnotice-cms.png) |
 
-| Job or exam detail page | Automation workflow |
+| Job detail page | Exam Page |
 | --- | --- |
 | ![Job notice detail page](docs/images/govtjobsnotice-postpage.png) | ![Exam Page](docs/images/govtjobsnotice-exampage.png) |
 
